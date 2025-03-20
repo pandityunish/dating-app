@@ -1,0 +1,210 @@
+{
+  "project_info": {
+    "project_number": "295563077707",
+    "firebase_url": "https://freerishteywala-2f843-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "freerishteywala-2f843",
+    "storage_bucket": "freerishteywala-2f843.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295563077707:android:b94ac0caa9e0e0a80c05ce",
+        "android_client_info": {
+          "package_name": "com.example.matrimony_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "295563077707-l8hpf23vek7u9nfcb818rr7n54p22igi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.matrimony_admin",
+            "certificate_hash": "a14b8438b18c9ef4cef6bd98c968fe69f437ba79"
+          }
+        },
+        {
+          "client_id": "295563077707-h1f3b2li3m87mets0353ualsa01fi2tp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoHW5-1OJTJ-qK9vzlpfl1J11YPDID4DI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "295563077707-bi28ru34rfr3gbbq6dvglca7eea98tv6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295563077707:android:f8099b92a5080b890c05ce",
+        "android_client_info": {
+          "package_name": "com.freerishtey.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "295563077707-4017nfivdv5lina8kp8884ssbv36ed0a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freerishtey.android",
+            "certificate_hash": "c282c4f507416f735f32738adc7eff17b2dfc25d"
+          }
+        },
+        {
+          "client_id": "295563077707-7esdklmur00g548rnjcthllthjo1osru.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freerishtey.android",
+            "certificate_hash": "ac244c41e2caf2ebb4da6163b7c643bf277eeb8c"
+          }
+        },
+        {
+          "client_id": "295563077707-ddhfe07v0dpto74pasnrs2klj848sff5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freerishtey.android",
+            "certificate_hash": "a14b8438b18c9ef4cef6bd98c968fe69f437ba79"
+          }
+        },
+        {
+          "client_id": "295563077707-et1gls58tm6nk9pfnl4eoo98nfk538n4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freerishtey.android",
+            "certificate_hash": "e3cc01cf8d77fc8961a51a3a7abd426fe5fd7490"
+          }
+        },
+        {
+          "client_id": "295563077707-gpliktkp1cgkuipt8piolu73tdn8ir4r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freerishtey.android",
+            "certificate_hash": "ced9813678097fabf4592b62db5d38ae5c77cd64"
+          }
+        },
+        {
+          "client_id": "295563077707-p5k32lkdnvo9h3imlhaeoion5qh2bn8l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freerishtey.android",
+            "certificate_hash": "8c430661bf40039137a2a4053cbb33c5685c0dfd"
+          }
+        },
+        {
+          "client_id": "295563077707-rrrk6opmot77i3vdgo5ektakblb7trpe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freerishtey.android",
+            "certificate_hash": "52ae1c7976af675632ef9aeaafbfaed1539b3f77"
+          }
+        },
+        {
+          "client_id": "295563077707-s4cc9473pcr5j448e3jc098q8u5c88e0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freerishtey.android",
+            "certificate_hash": "eb27a95966b78bedb35c5510a7e80c4ce63d0d22"
+          }
+        },
+        {
+          "client_id": "295563077707-t8vnntdbtck11pe9318469mrnob7p5e1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freerishtey.android",
+            "certificate_hash": "c150c9567053728fe9baa4207190da75e1ffe672"
+          }
+        },
+        {
+          "client_id": "295563077707-tjinprv7ul5r9u1rkjukc1pj5ke5gq22.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freerishtey.android",
+            "certificate_hash": "4d17e4b83d936e131a81ed721a3a85227e0b744a"
+          }
+        },
+        {
+          "client_id": "295563077707-uu893cosisp7gvqo3q0jg2k1r7qqukk8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freerishtey.android",
+            "certificate_hash": "5d2d5249f17af258f3da63737661bb6bf211a89b"
+          }
+        },
+        {
+          "client_id": "295563077707-h1f3b2li3m87mets0353ualsa01fi2tp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoHW5-1OJTJ-qK9vzlpfl1J11YPDID4DI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "295563077707-bi28ru34rfr3gbbq6dvglca7eea98tv6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295563077707:android:2e2631d55214dd9c0c05ce",
+        "android_client_info": {
+          "package_name": "com.freerishteywala.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "295563077707-5fmgmj3tl43d3faomud2qets6n0vb4h2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freerishteywala.android",
+            "certificate_hash": "c282c4f507416f735f32738adc7eff17b2dfc25d"
+          }
+        },
+        {
+          "client_id": "295563077707-q9vq70q6bq9ptkrssrign6an96t4a8hd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freerishteywala.android",
+            "certificate_hash": "a14b8438b18c9ef4cef6bd98c968fe69f437ba79"
+          }
+        },
+        {
+          "client_id": "295563077707-h1f3b2li3m87mets0353ualsa01fi2tp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoHW5-1OJTJ-qK9vzlpfl1J11YPDID4DI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "295563077707-bi28ru34rfr3gbbq6dvglca7eea98tv6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
