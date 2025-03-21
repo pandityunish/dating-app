@@ -216,7 +216,7 @@ class _VerifyState extends State<Verify> {
           builder: (context) {
             return const AlertDialog(
               content: SnackBarContent(
-                error_text: "Video Has Been Uploaded Successfully",
+                error_text: "Uploaded Successfully",
                 appreciation: "",
                 icon: Icons.check,
                 sec: 3,

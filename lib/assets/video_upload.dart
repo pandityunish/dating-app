@@ -293,8 +293,10 @@ class _VideoPlayerWidget1State extends State<VideoPlayerWidget1> {
                       child: Center(
                         child: IconButton(
                           icon: Icon(
-                            _isPlaying ? Icons.pause : Icons.play_arrow,
-                            color: mainColor,
+                            _isPlaying
+                                ? Icons.pause
+                                : Icons.play_circle_outline_outlined,
+                            color: Colors.white,
                             size: 40,
                           ),
                           onPressed: _toggleVideoPlayback,
