@@ -360,7 +360,7 @@ class _VerifyState extends State<Verify> {
                           child: Column(
                         children: [
                           const Text(
-                            "Upload a Video About you in brief",
+                            "Upload a Video About You in Brief",
                             textAlign: TextAlign.start,
                             style: TextStyle(
                                 fontFamily: 'Sans-serif',
@@ -416,6 +416,7 @@ class _VerifyState extends State<Verify> {
                                           child: const Icon(
                                             Icons.add,
                                             size: 50,
+                                            color: Colors.grey,
                                           ),
                                         )
                                       : VideoPlayerWidget1(
@@ -439,14 +440,33 @@ class _VerifyState extends State<Verify> {
                           Card(
                             elevation: 4,
                             color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  10), // Consistent border radius
+                            ),
                             child: SizedBox(
-                                height: 200,
-                                width: Get.width * 0.9,
-                                child: VideoPlayerWidget1(
-                                    videoUrl: (userSave.gender != "male")
-                                        ? "https://firebasestorage.googleapis.com/v0/b/couplematch-47708.appspot.com/o/videos%2Ffemalevideo.mp4?alt=media&token=46d36b9f-e321-4fe8-ac66-496a27aca7c7"
-                                        : "https://firebasestorage.googleapis.com/v0/b/couplematch-47708.appspot.com/o/videos%2Fmalevideo.mp4?alt=media&token=96c5c184-1ee7-49c2-80dd-ba63f564766d")),
-                          ),
+                              height: 200,
+                              width: Get.width * 0.9,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                    10), // Ensuring video is rounded too
+                                child: FittedBox(
+                                  fit: BoxFit
+                                      .cover, // Ensures the video fills the card like a cover
+                                  child: SizedBox(
+                                    width:
+                                        Get.width * 0.9, // Matches card width
+                                    height: 200, // Matches card height
+                                    child: VideoPlayerWidget1(
+                                      videoUrl: (userSave.gender != "male")
+                                          ? "https://firebasestorage.googleapis.com/v0/b/couplematch-47708.appspot.com/o/videos%2Ffemalevideo.mp4?alt=media&token=46d36b9f-e321-4fe8-ac66-496a27aca7c7"
+                                          : "https://firebasestorage.googleapis.com/v0/b/couplematch-47708.appspot.com/o/videos%2Fmalevideo.mp4?alt=media&token=96c5c184-1ee7-49c2-80dd-ba63f564766d",
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
                         ],
                       )),
                       // BigText(text: 'A Video About Me'),
@@ -454,7 +474,7 @@ class _VerifyState extends State<Verify> {
                       (userSave.verifiedStatus != "verified")
                           ? SizedBox(
                               height: 50,
-                              width: 300,
+                              width: Get.width * 0.9,
                               child: ElevatedButton(
                                 // enabled: userSave.verifiedStatus != "verified",
                                 style: ButtonStyle(

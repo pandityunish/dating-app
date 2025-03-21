@@ -230,17 +230,17 @@ class _MyProfileState extends State<MyProfile> {
         //         elevation: 0,
         //       );
         //     }).whenComplete(() {
-          if (useronlineads.isNotEmpty) {
-            showadsbar(context, useronlineads, () {
+        if (useronlineads.isNotEmpty) {
+          showadsbar(context, useronlineads, () {
+            Navigator.pop(context);
+          });
+        } else {
+          if (onlineads.isNotEmpty) {
+            showadsbar(context, onlineads, () {
               Navigator.pop(context);
             });
-          } else {
-            if (onlineads.isNotEmpty) {
-              showadsbar(context, onlineads, () {
-                Navigator.pop(context);
-              });
-            }
           }
+        }
         // });
         // Future(() {customAlertBox1(context, Icons.error,
         //     "No Online Profile \n According \n Your Preference", "", () {});})
@@ -508,7 +508,8 @@ class _MyProfileState extends State<MyProfile> {
                                               ? Border.all(
                                                   width: 1, color: mainColor)
                                               : Border.all(
-                                                  width: 2, color: Colors.white),
+                                                  width: 2,
+                                                  color: Colors.white),
                                           color: Colors.white,
                                           image: DecorationImage(
                                               image: (userSave.imageUrls ==
@@ -953,13 +954,15 @@ class _MyProfileState extends State<MyProfile> {
 
                               Future(() => customAlertBox1(context, Icons.error,
                                   "Under Process", "", () {}));
-                            } else if(userSave.verifiedStatus == "approved"){
-
-                              Future(() => customAlertBox1(context, Icons.check_circle_sharp,
-                                  "Already Verified", "", () {}));
-                            }else if(userSave.videoLink != ""){
-
-                              Future(() => customAlertBox1(context, Icons.check_circle_sharp,
+                            } else if (userSave.verifiedStatus == "approved") {
+                              Future(() => customAlertBox1(
+                                  context,
+                                  Icons.check_circle_sharp,
+                                  "Already Verified",
+                                  "",
+                                  () {}));
+                            } else if (userSave.videoLink != "") {
+                              Future(() => customAlertBox1(context, Icons.error,
                                   "Under Process", "", () {}));
                             } else {
                               Navigator.push(
@@ -1350,7 +1353,7 @@ class _MyProfileState extends State<MyProfile> {
                         GestureDetector(
                           onTap: () async {
                             print(shareads.length);
-                             if (usershareapp.isNotEmpty) {
+                            if (usershareapp.isNotEmpty) {
                               showadsbar(context, usershareapp, () async {
                                 Get.back();
                               });
@@ -1376,7 +1379,6 @@ class _MyProfileState extends State<MyProfile> {
 
                             await Share.share(
                                 'https://play.google.com/store/apps/details?id=com.freerishtey.android');
-                           
                           },
                           child: Row(
                             children: [
@@ -1533,7 +1535,7 @@ class _MyProfileState extends State<MyProfile> {
                                 //   height: 26,
                                 // ),
                                 // const LogoText(),
-                               
+
                                 const Text("Log Out \n You Want to Log Out?",
                                     textAlign: TextAlign.center),
                                 const SizedBox(
