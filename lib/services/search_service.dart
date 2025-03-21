@@ -141,7 +141,7 @@ class Searchservice {
   }
 
   Future<String> loadJsonData() async {
-    return await rootBundle.loadString('lib/country_modal/assets/data.json');
+    return await rootBundle.loadString('assets/country.json');
   }
 
   Future<List<LocationModel>> getData() async {

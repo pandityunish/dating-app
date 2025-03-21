@@ -95,13 +95,14 @@ class AuthenticatedApp extends StatelessWidget {
     return GetMaterialApp(
       getPages: [
         GetPage(name: '/incoming-call', page: () => IncomingCallScreen()),
-        GetPage(name: '/audio-incoming-call', page: () => IncomingAudioCallScreen()),
-
-
+        GetPage(
+            name: '/audio-incoming-call',
+            page: () => IncomingAudioCallScreen()),
       ],
-theme: ThemeData(useMaterial3: false,
-      scaffoldBackgroundColor: Colors.white
-      ,appBarTheme: AppBarTheme(color: Colors.white,elevation: 0)),
+      theme: ThemeData(
+          useMaterial3: false,
+          scaffoldBackgroundColor: Colors.white,
+          appBarTheme: AppBarTheme(color: Colors.white, elevation: 0)),
       navigatorKey: NavigationService.navigatorKey,
       debugShowCheckedModeBanner: false,
       home: const SplashVideo(),
@@ -236,14 +237,16 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        getPages: [
+      getPages: [
         GetPage(name: '/incoming-call', page: () => IncomingCallScreen()),
-        GetPage(name: '/audio-incoming-call', page: () => IncomingAudioCallScreen()),
-
+        GetPage(
+            name: '/audio-incoming-call',
+            page: () => IncomingAudioCallScreen()),
       ],
-      theme: ThemeData(useMaterial3: false,
-      scaffoldBackgroundColor: Colors.white
-      ,appBarTheme: AppBarTheme(color: Colors.white,elevation: 0)),
+      theme: ThemeData(
+          useMaterial3: false,
+          scaffoldBackgroundColor: Colors.white,
+          appBarTheme: AppBarTheme(color: Colors.white, elevation: 0)),
       title: 'Couple Mate',
       home: const SplashVideo(),
       debugShowCheckedModeBanner: false,
