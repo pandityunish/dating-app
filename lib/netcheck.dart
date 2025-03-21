@@ -20,41 +20,36 @@ class InternetController extends GetxController {
 
   void NetStatus(List<ConnectivityResult> result) {
     if (result.contains(ConnectivityResult.none)) {
-      // Get.rawSnackbar(
-      //   title: "No Internet",
-      //   message: 'Connect to the internet to continue.',
-      //   icon: Icon(Icons.wifi_off, color: mainColor),
-      //   isDismissible: true,
-      //   duration: const Duration(days: 1),
-      //   shouldIconPulse: true,
-      // );
-
-      Get.rawSnackbar(
-          titleText: Container(
-            width: double.infinity,
-            height: Get.height * (.950),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                  child: Icon(
-                    Icons.wifi_off,
-                    size: 100,
-                    color: mainColor,
+      if (!(Get.isDialogOpen ?? false)) {
+        Get.dialog(
+          WillPopScope(
+            onWillPop: () async => false,
+            child: CupertinoAlertDialog(
+              title: Column(
+                children: [
+                  SizedBox(
+                    height: 40,
                   ),
-                ),
-                Text(
-                  "No Internet Connection",
-                  style: TextStyle(fontSize: 20, color: mainColor),
-                )
-              ],
+                  Icon(Icons.error, color: mainColor, size: 50),
+                  const SizedBox(height: 10),
+                  Text(
+                    'No Internet Connection',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                ],
+              ),
             ),
           ),
-          messageText: Container(),
-          backgroundColor: Colors.black,
-          isDismissible: false,
-          duration: Duration(days: 1));
+          barrierDismissible: false,
+        );
+      }
     } else {
+      if (Get.isDialogOpen ?? false) {
+        Get.back(); // Close the dialog when internet reconnects
+      }
       if (Get.isSnackbarOpen) {
         Get.closeCurrentSnackbar();
       }
