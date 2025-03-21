@@ -16,7 +16,7 @@ import 'package:ristey/firebase_options.dart';
 import 'package:ristey/global_vars.dart';
 import 'package:ristey/models/shared_pref.dart';
 import 'package:ristey/models/user_modal.dart';
-import 'package:ristey/network_connectivity.dart';
+import 'package:ristey/netcheck.dart';
 import 'package:ristey/screens/incoming_audio_call.dart';
 import 'package:ristey/screens/incoming_call.dart';
 import 'package:ristey/screens/navigation/service/home_service.dart';

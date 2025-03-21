@@ -17,42 +17,6 @@ class DependencyInjection {
   }
 }
 
-class InternetController extends GetxController {
-  final Connectivity _connectivity = Connectivity();
-  late final StreamSubscription<List<ConnectivityResult>>
-      _connectivitySubscription;
-
-  @override
-  void onInit() {
-    super.onInit();
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen(NetStatus);
-  }
-
-  void NetStatus(List<ConnectivityResult> result) {
-    if (result.contains(ConnectivityResult.none)) {
-      Get.rawSnackbar(
-        title: "No Internet",
-        message: 'Connect to the internet to continue.',
-        icon: Icon(Icons.wifi_off, color: mainColor),
-        isDismissible: true,
-        duration: const Duration(days: 1),
-        shouldIconPulse: true,
-      );
-    } else {
-      if (Get.isSnackbarOpen) {
-        Get.closeCurrentSnackbar();
-      }
-    }
-  }
-
-  @override
-  void onClose() {
-    _connectivitySubscription.cancel(); // Clean up listener
-    super.onClose();
-  }
-}
-
 class NetworkController extends GetxController {
   final Connectivity _connectivity = Connectivity();
 
