@@ -566,7 +566,7 @@ class _MyProfileState extends State<MyProfile> {
                                                         (userSave.puid != null)
                                                             ? userSave.puid!
                                                             : "",
-                                                    size: 12,
+                                                    size: 13, color: mainColor,
                                                   ),
                                                 ),
                                               ],
