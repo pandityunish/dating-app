@@ -260,9 +260,11 @@ class _CustomImageContainerState extends State<CustomImageContainer> {
                         width: 100,
                         child: FloatingActionButton(
                           heroTag: "btn$num",
-                          
                           onPressed: onPressed,
-                          child: const Icon(Icons.add,color: Color(0xFF888888),),
+                          child: const Icon(
+                            Icons.add,
+                            color: Color(0xFF888888),
+                          ),
                           backgroundColor: Colors.white,
                           foregroundColor: Colors.black,
                           shape: RoundedRectangleBorder(
@@ -291,53 +293,56 @@ class _CustomImageContainerState extends State<CustomImageContainer> {
                                   ? BackdropFilter(
                                       filter: ImageFilter.blur(
                                           sigmaX: 2, sigmaY: 2),
-                                      child:  Container(
-              alignment: Alignment.center,
-              color: Colors.grey.withOpacity(0.1), // Slight overlay
-              child:  Icon(
-                Icons.lock, // Lock icon
-                size: 30,   // Icon size
-                color: mainColor, // Icon color
-              ),
-            ),
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        color: Colors.grey
+                                            .withOpacity(0.1), // Slight overlay
+                                        child: Icon(
+                                          Icons.lock, // Lock icon
+                                          size: 30, // Icon size
+                                          color: mainColor, // Icon color
+                                        ),
+                                      ),
                                     )
                                   : Center(),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 4,vertical: 3),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 4, vertical: 3),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 GestureDetector(
-                                  onTap: () {
-                                    onPressed2(url!);
-                                  },
-                                  child:Image.asset("images/icons/edit.png")
+                                    onTap: () {
+                                      onPressed2(url!);
+                                    },
+                                    child: Image.asset("images/icons/edit.png")
 
-                                  // Icon(
-                                  //   Icons.edit_square,
-                                  //   color: Colors.white,
-                                  //   size: 18,
-                                  //   shadows: <Shadow>[
-                                  //     Shadow(
-                                  //         color: Colors.black, blurRadius: 15.0)
-                                  //   ],
-                                  // ),
-                                ),
+                                    // Icon(
+                                    //   Icons.edit_square,
+                                    //   color: Colors.white,
+                                    //   size: 18,
+                                    //   shadows: <Shadow>[
+                                    //     Shadow(
+                                    //         color: Colors.black, blurRadius: 15.0)
+                                    //   ],
+                                    // ),
+                                    ),
                                 GestureDetector(
-                                  onTap: deleteImg,
-                                  child:Image.asset("images/icons/delete.png")
-                                  //  Icon(
-                                  //   Icons.delete,
-                                  //   size: 18,
-                                  //   color: Colors.white,
-                                  //   shadows: <Shadow>[
-                                  //     Shadow(
-                                  //         color: Colors.black, blurRadius: 15.0)
-                                  //   ],
-                                  // ),
-                                )
+                                    onTap: deleteImg,
+                                    child:
+                                        Image.asset("images/icons/delete.png")
+                                    //  Icon(
+                                    //   Icons.delete,
+                                    //   size: 18,
+                                    //   color: Colors.white,
+                                    //   shadows: <Shadow>[
+                                    //     Shadow(
+                                    //         color: Colors.black, blurRadius: 15.0)
+                                    //   ],
+                                    // ),
+                                    )
                               ],
                             ),
                           )
