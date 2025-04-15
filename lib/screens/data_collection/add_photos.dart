@@ -270,7 +270,7 @@ class _ReligionState extends State<AddPics> {
                               height: 40,
                             ),
                             Text(
-                              "Upload Your Best Photos",
+                              "Upload Your Best Pics",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 16,

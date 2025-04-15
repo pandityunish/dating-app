@@ -459,408 +459,478 @@ class _MyProfileState extends State<MyProfile> {
     )..layout(minWidth: 0, maxWidth: double.infinity);
 
     final textWidth = textPainter.width;
-    return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(top: 35, bottom: 15),
-                padding: const EdgeInsets.only(left: 1),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                              onTap: () async {},
-                              child: Container(
-                                child: Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {
-                                        // Navigator.pop(context);
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  MainAppContainer(
-                                                      notiPage: false),
-                                            ));
-                                      },
-                                      icon: Icon(
-                                        Icons.arrow_back_ios_new,
-                                        color: mainColor,
-                                      ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 35, bottom: 15),
+              padding: const EdgeInsets.only(left: 1),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                            onTap: () async {},
+                            child: Container(
+                              child: Row(
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      // Navigator.pop(context);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                MainAppContainer(
+                                                    notiPage: false),
+                                          ));
+                                    },
+                                    icon: Icon(
+                                      Icons.arrow_back_ios_new,
+                                      color: mainColor,
                                     ),
-                                    Container(
-                                      width: 45,
-                                      height: 45,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(35),
-                                          border: (userSave.imageUrls == null ||
-                                                  userSave.imageUrls!.isEmpty)
-                                              ? Border.all(
-                                                  width: 1, color: mainColor)
-                                              : Border.all(
-                                                  width: 2, color: Colors.white),
-                                          color: Colors.white,
-                                          image: DecorationImage(
-                                              image: (userSave.imageUrls ==
-                                                          null ||
-                                                      userSave
-                                                          .imageUrls!.isEmpty)
-                                                  ? const NetworkImage(
-                                                      "https://firebasestorage.googleapis.com/v0/b/couplematch-47708.appspot.com/o/impImage%2FnavImageError.png?alt=media&token=49f90276-0a97-4f1f-910f-28e95f1ac29c")
-                                                  // "https://firebasestorage.googleapis.com/v0/b/couplematch-47708.appspot.com/o/Images%2F70.png?alt=media&token=05816459-b75e-44ee-8ca6-a6b9b4d9cbf8")
-                                                  : NetworkImage(
-                                                      userSave.imageUrls![0]))),
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  margin: const EdgeInsets.only(
-                                                      left: 5),
-                                                  // width: textWidth,
-
-                                                  child: SizedBox(
-                                                    width: Get.width * 0.33,
-                                                    child:
-                                                        SingleChildScrollView(
-                                                      scrollDirection:
-                                                          Axis.horizontal,
-                                                      child: BigText(
-                                                        text: (userSave.name ==
-                                                                null)
-                                                            ? "Ghanshyam Ramayiyavasta"
-                                                            : "${userSave.name![0].toUpperCase() + userSave.name!.substring(1)} ${userSave.surname![0].toUpperCase() + userSave.surname!.substring(1)}",
-                                                        size: 14,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                      ),
+                                  ),
+                                  Container(
+                                    width: 45,
+                                    height: 45,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(35),
+                                        border: (userSave.imageUrls == null ||
+                                                userSave.imageUrls!.isEmpty)
+                                            ? Border.all(
+                                                width: 1, color: mainColor)
+                                            : Border.all(
+                                                width: 2, color: Colors.white),
+                                        color: Colors.white,
+                                        image: DecorationImage(
+                                            image: (userSave.imageUrls ==
+                                                        null ||
+                                                    userSave
+                                                        .imageUrls!.isEmpty)
+                                                ? const NetworkImage(
+                                                    "https://firebasestorage.googleapis.com/v0/b/couplematch-47708.appspot.com/o/impImage%2FnavImageError.png?alt=media&token=49f90276-0a97-4f1f-910f-28e95f1ac29c")
+                                                // "https://firebasestorage.googleapis.com/v0/b/couplematch-47708.appspot.com/o/Images%2F70.png?alt=media&token=05816459-b75e-44ee-8ca6-a6b9b4d9cbf8")
+                                                : NetworkImage(
+                                                    userSave.imageUrls![0]))),
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                margin: const EdgeInsets.only(
+                                                    left: 5),
+                                                // width: textWidth,
+    
+                                                child: SizedBox(
+                                                  width: Get.width * 0.33,
+                                                  child:
+                                                      SingleChildScrollView(
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    child: BigText(
+                                                      text: (userSave.name ==
+                                                              null)
+                                                          ? "Ghanshyam Ramayiyavasta"
+                                                          : "${userSave.name![0].toUpperCase() + userSave.name!.substring(1)} ${userSave.surname![0].toUpperCase() + userSave.surname!.substring(1)}",
+                                                      size: 14,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      overflow: TextOverflow
+                                                          .ellipsis,
                                                     ),
                                                   ),
                                                 ),
-                                                Container(
-                                                  margin: const EdgeInsets.only(
-                                                      left: 5),
-                                                  child: BigText(
-                                                    // text: uid.toString().substring(uid.length()-5),
-                                                    text:
-                                                        (userSave.puid != null)
-                                                            ? userSave.puid!
-                                                            : "",
-                                                    size: 12,
-                                                  ),
+                                              ),
+                                              Container(
+                                                margin: const EdgeInsets.only(
+                                                    left: 5),
+                                                child: BigText(
+                                                  // text: uid.toString().substring(uid.length()-5),
+                                                  text:
+                                                      (userSave.puid != null)
+                                                          ? userSave.puid!
+                                                          : "",
+                                                  size: 12,
                                                 ),
-                                              ],
-                                            ),
-                                            Column(
-                                              children: [
-                                                (userSave.verifiedStatus ==
-                                                            "verified" &&
-                                                        userSave.imageUrls!
-                                                            .isNotEmpty)
-                                                    ? Icon(
-                                                        Icons.verified_user,
-                                                        color: mainColor,
-                                                        size: 35,
-                                                      )
-                                                    : const Text(""),
-                                                const SizedBox(
-                                                  height: 4,
-                                                )
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              )),
-                          Container(
-                            margin: EdgeInsets.only(
-                                left: MediaQuery.of(context).size.width * 0.01),
-                            alignment: Alignment.bottomRight,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  side: BorderSide(
-                                    width: 2.0,
-                                    color: mainColor,
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            children: [
+                                              (userSave.verifiedStatus ==
+                                                          "verified" &&
+                                                      userSave.imageUrls!
+                                                          .isNotEmpty)
+                                                  ? Icon(
+                                                      Icons.verified_user,
+                                                      color: mainColor,
+                                                      size: 35,
+                                                    )
+                                                  : const Text(""),
+                                              const SizedBox(
+                                                height: 4,
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ],
                                   ),
-                                  backgroundColor: Colors.white,
-                                  minimumSize: const Size(40, 35),
-                                  elevation: 0,
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50)),
-                                  )),
-                              child: BigText(
-                                text: "Edit Profile",
-                                size: 15,
-                                color: mainColor,
+                                ],
                               ),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const EditProfile()));
-                                if (usereditprofile.isNotEmpty) {
-                                  showadsbar(context, usereditprofile, () {
-                                    Navigator.pop(context);
-                                  });
-                                } else {
-                                  if (editads.isNotEmpty) {
-                                    showadsbar(context, editads, () {
-                                      Navigator.pop(context);
-                                    });
-                                  }
-                                }
-                              },
+                            )),
+                        Container(
+                          margin: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width * 0.01),
+                          alignment: Alignment.bottomRight,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                side: BorderSide(
+                                  width: 2.0,
+                                  color: mainColor,
+                                ),
+                                backgroundColor: Colors.white,
+                                minimumSize: const Size(40, 35),
+                                elevation: 0,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(50)),
+                                )),
+                            child: BigText(
+                              text: "Edit Profile",
+                              size: 15,
+                              color: mainColor,
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 18, top: 5),
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          height: 8,
-                          width: MediaQuery.of(context).size.width * 0.82,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(color: mainColor),
-                          ),
-                          child: Row(
-                            children: [
-                              Flexible(
-                                child: Container(
-                                  height: 8,
-                                  width: MediaQuery.of(context).size.width *
-                                      0.82 *
-                                      userProfilePercentage /
-                                      100,
-                                  decoration: BoxDecoration(
-                                    color: mainColor,
-                                    borderRadius: BorderRadius.circular(3),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "Profile Completion ${userProfilePercentage}%",
-                    ),
-                    const Divider(
-                      color: Colors.grey,
-                      thickness: 1,
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                // margin: EdgeInsets.only(left: 10),
-                padding: EdgeInsetsDirectional.only(
-                  end: MediaQuery.of(context).size.width * 0.1,
-                ),
-
-                child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () async {
-                            is25Ads = true;
-                            int statusCode =
-                                await UserService().finduser(userSave.email!);
-                            if (statusCode == 200) {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) => MainAppContainer(
-                                            notiPage: false,
-                                          )),
-                                  (route) => false);
-                            } else {
-                              Navigator.of(context).pushAndRemoveUntil(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const FirstScreen()),
-                                  (route) => false);
-                              SharedPreferences sharedPreferences =
-                                  await SharedPreferences.getInstance();
-                              sharedPreferences.clear();
-                            }
-                          },
-                          child: Row(
-                            children: [
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              Container(
-                                child: Image.asset(
-                                  'images/icons/home.png',
-                                  width: 23,
-                                  height: 23,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              const Text(
-                                "Home",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 18),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const Search()));
-                            if (usersearchads.isNotEmpty) {
-                              showadsbar(context, usersearchads, () {
-                                Navigator.pop(context);
-                              });
-                            } else {
-                              if (searchads.isNotEmpty) {
-                                showadsbar(context, searchads, () {
+                                          const EditProfile()));
+                              if (usereditprofile.isNotEmpty) {
+                                showadsbar(context, usereditprofile, () {
                                   Navigator.pop(context);
                                 });
+                              } else {
+                                if (editads.isNotEmpty) {
+                                  showadsbar(context, editads, () {
+                                    Navigator.pop(context);
+                                  });
+                                }
                               }
-                            }
-                          },
-                          child: Row(
-                            children: [
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              Container(
-                                child: Image.asset(
-                                  'images/icons/search.png',
-                                  width: 23,
-                                  height: 23,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              const Text(
-                                "Search Profile",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 18),
-                              ),
-                            ],
+                            },
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 15,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 18, top: 5),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Container(
+                        height: 8,
+                        width: MediaQuery.of(context).size.width * 0.82,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(color: mainColor),
+                        ),
+                        child: Row(
+                          children: [
+                            Flexible(
+                              child: Container(
+                                height: 8,
+                                width: MediaQuery.of(context).size.width *
+                                    0.82 *
+                                    userProfilePercentage /
+                                    100,
+                                decoration: BoxDecoration(
+                                  color: mainColor,
+                                  borderRadius: BorderRadius.circular(3),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Profile Completion ${userProfilePercentage}%",
+                  ),
+                  const Divider(
+                    color: Colors.grey,
+                    thickness: 1,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              // margin: EdgeInsets.only(left: 10),
+              padding: EdgeInsetsDirectional.only(
+                end: MediaQuery.of(context).size.width * 0.1,
+              ),
+    
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () async {
+                          is25Ads = true;
+                          int statusCode =
+                              await UserService().finduser(userSave.email!);
+                          if (statusCode == 200) {
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) => MainAppContainer(
+                                          notiPage: false,
+                                        )),
+                                (route) => false);
+                          } else {
+                            Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const SearchPreferences()));
-                            if (usersavepreferenceads.isNotEmpty) {
-                              showadsbar(context, usersavepreferenceads, () {
+                                        const FirstScreen()),
+                                (route) => false);
+                            SharedPreferences sharedPreferences =
+                                await SharedPreferences.getInstance();
+                            sharedPreferences.clear();
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Container(
+                              child: Image.asset(
+                                'images/icons/home.png',
+                                width: 23,
+                                height: 23,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            const Text(
+                              "Home",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 18),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Search()));
+                          if (usersearchads.isNotEmpty) {
+                            showadsbar(context, usersearchads, () {
+                              Navigator.pop(context);
+                            });
+                          } else {
+                            if (searchads.isNotEmpty) {
+                              showadsbar(context, searchads, () {
                                 Navigator.pop(context);
                               });
-                            } else {
-                              if (savePreferads.isNotEmpty) {
-                                showadsbar(context, savePreferads, () {
-                                  Navigator.pop(context);
-                                });
-                              }
                             }
-                          },
-                          child: Row(
-                            children: [
-                              const SizedBox(
-                                width: 8,
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Container(
+                              child: Image.asset(
+                                'images/icons/search.png',
+                                width: 23,
+                                height: 23,
                               ),
-                              Container(
-                                child: Image.asset(
-                                  'images/icons/filter.png',
-                                  width: 23,
-                                  height: 23,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              const Text(
-                                "Saved Preference",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 18),
-                              ),
-                            ],
-                          ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            const Text(
+                              "Search Profile",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 18),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            AddToProfileService().updateonlinedata();
-
-                            onlineUser();
-                            AddToProfileService().updateonlineuser();
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const SearchPreferences()));
+                          if (usersavepreferenceads.isNotEmpty) {
+                            showadsbar(context, usersavepreferenceads, () {
+                              Navigator.pop(context);
+                            });
+                          } else {
+                            if (savePreferads.isNotEmpty) {
+                              showadsbar(context, savePreferads, () {
+                                Navigator.pop(context);
+                              });
+                            }
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Container(
+                              child: Image.asset(
+                                'images/icons/filter.png',
+                                width: 23,
+                                height: 23,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            const Text(
+                              "Saved Preference",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 18),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          AddToProfileService().updateonlinedata();
+    
+                          onlineUser();
+                          AddToProfileService().updateonlineuser();
+                          NotificationService().addtoadminnotification(
+                              userid: userSave.uid!,
+                              useremail: userSave.email!,
+                              subtitle: "ONLINE PROFILES",
+                              userimage: userSave.imageUrls!.isEmpty
+                                  ? ""
+                                  : userSave.imageUrls![0],
+                              title:
+                                  "${userSave.name!.substring(0, 1)} ${userSave.surname!.toUpperCase()} ${userSave.puid} SEEN ONLINE PROFILES");
+                          NotificationFunction.setNotification(
+                            "admin",
+                            "${userSave.name!.substring(0, 1)} ${userSave.surname!.toUpperCase()} ${userSave.puid} SEEN ONLINE PROFILES",
+                            'onlineuser',
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Container(
+                              child: Image.asset(
+                                'images/icons/user_dot_green.png',
+                                width: 23,
+                                height: 23,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Stack(
+                              children: [
+                                const SizedBox(
+                                  width: 120,
+                                  child: Text(
+                                    "Online",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 18),
+                                  ),
+                                ),
+                                // Positioned(
+                                //   top: -1,
+                                //   right: 0,
+                                //   child: Container(
+                                //       margin: const EdgeInsets.only(top: 5),
+                                //       child: const BlinkingColorScreen()),
+                                // ),
+                              ],
+                            ),
+    
+                            const SizedBox(width: 4, height: 5),
+    
+                            // ImageIcon(AssetImage("images/icons/user.png")),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          if (userSave.imageUrls == null ||
+                              userSave.imageUrls!.isEmpty) {
+                            AddToProfileService().updateprofileverified();
+    
                             NotificationService().addtoadminnotification(
                                 userid: userSave.uid!,
                                 useremail: userSave.email!,
@@ -869,809 +939,736 @@ class _MyProfileState extends State<MyProfile> {
                                     ? ""
                                     : userSave.imageUrls![0],
                                 title:
-                                    "${userSave.name!.substring(0, 1)} ${userSave.surname!.toUpperCase()} ${userSave.puid} SEEN ONLINE PROFILES");
-                            NotificationFunction.setNotification(
-                              "admin",
-                              "${userSave.name!.substring(0, 1)} ${userSave.surname!.toUpperCase()} ${userSave.puid} SEEN ONLINE PROFILES",
-                              'onlineuser',
-                            );
-                          },
-                          child: Row(
-                            children: [
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              Container(
-                                child: Image.asset(
-                                  'images/icons/user_dot_green.png',
-                                  width: 23,
-                                  height: 23,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              Stack(
-                                children: [
-                                  const SizedBox(
-                                    width: 120,
-                                    child: Text(
-                                      "Online",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 18),
-                                    ),
-                                  ),
-                                  // Positioned(
-                                  //   top: -1,
-                                  //   right: 0,
-                                  //   child: Container(
-                                  //       margin: const EdgeInsets.only(top: 5),
-                                  //       child: const BlinkingColorScreen()),
-                                  // ),
-                                ],
-                              ),
-
-                              const SizedBox(width: 4, height: 5),
-
-                              // ImageIcon(AssetImage("images/icons/user.png")),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            if (userSave.imageUrls == null ||
-                                userSave.imageUrls!.isEmpty) {
-                              AddToProfileService().updateprofileverified();
-
-                              NotificationService().addtoadminnotification(
-                                  userid: userSave.uid!,
-                                  useremail: userSave.email!,
-                                  subtitle: "ONLINE PROFILES",
-                                  userimage: userSave.imageUrls!.isEmpty
-                                      ? ""
-                                      : userSave.imageUrls![0],
-                                  title:
-                                      "${userSave.name!.substring(0, 1)} ${userSave.surname!.toUpperCase()} ${userSave.puid} TRIED TO VERIFIED PROFILE WITHOUT PHOTO ");
-                              Future(() => customAlertBox1(
-                                  context,
-                                  Icons.error,
-                                  "Profile Pics Required \n To \n Verify profile",
-                                  "",
-                                  () {}));
-                            } else if (userSave.status == "block") {
-                              AddToProfileService().updateprofileverified();
-
-                              Future(() => customAlertBox1(context, Icons.error,
-                                  "Under Process", "", () {}));
-                            } else if(userSave.verifiedStatus == "approved"){
-
-                              Future(() => customAlertBox1(context, Icons.check_circle_sharp,
-                                  "Already Verified", "", () {}));
-                            }else if(userSave.videoLink != ""){
-
-                              Future(() => customAlertBox1(context, Icons.check_circle_sharp,
-                                  "Under Process", "", () {}));
-                            } else {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Verify()));
-                              if (userprofileads.isNotEmpty) {
-                                showadsbar(context, userprofileads, () {
-                                  Navigator.pop(context);
-                                });
-                              } else {
-                                if (profileads.isNotEmpty) {
-                                  showadsbar(context, profileads, () {
-                                    Navigator.pop(context);
-                                  });
-                                }
-                              }
-                            }
-                          },
-                          child: Row(
-                            children: [
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              Container(
-                                child: Image.asset(
-                                  'images/icons/verified.png',
-                                  width: 23,
-                                  height: 23,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              const Text(
-                                "Profile Verification",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 18),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            //  if (userSave.status == "approved") {
-                            AddToProfileService().freepersonmatch();
+                                    "${userSave.name!.substring(0, 1)} ${userSave.surname!.toUpperCase()} ${userSave.puid} TRIED TO VERIFIED PROFILE WITHOUT PHOTO ");
+                            Future(() => customAlertBox1(
+                                context,
+                                Icons.error,
+                                "Profile Pics Required \n To \n Verify profile",
+                                "",
+                                () {}));
+                          } else if (userSave.status == "block") {
+                            AddToProfileService().updateprofileverified();
+    
+                            Future(() => customAlertBox1(context, Icons.error,
+                                "Under Process", "", () {}));
+                          } else if(userSave.verifiedStatus == "approved"){
+    
+                            Future(() => customAlertBox1(context, Icons.check_circle_sharp,
+                                "Already Verified", "", () {}));
+                          }else if(userSave.videoLink != ""){
+    
+                            Future(() => customAlertBox1(context, Icons.check_circle_sharp,
+                                "Under Process", "", () {}));
+                          } else {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const FreeMatchmakingScreen()));
-                            if (usermatchmakingads.isNotEmpty) {
-                              showadsbar(context, usermatchmakingads, () {
-                                Navigator.pop(context);
-                              });
-
-                              // }
-                            } else {
-                              if (matchmakingads.isNotEmpty) {
-                                showadsbar(context, matchmakingads, () {
-                                  Navigator.pop(context);
-                                });
-                              }
-                            }
-                          },
-                          child: Row(
-                            children: [
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              Container(
-                                child: Image.asset(
-                                  'images/icons/shake_heart.png',
-                                  width: 23,
-                                  height: 23,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              const Text(
-                                "Free Personalized Matchmaking",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 18),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            AddToProfileService().updatechatnow();
-
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (builder) => const ChatPageHome()));
-                            if (userchatads.isNotEmpty) {
-                              showadsbar(context, userchatads, () {
+                                    builder: (context) => const Verify()));
+                            if (userprofileads.isNotEmpty) {
+                              showadsbar(context, userprofileads, () {
                                 Navigator.pop(context);
                               });
                             } else {
-                              if (chatads.isNotEmpty) {
-                                showadsbar(context, chatads, () {
+                              if (profileads.isNotEmpty) {
+                                showadsbar(context, profileads, () {
                                   Navigator.pop(context);
                                 });
                               }
                             }
-                          },
-                          child: Row(
-                            children: [
-                              const SizedBox(
-                                width: 8,
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Container(
+                              child: Image.asset(
+                                'images/icons/verified.png',
+                                width: 23,
+                                height: 23,
                               ),
-                              Container(
-                                child: Image.asset(
-                                  'images/icons/chat.png',
-                                  width: 23,
-                                  height: 23,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              const Text(
-                                "Chat Now",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 18),
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  BlinkingNumber(
-                                      color: (getallnumberofunseen > 0)
-                                          ? mainColor
-                                          : Colors.white,
-                                      number: getallnumberofunseen.toString()),
-                                ],
-                              ),
-                            ],
-                          ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            const Text(
+                              "Profile Verification",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 18),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    (userSave.religion == "Hindu")
-                        ? Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () async {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const KundliMatch()));
-                                      if (userkundaliads.isNotEmpty) {
-                                        showadsbar(context, userkundaliads, () {
-                                          Navigator.pop(context);
-                                        });
-                                      } else {
-                                        if (kundaliads.isNotEmpty) {
-                                          showadsbar(context, kundaliads, () {
-                                            Navigator.pop(context);
-                                          });
-                                        }
-                                      }
-                                    },
-                                    child: Row(
-                                      children: [
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Container(
-                                          child: Image.asset(
-                                            'images/icons/kundli.png',
-                                            width: 23,
-                                            height: 23,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        const Text(
-                                          "Free Kundli Match",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.normal,
-                                              fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                            ],
-                          )
-                        : Container(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            AddToProfileService().updatebiodata();
-
-                            // Navigator.push(
-                            //         context,
-                            //         MaterialPageRoute(
-                            //             builder: (context) => BioData()));
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => BioData()));
-                            if (userSave.verifiedStatus == "verified" &&
-                                userSave.imageUrls!.isNotEmpty) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const BioData()));
-                              if (userbioads.isNotEmpty) {
-                                showadsbar(context, userbioads, () {
-                                  Navigator.pop(context);
-                                });
-                              } else {
-                                if (bioads.isNotEmpty) {
-                                  showadsbar(context, bioads, () {
-                                    Navigator.pop(context);
-                                  });
-                                }
-                              }
-                            } else {
-                              (userSave.videoLink == null ||
-                                      userSave.videoLink == "" ||
-                                      userSave.imageUrls!.isEmpty)
-                                  ? Future(() => customAlertBox1(
-                                      context,
-                                      Icons.error,
-                                      "Profile Verification Required\nTo\nDownload Matrimonial Biodata",
-                                      "",
-                                      () {}))
-                                  : Future(() => customAlertBox1(
-                                      context,
-                                      Icons.error,
-                                      "Profile Verification\nis\nUnder Process",
-                                      "",
-                                      () {}));
-                            }
-                          },
-                          child: Row(
-                            children: [
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              Container(
-                                child: Image.asset(
-                                  'images/icons/download.png',
-                                  width: 23,
-                                  height: 23,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              const Text(
-                                "Download Matrimonial Biodata",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 18),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            NotificationService().addtoadminnotification(
-                                userid: userSave.uid!,
-                                subtitle: "Profile Create",
-                                useremail: userSave.email!,
-                                userimage: userSave.imageUrls!.isEmpty
-                                    ? ""
-                                    : userSave.imageUrls![0],
-                                title:
-                                    "${userSave.name!.substring(0, 1)} ${userSave.surname!.toUpperCase()} ${userSave.puid} NEED MARRIAGE LOAN ");
-                            AddToProfileService().marriageloanupdate();
-
-                            showDialog(
-                                barrierDismissible: false,
-                                context: context,
-                                builder: (context) {
-                                  return const AlertDialog(
-                                    content: SnackBarContent(
-                                      error_text:
-                                          "Sorry\n Service is Not Available In Your Area \n Please Try Again Later",
-                                      appreciation: "",
-                                      icon: Icons.error,
-                                      sec: 2,
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    elevation: 0,
-                                  );
-                                }).whenComplete(() {
-                              if (usermarrigeloanads.isNotEmpty) {
-                                showadsbar(context, usermarrigeloanads, () {
-                                  Navigator.pop(context);
-                                });
-                              } else {
-                                if (marriageloanads.isNotEmpty) {
-                                  showadsbar(context, marriageloanads, () {
-                                    Navigator.pop(context);
-                                  });
-                                }
-                              }
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          //  if (userSave.status == "approved") {
+                          AddToProfileService().freepersonmatch();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const FreeMatchmakingScreen()));
+                          if (usermatchmakingads.isNotEmpty) {
+                            showadsbar(context, usermatchmakingads, () {
+                              Navigator.pop(context);
                             });
-                          },
-                          child: Row(
-                            children: [
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              Container(
-                                child: Image.asset(
-                                  'images/icons/income.png',
-                                  width: 23,
-                                  height: 23,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              const Text(
-                                "Marriage Loan (0% Interest)",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 18),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () async {
-                            print(shareads.length);
-                             if (usershareapp.isNotEmpty) {
-                              showadsbar(context, usershareapp, () async {
-                                Get.back();
-                              });
-                            } else {
-                              if (shareads.isNotEmpty) {
-                                showadsbar(context, shareads, () async {
-                                  Get.back();
-                                });
-                              }
-                            }
-                            NotificationService().addtoadminnotification(
-                                userid: userSave.uid!,
-                                subtitle: "Profile Create",
-                                useremail: userSave.email!,
-                                userimage: userSave.imageUrls!.isEmpty
-                                    ? ""
-                                    : userSave.imageUrls![0],
-                                title:
-                                    "${userSave.name!.substring(0, 1)} ${userSave.surname!.toUpperCase()} ${userSave.puid} SHARE APP");
-                            AddToProfileService().updateshare();
-                            SupprotService().deletesendlink(
-                                email: userSave.email!, value: "To Share App");
-
-                            await Share.share(
-                                'https://play.google.com/store/apps/details?id=com.freerishtey.android');
-                           
-                          },
-                          child: Row(
-                            children: [
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              Container(
-                                child: Image.asset(
-                                  'images/icons/share.png',
-                                  width: 23,
-                                  height: 23,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              const Text(
-                                "Share App",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 18),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const SupportScreen()));
-                            if (supportads.isNotEmpty) {
-                              showadsbar(context, supportads, () {
-                                Navigator.pop(context);
-                              });
-                            } else if (usersupportads.isNotEmpty) {
-                              showadsbar(context, usersupportads, () {
+    
+                            // }
+                          } else {
+                            if (matchmakingads.isNotEmpty) {
+                              showadsbar(context, matchmakingads, () {
                                 Navigator.pop(context);
                               });
                             }
-                          },
-                          child: Row(
-                            children: [
-                              const SizedBox(
-                                width: 8,
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Container(
+                              child: Image.asset(
+                                'images/icons/shake_heart.png',
+                                width: 23,
+                                height: 23,
                               ),
-                              Container(
-                                child: Image.asset(
-                                  'images/icons/community.png',
-                                  width: 23,
-                                  height: 23,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              Stack(
-                                children: [
-                                  const SizedBox(
-                                    width: 80,
-                                    child: Text(
-                                      "Support",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 18),
-                                    ),
-                                  ),
-                                  data1 == null
-                                      ? const Center()
-                                      : Positioned(
-                                          top: -4,
-                                          right: 0,
-                                          child: Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 5),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                BlinkingNumber(
-                                                    color: data1.length <= 0
-                                                        ? Colors.white
-                                                        : (data1[0]["isAdmin"] ==
-                                                                true)
-                                                            ? mainColor
-                                                            : Colors.white,
-                                                    number: "1"),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                ],
-                              ),
-                            ],
-                          ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            const Text(
+                              "Free Personalized Matchmaking",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 18),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          unselectedItemColor: mainColor,
-          selectedItemColor: mainColor,
-          backgroundColor: Colors.white,
-          onTap: (int index) {
-            switch (index) {
-              case 0:
-                deleteAccount();
-                if (userdeleteprofile.isNotEmpty) {
-                  showadsbar(context, userdeleteprofile, () {
-                    Navigator.pop(context);
-                  });
-                } else {
-                  if (deleteads.isNotEmpty) {
-                    showadsbar(context, deleteads, () {
-                      Navigator.pop(context);
-                    });
-                  }
-                }
-                break;
-              case 1:
-                {
-                  showDialog(
-                    barrierDismissible: false,
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        content: MediaQuery(
-                          data: MediaQuery.of(context)
-                              .copyWith(textScaleFactor: 1.0),
-                          child: SizedBox(
-                            height: 244,
-                            child: Column(
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          AddToProfileService().updatechatnow();
+    
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (builder) => const ChatPageHome()));
+                          if (userchatads.isNotEmpty) {
+                            showadsbar(context, userchatads, () {
+                              Navigator.pop(context);
+                            });
+                          } else {
+                            if (chatads.isNotEmpty) {
+                              showadsbar(context, chatads, () {
+                                Navigator.pop(context);
+                              });
+                            }
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Container(
+                              child: Image.asset(
+                                'images/icons/chat.png',
+                                width: 23,
+                                height: 23,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            const Text(
+                              "Chat Now",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 18),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                // SizedBox(
-                                //   height: 26,
-                                // ),
-                                // const LogoText(),
-                               
-                                const Text("Log Out \n You Want to Log Out?",
-                                    textAlign: TextAlign.center),
-                                const SizedBox(
-                                  height: 23,
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.only(left: 6),
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.8,
-                                  child: ElevatedButton(
-                                      style: ButtonStyle(
-                                          shadowColor:
-                                              MaterialStateColor.resolveWith(
-                                                  (states) => Colors.black),
-                                          padding: MaterialStateProperty.all<
-                                              EdgeInsetsGeometry?>(
-                                            const EdgeInsets.symmetric(
-                                              vertical: 12,
-                                            ),
-                                          ),
-                                          shape: MaterialStateProperty.all<
-                                                  RoundedRectangleBorder>(
-                                              RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          60.0),
-                                                  side: BorderSide(
-                                                    color:
-                                                        (color_done2 == false)
-                                                            ? Colors.white
-                                                            : mainColor,
-                                                  ))),
-                                          backgroundColor:
-                                              MaterialStateProperty.all<Color>(
-                                                  Colors.white)),
-                                      onPressed: () async {
-                                        if (!mounted) return;
-                                        setState(() {
-                                          color_done2 = true;
+                                BlinkingNumber(
+                                    color: (getallnumberofunseen > 0)
+                                        ? mainColor
+                                        : Colors.white,
+                                    number: getallnumberofunseen.toString()),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  (userSave.religion == "Hindu")
+                      ? Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                              children: [
+                                GestureDetector(
+                                  onTap: () async {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const KundliMatch()));
+                                    if (userkundaliads.isNotEmpty) {
+                                      showadsbar(context, userkundaliads, () {
+                                        Navigator.pop(context);
+                                      });
+                                    } else {
+                                      if (kundaliads.isNotEmpty) {
+                                        showadsbar(context, kundaliads, () {
+                                          Navigator.pop(context);
                                         });
-
-                                        await NotificationFunction
-                                            .setOnlineStatus(
-                                                userSave.uid!, "Offline");
-
-                                        logout(
-                                            context: context,
-                                            noti: true,
-                                            isLogout: false);
-                                      },
-                                      child: Text(
-                                        "Yes",
-                                        style: (color_done2 == false)
-                                            ? const TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                                fontFamily: 'Serif',
-                                                fontWeight: FontWeight.w700)
-                                            : TextStyle(
-                                                color: mainColor,
-                                                fontSize: 16,
-                                                fontFamily: 'Serif',
-                                                fontWeight: FontWeight.w700),
-                                      )),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-
-                                Container(
-                                  margin: const EdgeInsets.only(left: 6),
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.8,
-                                  child: ElevatedButton(
-                                      style: ButtonStyle(
-                                          shadowColor: MaterialStateColor.resolveWith(
-                                              (states) => Colors.black),
-                                          padding: MaterialStateProperty.all<EdgeInsetsGeometry?>(
-                                              const EdgeInsets.symmetric(
-                                                  vertical: 12)),
-                                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                              RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          60.0),
-                                                  side: const BorderSide(
-                                                    color: Colors.white,
-                                                  ))),
-                                          backgroundColor:
-                                              MaterialStateProperty.all<Color>(
-                                                  Colors.white)),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: const Text("Cancel",
-                                          style: TextStyle(color: Colors.black, fontSize: 16, fontFamily: 'Serif', fontWeight: FontWeight.w700))),
+                                      }
+                                    }
+                                  },
+                                  child: Row(
+                                    children: [
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      Container(
+                                        child: Image.asset(
+                                          'images/icons/kundli.png',
+                                          width: 23,
+                                          height: 23,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      const Text(
+                                        "Free Kundli Match",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 18),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                          ],
+                        )
+                      : Container(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          AddToProfileService().updatebiodata();
+    
+                          // Navigator.push(
+                          //         context,
+                          //         MaterialPageRoute(
+                          //             builder: (context) => BioData()));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => BioData()));
+                          if (userSave.verifiedStatus == "verified" &&
+                              userSave.imageUrls!.isNotEmpty) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const BioData()));
+                            if (userbioads.isNotEmpty) {
+                              showadsbar(context, userbioads, () {
+                                Navigator.pop(context);
+                              });
+                            } else {
+                              if (bioads.isNotEmpty) {
+                                showadsbar(context, bioads, () {
+                                  Navigator.pop(context);
+                                });
+                              }
+                            }
+                          } else {
+                            (userSave.videoLink == null ||
+                                    userSave.videoLink == "" ||
+                                    userSave.imageUrls!.isEmpty)
+                                ? Future(() => customAlertBox1(
+                                    context,
+                                    Icons.error,
+                                    "Profile Verification Required\nTo\nDownload Matrimonial Biodata",
+                                    "",
+                                    () {}))
+                                : Future(() => customAlertBox1(
+                                    context,
+                                    Icons.error,
+                                    "Profile Verification\nis\nUnder Process",
+                                    "",
+                                    () {}));
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Container(
+                              child: Image.asset(
+                                'images/icons/download.png',
+                                width: 23,
+                                height: 23,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            const Text(
+                              "Download Matrimonial Biodata",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 18),
+                            ),
+                          ],
                         ),
-                      );
-                    },
-                  );
-                  if (userlogoutprofile.isNotEmpty) {
-                    showadsbar(context, userlogoutprofile, () {
-                      Navigator.pop(context);
-                    });
-                  } else {
-                    if (logoutads.isNotEmpty) {
-                      showadsbar(context, logoutads, () {
-                        Navigator.pop(context);
-                      });
-                    }
-                  }
-                }
-                break;
-            }
-          },
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                const AssetImage('images/icons/delete_bin.png'),
-                size: 22,
-                color: mainColor,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          NotificationService().addtoadminnotification(
+                              userid: userSave.uid!,
+                              subtitle: "Profile Create",
+                              useremail: userSave.email!,
+                              userimage: userSave.imageUrls!.isEmpty
+                                  ? ""
+                                  : userSave.imageUrls![0],
+                              title:
+                                  "${userSave.name!.substring(0, 1)} ${userSave.surname!.toUpperCase()} ${userSave.puid} NEED MARRIAGE LOAN ");
+                          AddToProfileService().marriageloanupdate();
+    
+                          showDialog(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (context) {
+                                return const AlertDialog(
+                                  content: SnackBarContent(
+                                    error_text:
+                                        "Sorry\n Service is Not Available In Your Area \n Please Try Again Later",
+                                    appreciation: "",
+                                    icon: Icons.error,
+                                    sec: 2,
+                                  ),
+                                  backgroundColor: Colors.transparent,
+                                  elevation: 0,
+                                );
+                              }).whenComplete(() {
+                            if (usermarrigeloanads.isNotEmpty) {
+                              showadsbar(context, usermarrigeloanads, () {
+                                Navigator.pop(context);
+                              });
+                            } else {
+                              if (marriageloanads.isNotEmpty) {
+                                showadsbar(context, marriageloanads, () {
+                                  Navigator.pop(context);
+                                });
+                              }
+                            }
+                          });
+                        },
+                        child: Row(
+                          children: [
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Container(
+                              child: Image.asset(
+                                'images/icons/income.png',
+                                width: 23,
+                                height: 23,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            const Text(
+                              "Marriage Loan (0% Interest)",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 18),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () async {
+                          print(shareads.length);
+                           if (usershareapp.isNotEmpty) {
+                            showadsbar(context, usershareapp, () async {
+                              Get.back();
+                            });
+                          } else {
+                            if (shareads.isNotEmpty) {
+                              showadsbar(context, shareads, () async {
+                                Get.back();
+                              });
+                            }
+                          }
+                          NotificationService().addtoadminnotification(
+                              userid: userSave.uid!,
+                              subtitle: "Profile Create",
+                              useremail: userSave.email!,
+                              userimage: userSave.imageUrls!.isEmpty
+                                  ? ""
+                                  : userSave.imageUrls![0],
+                              title:
+                                  "${userSave.name!.substring(0, 1)} ${userSave.surname!.toUpperCase()} ${userSave.puid} SHARE APP");
+                          AddToProfileService().updateshare();
+                          SupprotService().deletesendlink(
+                              email: userSave.email!, value: "To Share App");
+    
+                          await Share.share(
+                              'https://play.google.com/store/apps/details?id=com.freerishtey.android');
+                         
+                        },
+                        child: Row(
+                          children: [
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Container(
+                              child: Image.asset(
+                                'images/icons/share.png',
+                                width: 23,
+                                height: 23,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            const Text(
+                              "Share App",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 18),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const SupportScreen()));
+                          if (supportads.isNotEmpty) {
+                            showadsbar(context, supportads, () {
+                              Navigator.pop(context);
+                            });
+                          } else if (usersupportads.isNotEmpty) {
+                            showadsbar(context, usersupportads, () {
+                              Navigator.pop(context);
+                            });
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Container(
+                              child: Image.asset(
+                                'images/icons/community.png',
+                                width: 23,
+                                height: 23,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Stack(
+                              children: [
+                                const SizedBox(
+                                  width: 80,
+                                  child: Text(
+                                    "Support",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 18),
+                                  ),
+                                ),
+                                data1 == null
+                                    ? const Center()
+                                    : Positioned(
+                                        top: -4,
+                                        right: 0,
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 5),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              BlinkingNumber(
+                                                  color: data1.length <= 0
+                                                      ? Colors.white
+                                                      : (data1[0]["isAdmin"] ==
+                                                              true)
+                                                          ? mainColor
+                                                          : Colors.white,
+                                                  number: "1"),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              label: 'Delete Profile',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.logout,
-                size: 25,
-                color: mainColor,
-              ),
-              label: 'Log Out',
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        unselectedItemColor: mainColor,
+        selectedItemColor: mainColor,
+        backgroundColor: Colors.white,
+        onTap: (int index) {
+          switch (index) {
+            case 0:
+              deleteAccount();
+              if (userdeleteprofile.isNotEmpty) {
+                showadsbar(context, userdeleteprofile, () {
+                  Navigator.pop(context);
+                });
+              } else {
+                if (deleteads.isNotEmpty) {
+                  showadsbar(context, deleteads, () {
+                    Navigator.pop(context);
+                  });
+                }
+              }
+              break;
+            case 1:
+              {
+                showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: MediaQuery(
+                        data: MediaQuery.of(context)
+                            .copyWith(textScaleFactor: 1.0),
+                        child: SizedBox(
+                          height: 244,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              // SizedBox(
+                              //   height: 26,
+                              // ),
+                              // const LogoText(),
+                             
+                              const Text("Log Out \n You Want to Log Out?",
+                                  textAlign: TextAlign.center),
+                              const SizedBox(
+                                height: 23,
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(left: 6),
+                                width:
+                                    MediaQuery.of(context).size.width * 0.8,
+                                child: ElevatedButton(
+                                    style: ButtonStyle(
+                                        shadowColor:
+                                            MaterialStateColor.resolveWith(
+                                                (states) => Colors.black),
+                                        padding: MaterialStateProperty.all<
+                                            EdgeInsetsGeometry?>(
+                                          const EdgeInsets.symmetric(
+                                            vertical: 12,
+                                          ),
+                                        ),
+                                        shape: MaterialStateProperty.all<
+                                                RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        60.0),
+                                                side: BorderSide(
+                                                  color:
+                                                      (color_done2 == false)
+                                                          ? Colors.white
+                                                          : mainColor,
+                                                ))),
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                Colors.white)),
+                                    onPressed: () async {
+                                      if (!mounted) return;
+                                      setState(() {
+                                        color_done2 = true;
+                                      });
+    
+                                      await NotificationFunction
+                                          .setOnlineStatus(
+                                              userSave.uid!, "Offline");
+    
+                                      logout(
+                                          context: context,
+                                          noti: true,
+                                          isLogout: false);
+                                    },
+                                    child: Text(
+                                      "Yes",
+                                      style: (color_done2 == false)
+                                          ? const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                              fontFamily: 'Serif',
+                                              fontWeight: FontWeight.w700)
+                                          : TextStyle(
+                                              color: mainColor,
+                                              fontSize: 16,
+                                              fontFamily: 'Serif',
+                                              fontWeight: FontWeight.w700),
+                                    )),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+    
+                              Container(
+                                margin: const EdgeInsets.only(left: 6),
+                                width:
+                                    MediaQuery.of(context).size.width * 0.8,
+                                child: ElevatedButton(
+                                    style: ButtonStyle(
+                                        shadowColor: MaterialStateColor.resolveWith(
+                                            (states) => Colors.black),
+                                        padding: MaterialStateProperty.all<EdgeInsetsGeometry?>(
+                                            const EdgeInsets.symmetric(
+                                                vertical: 12)),
+                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        60.0),
+                                                side: const BorderSide(
+                                                  color: Colors.white,
+                                                ))),
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                Colors.white)),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text("Cancel",
+                                        style: TextStyle(color: Colors.black, fontSize: 16, fontFamily: 'Serif', fontWeight: FontWeight.w700))),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+                if (userlogoutprofile.isNotEmpty) {
+                  showadsbar(context, userlogoutprofile, () {
+                    Navigator.pop(context);
+                  });
+                } else {
+                  if (logoutads.isNotEmpty) {
+                    showadsbar(context, logoutads, () {
+                      Navigator.pop(context);
+                    });
+                  }
+                }
+              }
+              break;
+          }
+        },
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: ImageIcon(
+              const AssetImage('images/icons/delete_bin.png'),
+              size: 22,
+              color: mainColor,
+            ),
+            label: 'Delete Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.logout,
+              size: 25,
+              color: mainColor,
+            ),
+            label: 'Log Out',
+          ),
+        ],
       ),
     );
   }

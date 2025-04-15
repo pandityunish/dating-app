@@ -27,4 +27,42 @@ class AdsService {
     }
     return getallusersdata;
   }
+   Future<void> updateSeenAds(
+      {required String adsId,
+     }) async {
+    try {
+  
+      http.Response res = await http.post(Uri.parse(updateseenadurl),
+          headers: {'Content-Type': 'Application/json'},
+          body: jsonEncode({
+            "id": adsId,
+           
+          }));
+      print(res.body);
+      if (res.statusCode == 200) {
+        print("Admin notification added successfully");
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+  Future<void> updateClickAds(
+      {required String adsId,
+     }) async {
+    try {
+  
+      http.Response res = await http.post(Uri.parse(updateclickadurl),
+          headers: {'Content-Type': 'Application/json'},
+          body: jsonEncode({
+            "id": adsId,
+           
+          }));
+      print(res.body);
+      if (res.statusCode == 200) {
+        print("Admin notification added successfully");
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 }

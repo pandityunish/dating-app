@@ -352,7 +352,7 @@ class _ReligionState extends State<Congo> {
                                   " Free",
                                   style: TextStyle(
                                       color: Colors.black,
-                                      fontWeight: FontWeight.w700,
+                                      // fontWeight: FontWeight.w700,
                                       fontSize: 16,
                                   ),
                                 ),
@@ -360,7 +360,7 @@ class _ReligionState extends State<Congo> {
                                   "RishteyWala",
                                   style: TextStyle(
                                       color: mainColor,
-                                      fontWeight: FontWeight.w700,
+                                      // fontWeight: FontWeight.w700,
                                       fontSize: 16,
                                      ),
                                 ),
@@ -417,6 +417,7 @@ class _ReligionState extends State<Congo> {
                         style: const TextStyle(
                             color: Colors.black,
                             fontSize: 16,
+                            decoration: TextDecoration.underline,
                             fontWeight: FontWeight.w600,
                             fontFamily: 'Sans-serif'),
                       )

@@ -189,7 +189,7 @@ class _FirstScreenState extends State<FirstScreen> {
            Text("Allow Notifications",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
            SizedBox(height: 15,),
            Text("Would You Like To Receive Notifications",style: TextStyle(fontSize: 12),),
-           SizedBox(height: 10,),
+           SizedBox(height: 25,),
 
            InkWell(
             onTap: () {
@@ -227,7 +227,7 @@ class _FirstScreenState extends State<FirstScreen> {
            Text("Allow Location",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
            SizedBox(height: 15,),
            Text("GPS is Used To Locate \n  You in Relationship To The Parking Spots",textAlign: TextAlign.center,style: TextStyle(fontSize: 12),),
-           SizedBox(height: 10,),
+           SizedBox(height: 20,),
 
            InkWell(
             onTap: () {

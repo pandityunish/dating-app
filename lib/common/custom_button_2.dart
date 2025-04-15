@@ -13,9 +13,16 @@ class CustomButtom extends StatelessWidget {
         width: MediaQuery.of(context).size.height * 0.8,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
-            border: Border.all(
-              color: Colors.black,
-            )),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 2,
+                blurRadius: 1,
+                offset: const Offset(0, 1), // changes position of shadow
+              ),
+            ]
+         ),
         child: Center(
           child: Text(
             text,

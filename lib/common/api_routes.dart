@@ -88,3 +88,6 @@ const updateprofessionurl = "$baseurl/auth/updateprofession";
 const updateeducationurl = "$baseurl/auth/updateeducation";
 const addtounapproveacitvitesurl = "$baseurl/auth/addtounapproveuser";
 const getadminsurl = "$baseurl/admin/getalladmins";
+const updateseenadurl = "$baseurl/updateseenad";
+const updateclickadurl = "$baseurl/updateclickad";
+const postAudioClipUrl = "$baseurl/postAudioClipByEmail";

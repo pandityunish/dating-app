@@ -219,7 +219,7 @@ class _VerifyState extends State<Verify> {
                 error_text:
                     "Video Has Been Uploaded Successfully",
                 appreciation: "",
-                icon: Icons.check,
+                icon: Icons.check_circle_rounded,
                 sec: 3,
               ),
               backgroundColor: Colors.transparent,

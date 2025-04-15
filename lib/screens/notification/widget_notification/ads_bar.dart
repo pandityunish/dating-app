@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ristey/global_vars.dart';
 import 'package:ristey/models/ads_modal.dart';
+import 'package:ristey/screens/navigation/service/ads_service.dart';
 import 'package:ristey/screens/profile/service/notification_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
@@ -61,6 +62,9 @@ void showadsbar(
                                         bool hasUrl =
                                             containsUrl(allads[0].description);
                                         if (hasUrl) {
+                                          AdsService().updateClickAds(
+                                              adsId: allads[0].id
+                                          );
                                           _launchPlayStore(
                                               allads[0].description);
                                           Navigator.pop(context);
@@ -80,6 +84,9 @@ void showadsbar(
                                                         "${userSave.name!.substring(0, 1)} ${userSave.surname!.toUpperCase()} ${userSave.puid} SEEN ADVERTISEMENT-${allads[0].adsid} CLICK");
                                           }
                                         } else {
+                                             AdsService().updateSeenAds(
+                                              adsId: allads[0].id
+                                          );
                                           onclick();
                                           // Navigator.pop(context);
                                         }

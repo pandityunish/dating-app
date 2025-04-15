@@ -505,7 +505,27 @@ class _LetsStartState extends State<LetsStart> {
               );
             });
       });
-    } else if (!isNumberValid) {
+    } else if (phoneNumberState == null) {
+      print("Our number isValid ${isNumberValid}");
+      setState(() {
+        error = "Please Enter Contact Number";
+        showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (context) {
+              return const AlertDialog(
+                content: SnackBarContent(
+                  error_text: "Please Enter Contact Number",
+                  appreciation: "",
+                  icon: Icons.error,
+                  sec: 1,
+                ),
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              );
+            });
+      });
+    }  else if (!isNumberValid) {
       print("Our number isValid ${isNumberValid}");
       setState(() {
         error = "Please Enter Valid Contact Number";
@@ -572,7 +592,7 @@ class _LetsStartState extends State<LetsStart> {
             builder: (context) {
               return const AlertDialog(
                 content: SnackBarContent(
-                  error_text: "Age must be \n Greater than 21",
+                  error_text: "Age Must be \n Greater than 21",
                   appreciation: "",
                   icon: Icons.error,
                   sec: 2,
@@ -800,6 +820,7 @@ class _LetsStartState extends State<LetsStart> {
               
                 Expanded(
                   child: SingleChildScrollView(
+                    controller:_scrollController,
                     child: Column(
                       children: [
                         Padding(
