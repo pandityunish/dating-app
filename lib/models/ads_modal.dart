@@ -5,11 +5,13 @@ class AdsModel {
   final String image;
   final String createdAt;
   final String adsid;
+  final String id;
   final String description;
   final String video;
   final bool isActive;
   AdsModel({
     required this.image,
+    required this.id,
     required this.createdAt,
     required this.adsid,
     required this.video,
@@ -28,6 +30,7 @@ class AdsModel {
   factory AdsModel.fromMap(Map<String, dynamic> map) {
     return AdsModel(
       image: map['image'] as String,
+      id: map['_id'] as String,
       createdAt: map['createdAt'] as String,
       adsid: map['adsid'] as String,
       description: map['description'] as String,

@@ -1,0 +1,2 @@
+/Users/yunishpandit/Downloads/ristey-main/android/app/.cxx/RelWithDebInfo/2z532q1o/x86_64/CMakeFiles/edit_cache.dir
+/Users/yunishpandit/Downloads/ristey-main/android/app/.cxx/RelWithDebInfo/2z532q1o/x86_64/CMakeFiles/rebuild_cache.dir

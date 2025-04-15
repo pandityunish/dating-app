@@ -11,6 +11,7 @@ import 'package:ristey/assets/notification_pop_up.dart';
 import 'package:ristey/common/api_routes.dart';
 import 'package:ristey/global_vars.dart';
 import 'package:ristey/models/ads_modal.dart';
+import 'package:ristey/screens/audio_clip/audio_clip_accept.dart';
 import 'package:ristey/screens/data_collection/mannual_education_udpate.dart';
 import 'package:ristey/screens/data_collection/mannual_profession_udpate.dart';
 import 'package:ristey/screens/main_screen.dart';
@@ -28,6 +29,7 @@ import 'package:ristey/screens/profile/profile_scroll.dart';
 import 'package:ristey/screens/profile/profile_verify.dart';
 import 'package:ristey/screens/profile/review_screen.dart';
 import 'package:ristey/screens/profile/service/notification_service.dart';
+import 'package:ristey/screens/profile/verification/contact_verify.dart';
 import 'package:ristey/screens/search_pref/saved_pref.dart';
 import 'package:ristey/services/add_to_profile_service.dart';
 import 'package:ristey/services/socket_service.dart';
@@ -324,6 +326,12 @@ class _SplashVideoState extends State<SplashVideo> {
                     MaterialPageRoute(builder: (context) => const Use()),
                     (route) => false,
                   );
+                }else if (sendlinks.contains("OTP Verify")) {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ContactVerify()),
+                    (route) => false,
+                  );
                 } else if (sendlinks.contains("To Save Preference")) {
                   Navigator.pushAndRemoveUntil(
                     context,
@@ -466,6 +474,14 @@ class _SplashVideoState extends State<SplashVideo> {
                       });
                     }
                   }
+                }else if (sendlinks.contains("Audio Clip")) {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>  IncomingAudioClipScreen()),
+                    (route) => false,
+                  );
+                 
                 } else {
                   is9Ads = true;
 

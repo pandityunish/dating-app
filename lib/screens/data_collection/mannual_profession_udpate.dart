@@ -28,7 +28,7 @@ class _MannulProfessionState extends State<MannulProfessionUpdate> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
       child: Scaffold(
-          appBar:CustomAppBar(title: "Other Profession", iconImage: 'images/icons/profession_suitcase.png'),
+          appBar:CustomAppBar(title: "Profession", iconImage: 'images/icons/profession_suitcase.png'),
           body: SingleChildScrollView(
             child: Column(
               children: [
@@ -42,33 +42,48 @@ class _MannulProfessionState extends State<MannulProfessionUpdate> {
                         Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 3),
-                                child: TextField(
-                                  // height: 20.0,
-                                  
-                                  maxLength: 15,
-                                maxLines: 1,
-                                                                
-                                  maxLengthEnforcement: MaxLengthEnforcement
-                                      .enforced, // show error message
-                                  // maxLengthEnforcedMessage: 'You have reached the maximum character limit of 50',
-                                  
-                                  focusNode: _focusNode1,
-                                  controller: name,
-                                  decoration: InputDecoration(
-                                    hintText: "Enter Profession",
-                                    border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: _focusNode1.hasFocus
-                                          ? mainColor
-                                          : Colors.white,
+                                child: SizedBox(
+                                  height: 65,
+                                  child: TextField(
+                                    // height: 20.0,
+                                    
+                                    maxLength: 15,
+                                  maxLines: 1,
+                                                                  
+                                    maxLengthEnforcement: MaxLengthEnforcement
+                                        .enforced, // show error message
+                                    // maxLengthEnforcedMessage: 'You have reached the maximum character limit of 50',
+                                    
+                                    focusNode: _focusNode1,
+                                    controller: name,
+                                    decoration: InputDecoration(
+                                      hintText: "Enter Profession",
+                                      
+                                      contentPadding: const EdgeInsets.only(left: 20,bottom: 10),
+  focusedBorder:  OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: _focusNode1.hasFocus
+                                            ? mainColor
+                                            : Colors.white,
+                                      ),
+                                      
+                                      borderRadius: BorderRadius.circular(30),
+                                      
                                     ),
-                                    borderRadius: BorderRadius.circular(30),
+                                      border: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: _focusNode1.hasFocus
+                                            ? mainColor
+                                            : Colors.white,
+                                      ),
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    ),
+                                    textInputAction: TextInputAction.done,
+                                    onChanged: (name) => {
+                                     
+                                    },
                                   ),
-                                  ),
-                                  textInputAction: TextInputAction.done,
-                                  onChanged: (name) => {
-                                   
-                                  },
                                 ),
                               ),
                         SizedBox(
@@ -83,7 +98,7 @@ class _MannulProfessionState extends State<MannulProfessionUpdate> {
                                       (states) => Colors.black),
                                   padding: WidgetStateProperty.all<
                                           EdgeInsetsGeometry?>(
-                                      const EdgeInsets.symmetric(vertical: 17)),
+                                      const EdgeInsets.symmetric(vertical: 12)),
                                   shape: WidgetStateProperty.all<
                                           RoundedRectangleBorder>(
                                       RoundedRectangleBorder(

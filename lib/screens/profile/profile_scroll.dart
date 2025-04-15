@@ -21,6 +21,7 @@ import 'package:ristey/screens/navigation/service/home_service.dart';
 import 'package:ristey/screens/profile/profile_page.dart';
 import 'package:ristey/screens/profile/service/notification_service.dart';
 import 'package:ristey/services/audio_call.dart';
+import 'package:ristey/services/audio_sharing_service.dart';
 import 'package:ristey/small_functions/profile_completion.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -297,6 +298,7 @@ class _SlideProfileState extends State<SlideProfile> {
     });
 Get.put(NewCallController()); 
 Get.put(AudioNewCallController()); 
+Get.put(AudioSharingController()); 
     super.initState();
     getads();
     homeservice.getuserdata().whenComplete(() {
@@ -510,7 +512,7 @@ Get.put(AudioNewCallController());
                       ),
                     )
                   : Positioned(
-                      left: MediaQuery.of(context).size.width * 0.05,
+                      left: MediaQuery.of(context).size.width * 0.0003,
                       top: MediaQuery.of(context).size.height * 0.034,
                       child: IconButton(
                         icon: const Icon(
@@ -554,7 +556,7 @@ Get.put(AudioNewCallController());
                       height: 0,
                     ))
                   : Positioned(
-                      right: MediaQuery.of(context).size.width * 0.05,
+                      right: MediaQuery.of(context).size.width * 0.004,
                       top: MediaQuery.of(context).size.height * 0.04,
                       child: IconButton(
                         icon: Stack(

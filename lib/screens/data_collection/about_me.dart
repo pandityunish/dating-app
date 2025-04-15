@@ -122,7 +122,6 @@ class _ReligionState extends State<AboutMe> {
                               "About Me",
                               style: TextStyle(
                                   fontFamily: 'Sans-serif',
-                                  color: mainColor,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w700),
                             ),
@@ -149,8 +148,12 @@ class _ReligionState extends State<AboutMe> {
                                 floatingLabelStyle:
                                     TextStyle(color: mainColor),
                                 hintStyle: TextStyle(color: newtextColor),
-                                hintText:
-                                    'Please Describe in Brief about yourself like \nOccupation,Education,Hobby,Interest,Family \nBackground Etc.\n(Note: Do Not Share Contact Detail Here)',
+                                label: Text(
+                                   'Please Describe in Brief about yourself like \nOccupation,Education,Hobby,Interest,Family \nBackground Etc.\n(Note: Do Not Share Contact Detail Here)',
+                                  //  style: TextStyle(color: newtextColor),
+                                ),
+                                // hintText:
+                                   
                               ),
                               // decoration: InputDecoration(
                               //   border: OutlineInputBorder(
@@ -173,7 +176,6 @@ class _ReligionState extends State<AboutMe> {
                               "Partner Preference",
                               style: TextStyle(
                                   fontFamily: 'Sans-serif',
-                                  color: mainColor,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w700),
                             ),
@@ -203,7 +205,11 @@ class _ReligionState extends State<AboutMe> {
                                     TextStyle(color: mainColor),
                                 labelStyle: TextStyle(color: Colors.grey),
                                 hintStyle:TextStyle(color: Colors.grey), 
-                                hintText: 'Please Describe in Brief about Partner Preference Like Occupation,Education,Hobby,Interest,Family \nBackground, Location Etc. \n(Note: Do Not Share Contact Detail Here).',
+                                 label: Text(
+                                 'Please Describe in Brief about Partner Preference Like Occupation,Education,Hobby,Interest,Family \nBackground, Location Etc. \n(Note: Do Not Share Contact Detail Here).',
+                                  //  style: TextStyle(color: newtextColor),
+                                ),
+                          
 
                                     
                               ),

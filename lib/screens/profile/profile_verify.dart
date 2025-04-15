@@ -218,7 +218,7 @@ class _VerifyState extends State<Verify> {
               content: SnackBarContent(
                 error_text: "Uploaded Successfully",
                 appreciation: "",
-                icon: Icons.check,
+                icon: Icons.check_circle_rounded,
                 sec: 3,
               ),
               backgroundColor: Colors.transparent,
