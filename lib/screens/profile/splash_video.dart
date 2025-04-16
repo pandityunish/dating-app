@@ -211,9 +211,13 @@ class _SplashVideoState extends State<SplashVideo> {
 
       int profilepercentage = await profile.profileComplete();
       userProfilePercentage = profilepercentage;
-    if (data != null && data.isNotEmpty && data[0] != null && data[0].containsKey("isUnder") && data[0]["isUnder"] == true) {
-    Get.offAll(const MeintenanceScreen());
-} else {
+      if (data != null &&
+          data.isNotEmpty &&
+          data[0] != null &&
+          data[0].containsKey("isUnder") &&
+          data[0]["isUnder"] == true) {
+        Get.offAll(const MeintenanceScreen());
+      } else {
         if ((useremail == null && userlocation == null) ||
             (useremail == "" && userlocation == "")) {
           await FirebaseAuth.instance.signOut();
@@ -326,10 +330,11 @@ class _SplashVideoState extends State<SplashVideo> {
                     MaterialPageRoute(builder: (context) => const Use()),
                     (route) => false,
                   );
-                }else if (sendlinks.contains("OTP Verify")) {
+                } else if (sendlinks.contains("OTP Verify")) {
                   Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => const ContactVerify()),
+                    MaterialPageRoute(
+                        builder: (context) => const ContactVerify()),
                     (route) => false,
                   );
                 } else if (sendlinks.contains("To Save Preference")) {
@@ -474,14 +479,13 @@ class _SplashVideoState extends State<SplashVideo> {
                       });
                     }
                   }
-                }else if (sendlinks.contains("Audio Clip")) {
+                } else if (sendlinks.contains("Audio Clip")) {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>  IncomingAudioClipScreen()),
+                        builder: (context) => IncomingAudioClipScreen()),
                     (route) => false,
                   );
-                 
                 } else {
                   is9Ads = true;
 

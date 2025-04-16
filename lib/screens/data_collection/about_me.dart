@@ -103,7 +103,9 @@ class _ReligionState extends State<AboutMe> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
       child: Scaffold(
-        appBar:CustomAppBar(title: "Detail In Brief", iconImage: 'images/icons/user_rounded.png'),
+        appBar: CustomAppBar(
+            title: "Detail In Brief",
+            iconImage: 'images/icons/user_rounded.png'),
         body: Material(
           color: Colors.white,
           child: Padding(
@@ -114,7 +116,6 @@ class _ReligionState extends State<AboutMe> {
                   children: [
                     Column(
                       children: [
-                       
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -126,9 +127,9 @@ class _ReligionState extends State<AboutMe> {
                                   fontWeight: FontWeight.w700),
                             ),
                             const SizedBox(
-                              height: 15,
+                              height: 25,
                             ),
-                           TextField(
+                            TextField(
                               controller: aboutMe,
                               maxLength: 300,
                               // maxLengthEnforcement: MaxLengthEnforcement
@@ -136,6 +137,8 @@ class _ReligionState extends State<AboutMe> {
                               // maxLengthEnforcedMessage: 'You have reached the maximum character limit of 50',
                               minLines: 5,
                               maxLines: 7,
+                              cursorColor: mainColor,
+                              cursorWidth: 2,
                               style: TextStyle(
                                   fontFamily: 'Sans-serif', fontSize: 17),
                               decoration: InputDecoration(
@@ -145,15 +148,14 @@ class _ReligionState extends State<AboutMe> {
                                         new BorderSide(color: glb.mainColor)),
                                 // hintText: 'User Name',
                                 focusColor: mainColor,
-                                floatingLabelStyle:
-                                    TextStyle(color: mainColor),
-                                hintStyle: TextStyle(color: newtextColor),
+                                floatingLabelStyle: TextStyle(color: mainColor),
+                                labelStyle: TextStyle(color: Colors.grey),
+                                hintStyle: TextStyle(color: Colors.grey),
                                 label: Text(
-                                   'Please Describe in Brief about yourself like \nOccupation,Education,Hobby,Interest,Family \nBackground Etc.\n(Note: Do Not Share Contact Detail Here)',
+                                  'Please Describe in Brief about yourself like \nOccupation,Education,Hobby,Interest,Family \nBackground Etc.\n(Note: Do Not Share Contact Detail Here)',
                                   //  style: TextStyle(color: newtextColor),
                                 ),
                                 // hintText:
-                                   
                               ),
                               // decoration: InputDecoration(
                               //   border: OutlineInputBorder(
@@ -180,12 +182,13 @@ class _ReligionState extends State<AboutMe> {
                                   fontWeight: FontWeight.w700),
                             ),
                             const SizedBox(
-                              height: 15,
+                              height: 25,
                             ),
-                             TextField(
+                            TextField(
                               minLines: 5,
                               maxLines: 7,
-
+                              cursorColor: mainColor,
+                              cursorWidth: 2,
                               maxLength: 300,
                               // maxLengthEnforcement: MaxLengthEnforcement.enforced, // show error message
                               // maxLengthEnforcedMessage: 'You have reached the maximum character limit of 50',
@@ -201,17 +204,13 @@ class _ReligionState extends State<AboutMe> {
                                 // hintText: 'Partner preference',r
                                 //  labelStyle: TextStyle(color: main_color),
                                 focusColor: mainColor,
-                                floatingLabelStyle:
-                                    TextStyle(color: mainColor),
+                                floatingLabelStyle: TextStyle(color: mainColor),
                                 labelStyle: TextStyle(color: Colors.grey),
-                                hintStyle:TextStyle(color: Colors.grey), 
-                                 label: Text(
-                                 'Please Describe in Brief about Partner Preference Like Occupation,Education,Hobby,Interest,Family \nBackground, Location Etc. \n(Note: Do Not Share Contact Detail Here).',
+                                hintStyle: TextStyle(color: Colors.grey),
+                                label: Text(
+                                  'Please Describe in Brief about Partner Preference Like Occupation,Education,Hobby,Interest,Family \nBackground, Location Etc. \n(Note: Do Not Share Contact Detail Here).',
                                   //  style: TextStyle(color: newtextColor),
                                 ),
-                          
-
-                                    
                               ),
                             ),
                           ],

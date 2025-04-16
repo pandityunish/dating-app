@@ -30,7 +30,6 @@ class _ReligionState extends State<Congo> {
   HomeService homeservice = Get.put(HomeService());
   SendMessage sendMessage = SendMessage();
 
-
   void sendmessages() async {
     // scheduleNotification();
     NotificationServiceLocal().showNotification(
@@ -64,7 +63,6 @@ class _ReligionState extends State<Congo> {
           email: userSave.email!, title: "KNOW HOW TO USE APP");
     });
 
-    
     //  NotificationService().addtoadminnotification(
     //         userid: userSave.uid!,
     //         subtitle: "Profile Create",
@@ -305,18 +303,18 @@ class _ReligionState extends State<Congo> {
                           const Text(
                             "Free",
                             style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                                ),
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
                           Text(
                             "RishteyWala",
                             style: TextStyle(
-                                color: mainColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                               ),
+                              color: mainColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
                         ],
                       ),
@@ -327,7 +325,7 @@ class _ReligionState extends State<Congo> {
                         // mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           const Text(
-                            "You have successfully registered",
+                            "You Have Successfully Registered",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
@@ -351,18 +349,18 @@ class _ReligionState extends State<Congo> {
                                 const Text(
                                   " Free",
                                   style: TextStyle(
-                                      color: Colors.black,
-                                      // fontWeight: FontWeight.w700,
-                                      fontSize: 16,
+                                    color: Colors.black,
+                                    // fontWeight: FontWeight.w700,
+                                    fontSize: 16,
                                   ),
                                 ),
                                 Text(
                                   "RishteyWala",
                                   style: TextStyle(
-                                      color: mainColor,
-                                      // fontWeight: FontWeight.w700,
-                                      fontSize: 16,
-                                     ),
+                                    color: mainColor,
+                                    // fontWeight: FontWeight.w700,
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ],
                             ),
@@ -392,16 +390,16 @@ class _ReligionState extends State<Congo> {
                           const Text(
                             " Free",
                             style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                              ),
+                              color: Colors.black,
+                              fontSize: 16,
+                            ),
                           ),
                           Text(
                             "RishteyWala",
                             style: TextStyle(
-                                color: mainColor,
-                                fontSize: 16,
-                                ),
+                              color: mainColor,
+                              fontSize: 16,
+                            ),
                           ),
                           Text(
                             " ID is ${userService.userdata["puid"] ?? ""}",

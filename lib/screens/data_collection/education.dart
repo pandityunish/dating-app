@@ -94,11 +94,11 @@ class _ReligionState extends State<Education> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
       child: Scaffold(
-          appBar:CustomAppBar(title: "Education", iconImage: 'images/icons/education.png'),
+          appBar: CustomAppBar(
+              title: "Education", iconImage: 'images/icons/education.png'),
           body: SingleChildScrollView(
             child: Column(
               children: [
-               
                 Center(
                     child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.85,
