@@ -6,6 +6,7 @@ import 'dart:ui';
 
 import 'package:expandable_text/expandable_text.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 import 'package:flutter/material.dart';
@@ -602,7 +603,7 @@ class _ProfilePageState extends State<ProfilePage>
   locationCard(boxname, imgicon, defaultText) {
     return Container(
         margin: const EdgeInsets.only(bottom: 1.5, right: 2),
-        height: MediaQuery.of(context).size.height * 0.0195,
+        height: MediaQuery.of(context).size.height * 0.024,
 
         // width: (width == null) ? box_text.length * 8 + 32.0 : width,
         width: 80,
@@ -610,41 +611,44 @@ class _ProfilePageState extends State<ProfilePage>
           borderRadius: BorderRadius.circular(33.0),
           border: Border.all(color: mainColor, width: 0.5),
         ),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              const SizedBox(
-                width: 5,
-              ),
-              ImageIcon(
-                AssetImage(imgicon),
-                size: 16,
-                color: mainColor,
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              boxname.contains("1")
-                  ? Text(
-                      "Any",
-                      // textScaleFactor: 1.0,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12,
-                        color: mainColor,
-                      ),
-                    )
-                  : Text(
-                      boxname,
-                      // textScaleFactor: 1.0,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12,
-                        color: mainColor,
-                      ),
-                    )
-            ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 2),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                const SizedBox(
+                  width: 5,
+                ),
+                ImageIcon(
+                  AssetImage(imgicon),
+                  size: 16,
+                  color: mainColor,
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                boxname.contains("1")
+                    ? Text(
+                        "Any",
+                        // textScaleFactor: 1.0,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                          color: mainColor,
+                        ),
+                      )
+                    : Text(
+                        boxname,
+                        // textScaleFactor: 1.0,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                          color: mainColor,
+                        ),
+                      )
+              ],
+            ),
           ),
         ));
     //  Box(
@@ -832,6 +836,7 @@ class _ProfilePageState extends State<ProfilePage>
                                     )
                                   : ImageSlideshow(
                                       indicatorRadius: 4,
+
                                       // indicatorRightPadding: 10,
                                       indicatorBottomPadding: 10,
                                       initialPage: 0,
@@ -1543,15 +1548,28 @@ class _ProfilePageState extends State<ProfilePage>
                                         ),
                                       ),
                                     ),
-                                    Container(
-                                      margin: const EdgeInsets.only(right: 12),
-                                      child: Text(
-                                        "Profile ID- ${widget.userSave!.puid}",
-                                        style: const TextStyle(
-                                          fontFamily: "Sans-serif",
-                                          fontSize: 11,
-                                          fontWeight: FontWeight.w400,
-                                          color: Color(0xFF38B9F4),
+                                    GestureDetector(
+                                      onLongPress: () {
+                                          Clipboard.setData(ClipboardData(
+                                                text: widget.userSave!.puid))
+                                            .then((value) {
+                                          //only if ->
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content: Text(
+                                                      "Copied successfully")));
+                                        });
+                                      },
+                                      child: Container(
+                                        margin: const EdgeInsets.only(right: 12),
+                                        child: Text(
+                                          "Profile ID- ${widget.userSave!.puid}",
+                                          style: const TextStyle(
+                                            fontFamily: "Sans-serif",
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.w400,
+                                            color: Color(0xFF38B9F4),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -1620,6 +1638,39 @@ SizedBox(height: 5,),
                                             icon:
                                                 'images/icons/marital_status.png',
                                           ),
+                                             Box(
+                                            // width: userSave.Diet!.length * 15.5,
+                                            box_text: widget.userSave!.diet,
+                                            currentusertext: userSave.Diet!,
+
+                                            icon: 'images/icons/food.png',
+                                          ),
+                                             Box(
+                                            currentusertext: userSave.Drink!,
+                                            // width: userSave.Profession!.length * 15.5,
+                                            box_text: widget.userSave!.drink,
+                                            icon: 'images/icons/drink.png',
+                                          ),
+                                               Box(
+                                            currentusertext: userSave.Smoke!,
+
+                                            // width: userSave.Profession!.length * 15.5,
+                                            box_text: widget.userSave!.smoke,
+                                            icon: 'images/icons/smoke.png',
+                                          ),
+                                          (widget.userSave!.disability ==
+                                                  'Normal')
+                                              ? Container(width: 0)
+                                              : Box(
+                                                  currentusertext:
+                                                      userSave.Disability!,
+
+                                                  // width: userSave.Profession!.length * 15.5,
+                                                  box_text: widget
+                                                      .userSave!.disability,
+                                                  icon:
+                                                      'images/icons/disability.png',
+                                                ),
                                           Box(
                                             // width: userSave.Height!.length * 15.5,
                                             box_text: widget.userSave!.height,
@@ -1627,13 +1678,7 @@ SizedBox(height: 5,),
 
                                             icon: 'images/icons/height.png',
                                           ),
-                                          Box(
-                                            // width: userSave.Diet!.length * 15.5,
-                                            box_text: widget.userSave!.diet,
-                                            currentusertext: userSave.Diet!,
-
-                                            icon: 'images/icons/food.png',
-                                          ),
+                                       
                                           Box(
                                             // width: userSave.Education!.length * 15.5,
                                             currentusertext:
@@ -1687,32 +1732,9 @@ SizedBox(height: 5,),
                                           //   icon:
                                           //       'images/icons/location_home.png',
                                           // ),
-                                          Box(
-                                            currentusertext: userSave.Drink!,
-                                            // width: userSave.Profession!.length * 15.5,
-                                            box_text: widget.userSave!.drink,
-                                            icon: 'images/icons/drink.png',
-                                          ),
-                                          Box(
-                                            currentusertext: userSave.Smoke!,
-
-                                            // width: userSave.Profession!.length * 15.5,
-                                            box_text: widget.userSave!.smoke,
-                                            icon: 'images/icons/smoke.png',
-                                          ),
-                                          (widget.userSave!.disability ==
-                                                  'Normal')
-                                              ? Container(width: 0)
-                                              : Box(
-                                                  currentusertext:
-                                                      userSave.Disability!,
-
-                                                  // width: userSave.Profession!.length * 15.5,
-                                                  box_text: widget
-                                                      .userSave!.disability,
-                                                  icon:
-                                                      'images/icons/disability.png',
-                                                ),
+                                       
+                                     
+                                          
                                           Box(
                                             currentusertext: userSave.Income!,
                                             // width: userSave.Profession!.length * 15.5,
@@ -1882,29 +1904,16 @@ SizedBox(height: 6,),
                                                     'images/icons/marital_status.png',
                                                     defaultSp
                                                         .MaritalStatusList),
-                                                heightard([],
-                                                    'images/icons/height.png',
-                                                    defaultSp.HeightList),
-                                                savedPrefCard([],
+                                                          savedPrefCard([],
                                                     'images/icons/food.png',
                                                     defaultSp.dietList),
-                                                savedPrefCard([],
-                                                    'images/icons/education.png',
-                                                    defaultSp.EducationList),
-                                                savedPrefCard([],
-                                                    'images/icons/profession_suitcase.png',
-                                                    defaultSp.ProfessionList),
-                                                locationCard(
-                                                    "Any ",
-                                                    'images/icons/location.png',
-                                                    defaultSp.LocatioList),
-                                                savedPrefCard([],
+                                                      savedPrefCard([],
                                                     'images/icons/drink.png',
                                                     defaultSp.DrinkList),
                                                 savedPrefCard([],
                                                     'images/icons/smoke.png',
                                                     defaultSp.SmokeList),
-                                                (widget.userSave!.disability ==
+                                                      (widget.userSave!.disability ==
                                                         "Normal")
                                                     ? Container(width: 0)
                                                     : savedPrefCard(
@@ -1912,9 +1921,23 @@ SizedBox(height: 6,),
                                                         'images/icons/disability.png',
                                                         defaultSp
                                                             .DisabilityList),
+                                                heightard([],
+                                                    'images/icons/height.png',
+                                                    defaultSp.HeightList),
+                                              
+                                                savedPrefCard([],
+                                                    'images/icons/education.png',
+                                                    defaultSp.EducationList),
+                                                savedPrefCard([],
+                                                    'images/icons/profession_suitcase.png',
+                                                    defaultSp.ProfessionList),
                                                 savedPrefCard([],
                                                     'images/icons/hand_rupee.png',
                                                     defaultSp.IncomeList),
+                                                        locationCard(
+                                                    "Any ",
+                                                    'images/icons/location.png',
+                                                    defaultSp.LocatioList),
                                               ],
                                             ),
                                           )
@@ -1962,43 +1985,11 @@ SizedBox(height: 6,),
                                                       .maritalStatusList,
                                                   'images/icons/marital_status.png',
                                                   defaultSp.MaritalStatusList),
-
-                                              heightard(
-                                                  newSavePrefModel!.heightList,
-                                                  'images/icons/height.png',
-                                                  defaultSp.HeightList),
-                                              savedPrefCard(
+   savedPrefCard(
                                                   newSavePrefModel!.dietList,
                                                   'images/icons/food.png',
                                                   defaultSp.dietList),
-                                              savedPrefCard(
-                                                  newSavePrefModel!
-                                                      .educationList,
-                                                  'images/icons/education.png',
-                                                  defaultSp.EducationList),
-                                              savedPrefCard(
-                                                  newSavePrefModel!
-                                                      .professionList,
-                                                  'images/icons/profession_suitcase.png',
-                                                  defaultSp.ProfessionList),
-                                              locationCard(
-                                                  newSavePrefModel!.location
-                                                              .isEmpty &&
-                                                          newSavePrefModel!
-                                                              .statelocation
-                                                              .isEmpty &&
-                                                          newSavePrefModel!
-                                                              .citylocation
-                                                              .isEmpty
-                                                      ? "Any"
-                                                      : "${newSavePrefModel!.citylocation.join(', ')}${newSavePrefModel!.statelocation.join(', ')}${newSavePrefModel!.location} ",
-                                                  'images/icons/location.png',
-                                                  defaultSp.LocatioList),
-                                              savedPrefCard(
-                                                  newSavePrefModel!.drinkList,
-                                                  'images/icons/drink.png',
-                                                  defaultSp.DrinkList),
-                                              savedPrefCard(
+                                                      savedPrefCard(
                                                   newSavePrefModel!.smokeList,
                                                   'images/icons/smoke.png',
                                                   defaultSp.SmokeList),
@@ -2011,10 +2002,44 @@ SizedBox(height: 6,),
                                                           .disabilityList,
                                                       'images/icons/disability.png',
                                                       defaultSp.DisabilityList),
+                                              heightard(
+                                                  newSavePrefModel!.heightList,
+                                                  'images/icons/height.png',
+                                                  defaultSp.HeightList),
+                                           
+                                              savedPrefCard(
+                                                  newSavePrefModel!
+                                                      .educationList,
+                                                  'images/icons/education.png',
+                                                  defaultSp.EducationList),
+                                              savedPrefCard(
+                                                  newSavePrefModel!
+                                                      .professionList,
+                                                  'images/icons/profession_suitcase.png',
+                                                  defaultSp.ProfessionList),
+                                           
+                                              savedPrefCard(
+                                                  newSavePrefModel!.drinkList,
+                                                  'images/icons/drink.png',
+                                                  defaultSp.DrinkList),
+                                          
                                               savedPrefCard(
                                                   newSavePrefModel!.incomeList,
                                                   'images/icons/hand_rupee.png',
                                                   defaultSp.IncomeList),
+                                                     locationCard(
+                                                  newSavePrefModel!.location
+                                                              .isEmpty &&
+                                                          newSavePrefModel!
+                                                              .statelocation
+                                                              .isEmpty &&
+                                                          newSavePrefModel!
+                                                              .citylocation
+                                                              .isEmpty
+                                                      ? "Any"
+                                                      : "${newSavePrefModel!.citylocation.join(', ')}${newSavePrefModel!.statelocation.join(', ')}${newSavePrefModel!.location} ",
+                                                  'images/icons/location.png',
+                                                  defaultSp.LocatioList),
                                             ],
                                           ),
                                   ),

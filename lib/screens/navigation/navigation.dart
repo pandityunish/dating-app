@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -554,16 +555,30 @@ class _MyProfileState extends State<MyProfile> {
                                                   ),
                                                 ),
                                               ),
-                                              Container(
-                                                margin: const EdgeInsets.only(
-                                                    left: 5),
-                                                child: BigText(
-                                                  // text: uid.toString().substring(uid.length()-5),
-                                                  text:
-                                                      (userSave.puid != null)
-                                                          ? userSave.puid!
-                                                          : "",
-                                                  size: 12,
+                                              GestureDetector(
+                                                onTap: () {
+                                                  Clipboard.setData(ClipboardData(
+                                                text: userSave.puid??""))
+                                            .then((value) {
+                                          //only if ->
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content: Text(
+                                                      "Copied successfully")));
+                                        });
+                                                },
+                                                child: Container(
+                                                  margin: const EdgeInsets.only(
+                                                      left: 5),
+                                                  child: BigText(
+                                                    // text: uid.toString().substring(uid.length()-5),
+                                                    text:
+                                                        (userSave.puid != null)
+                                                            ? userSave.puid!
+                                                            : "",
+                                                            color: mainColor,
+                                                    size: 12,
+                                                  ),
                                                 ),
                                               ),
                                             ],
