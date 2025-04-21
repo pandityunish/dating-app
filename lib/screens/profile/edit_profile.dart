@@ -243,7 +243,7 @@ class _EditProfileState extends State<EditProfile> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text("Hide Pic"),
+                          Text("Hide Pics"),
                           Align(
                             alignment: Alignment.centerRight,
                             child: Padding(
@@ -259,165 +259,80 @@ class _EditProfileState extends State<EditProfile> {
                                   borderRadius: BorderRadius.circular(30.0),
                                 ),
                                 child: CupertinoSwitch(
-                                  // overrides the default green color of the track
                                   activeColor: Colors.white,
-                                  // color of the round icon, which moves from right to left
-                                  thumbColor:
-                                      forIos ? mainColor : Colors.black12,
-                                  // when the switch is off
-                                  trackColor:
-                                      forIos ? Colors.white : Colors.black12,
-                                  // boolean variable value
-                                  value: forIos,
-                                  // changes the state of the switch
+                                  thumbColor: userSave.imageUrls!.isNotEmpty
+                                      ? (forIos ? mainColor : Colors.black12)
+                                      : Colors.grey,
+                                  trackColor: userSave.imageUrls!.isNotEmpty
+                                      ? (forIos ? Colors.white : Colors.black12)
+                                      : Colors.grey,
+                                  value: userSave.imageUrls!.isNotEmpty
+                                      ? forIos
+                                      : false,
                                   onChanged: (value) {
-                                    if (userSave.imageUrls!.isNotEmpty) {
+                                    if (userSave.imageUrls!.isEmpty) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                            content: Text(
+                                                "Please add images first to hide them")),
+                                      );
+                                      return;
+                                    }
+
+                                    // Common update function
+                                    void updateProfile() {
                                       setState(() {
                                         forIos = value;
                                         userSave.isBlur = value;
                                       });
-                                      if (picblockads.isNotEmpty ||
-                                          picunblockads.isNotEmpty) {
-                                        print("ok");
-                                        showadsbar(
-                                            context,
-                                            value == false
-                                                ? picunblockads
-                                                : picblockads, () {
-                                          Navigator.pop(context);
-                                          HomeService().createeditprofile(
-                                              userid: userSave.email!,
-                                              isBlur: forIos,
-                                              editname:
-                                                  "Edit by ${userSave.name!}",
-                                              aboutme: (userSave.About_Me ==
-                                                          null ||
-                                                      userSave.About_Me == "")
-                                                  ? "Welcome to my profile. I'm here to find someone who appreciates authenticity and kindness. Hope you find what you're looking for."
-                                                  : aboutmeController.text,
-                                              mypreference: (userSave
-                                                              .Partner_Prefs ==
-                                                          null ||
-                                                      userSave.Partner_Prefs ==
-                                                          "")
-                                                  ? "I am looking for a meaningful connection based on mutual respect, trust and shared values. Someone who is ready to grow and learn with me on this journey I would like to Connect"
-                                                  : partnerPrefController.text,
-                                              imageurls: userSave.imageUrls!);
-                                          NotificationService()
-                                              .addtoadminnotification(
-                                                  userid: userSave.uid!,
-                                                  subtitle: "EDIT PROFILE",
-                                                  useremail: userSave.email!,
-                                                  userimage: userSave
-                                                          .imageUrls!.isEmpty
-                                                      ? ""
-                                                      : userSave.imageUrls![0],
-                                                  title:
-                                                      "${userSave.name!.substring(0, 1)} ${userSave.surname!.toUpperCase()} ${userSave.puid} ${value == false ? "UNHIDE" : "HIDE"} PROFILE ");
-                                          HomeService().createeditprofile(
-                                              userid: userSave.email!,
-                                              isBlur: forIos,
-                                              editname:
-                                                  "Edit by ${userSave.name!}",
-                                              aboutme: (userSave.About_Me ==
-                                                          null ||
-                                                      userSave.About_Me == "")
-                                                  ? "Welcome to my profile. I'm here to find someone who appreciates authenticity and kindness. Hope you find what you're looking for."
-                                                  : aboutmeController.text,
-                                              mypreference: (userSave
-                                                              .Partner_Prefs ==
-                                                          null ||
-                                                      userSave.Partner_Prefs ==
-                                                          "")
-                                                  ? "I am looking for a meaningful connection based on mutual respect, trust and shared values. Someone who is ready to grow and learn with me on this journey I would like to Connect"
-                                                  : partnerPrefController.text,
-                                              imageurls: userSave.imageUrls!);
-                                          NotificationService()
-                                              .addtoadminnotification(
-                                                  userid: userSave.uid!,
-                                                  subtitle: "EDIT PROFILE",
-                                                  useremail: userSave.email!,
-                                                  userimage: userSave
-                                                          .imageUrls!.isEmpty
-                                                      ? ""
-                                                      : userSave.imageUrls![0],
-                                                  title:
-                                                      "${userSave.name!.substring(0, 1)} ${userSave.surname!.toUpperCase()} ${userSave.puid} ${value == false ? "UNLOCKED" : "LOCKED"} PROFILE PICTURES SUCCESSFULLY");
-                                          HomeService()
-                                              .updateblur(
-                                                  email: userSave.email!,
-                                                  isblur: value)
-                                              .whenComplete(() {
-                                            HomeService().getuserdata();
-                                          });
-                                        });
-                                      } else {
-                                        HomeService().createeditprofile(
-                                            userid: userSave.email!,
-                                            isBlur: forIos,
-                                            editname:
-                                                "Edit by ${userSave.name!}",
-                                            aboutme: (userSave.About_Me ==
-                                                        null ||
-                                                    userSave.About_Me == "")
-                                                ? "Welcome to my profile. I'm here to find someone who appreciates authenticity and kindness. Hope you find what you're looking for."
-                                                : aboutmeController.text,
-                                            mypreference: (userSave
-                                                            .Partner_Prefs ==
-                                                        null ||
-                                                    userSave.Partner_Prefs ==
-                                                        "")
-                                                ? "I am looking for a meaningful connection based on mutual respect, trust and shared values. Someone who is ready to grow and learn with me on this journey I would like to Connect"
-                                                : partnerPrefController.text,
-                                            imageurls: userSave.imageUrls!);
-                                        NotificationService()
-                                            .addtoadminnotification(
-                                                userid: userSave.uid!,
-                                                subtitle: "EDIT PROFILE",
-                                                useremail: userSave.email!,
-                                                userimage: userSave
-                                                        .imageUrls!.isEmpty
-                                                    ? ""
-                                                    : userSave.imageUrls![0],
-                                                title:
-                                                    "${userSave.name!.substring(0, 1)} ${userSave.surname!.toUpperCase()} ${userSave.puid} ${value == false ? "UNHIDE" : "HIDE"} PROFILE ");
-                                        HomeService().createeditprofile(
-                                            userid: userSave.email!,
-                                            isBlur: forIos,
-                                            editname:
-                                                "Edit by ${userSave.name!}",
-                                            aboutme: (userSave.About_Me ==
-                                                        null ||
-                                                    userSave.About_Me == "")
-                                                ? "Welcome to my profile. I'm here to find someone who appreciates authenticity and kindness. Hope you find what you're looking for."
-                                                : aboutmeController.text,
-                                            mypreference: (userSave
-                                                            .Partner_Prefs ==
-                                                        null ||
-                                                    userSave.Partner_Prefs ==
-                                                        "")
-                                                ? "I am looking for a meaningful connection based on mutual respect, trust and shared values. Someone who is ready to grow and learn with me on this journey I would like to Connect"
-                                                : partnerPrefController.text,
-                                            imageurls: userSave.imageUrls!);
-                                        NotificationService()
-                                            .addtoadminnotification(
-                                                userid: userSave.uid!,
-                                                subtitle: "EDIT PROFILE",
-                                                useremail: userSave.email!,
-                                                userimage: userSave
-                                                        .imageUrls!.isEmpty
-                                                    ? ""
-                                                    : userSave.imageUrls![0],
-                                                title:
-                                                    "${userSave.name!.substring(0, 1)} ${userSave.surname!.toUpperCase()} ${userSave.puid} ${value == false ? "UNLOCKED" : "LOCKED"} PROFILE PICTURES SUCCESSFULLY");
-                                        HomeService()
-                                            .updateblur(
-                                                email: userSave.email!,
-                                                isblur: value)
-                                            .whenComplete(() {
-                                          HomeService().getuserdata();
-                                        });
-                                      }
+
+                                      HomeService().createeditprofile(
+                                        userid: userSave.email!,
+                                        isBlur: forIos,
+                                        editname: "Edit by ${userSave.name!}",
+                                        aboutme: (userSave.About_Me == null ||
+                                                userSave.About_Me == "")
+                                            ? "Welcome to my profile. I'm here to find someone who appreciates authenticity and kindness. Hope you find what you're looking for."
+                                            : aboutmeController.text,
+                                        mypreference: (userSave.Partner_Prefs ==
+                                                    null ||
+                                                userSave.Partner_Prefs == "")
+                                            ? "I am looking for a meaningful connection based on mutual respect, trust and shared values. Someone who is ready to grow and learn with me on this journey I would like to Connect"
+                                            : partnerPrefController.text,
+                                        imageurls: userSave.imageUrls!,
+                                      );
+
+                                      NotificationService()
+                                          .addtoadminnotification(
+                                        userid: userSave.uid!,
+                                        subtitle: "EDIT PROFILE",
+                                        useremail: userSave.email!,
+                                        userimage: userSave.imageUrls!.isEmpty
+                                            ? ""
+                                            : userSave.imageUrls![0],
+                                        title:
+                                            "${userSave.name!.substring(0, 1)} ${userSave.surname!.toUpperCase()} ${userSave.puid} ${value ? "HIDE" : "UNHIDE"} PROFILE",
+                                      );
+
+                                      HomeService()
+                                          .updateblur(
+                                              email: userSave.email!,
+                                              isblur: value)
+                                          .whenComplete(() =>
+                                              HomeService().getuserdata());
+                                    }
+
+                                    if (picblockads.isNotEmpty ||
+                                        picunblockads.isNotEmpty) {
+                                      showadsbar(context,
+                                          value ? picblockads : picunblockads,
+                                          () {
+                                        Navigator.pop(context);
+                                        updateProfile();
+                                      });
+                                    } else {
+                                      updateProfile();
                                     }
                                   },
                                 ),

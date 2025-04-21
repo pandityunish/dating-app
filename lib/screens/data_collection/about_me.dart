@@ -140,7 +140,7 @@ class _ReligionState extends State<AboutMe> {
                               cursorColor: mainColor,
                               cursorWidth: 2,
                               style: TextStyle(
-                                  fontFamily: 'Sans-serif', fontSize: 17),
+                                  fontFamily: 'Sans-serif', fontSize: 14),
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
                                 focusedBorder: OutlineInputBorder(
@@ -193,7 +193,7 @@ class _ReligionState extends State<AboutMe> {
                               // maxLengthEnforcement: MaxLengthEnforcement.enforced, // show error message
                               // maxLengthEnforcedMessage: 'You have reached the maximum character limit of 50',
                               style: TextStyle(
-                                  fontFamily: 'Sans-serif', fontSize: 17),
+                                  fontFamily: 'Sans-serif', fontSize: 14),
                               controller: partnerPref,
 
                               decoration: InputDecoration(
@@ -208,7 +208,7 @@ class _ReligionState extends State<AboutMe> {
                                 labelStyle: TextStyle(color: Colors.grey),
                                 hintStyle: TextStyle(color: Colors.grey),
                                 label: Text(
-                                  'Please Describe in Brief about Partner Preference Like Occupation,Education,Hobby,Interest,Family \nBackground, Location Etc. \n(Note: Do Not Share Contact Detail Here).',
+                                  'Please Describe in Brief about Partner Preference \nLike Occupation,Education,Hobby,Interest,Family \nBackground, Location Etc. \n(Note: Do Not Share Contact Detail Here).',
                                   //  style: TextStyle(color: newtextColor),
                                 ),
                               ),

@@ -143,10 +143,11 @@ class _SearchPreferencesState extends State<SearchPreferences> {
   nameContainer(icon, String head, List<dynamic> val, List<dynamic> options) {
     //val for return value list and options for showing options in dialog
     return Padding(
-     padding: const EdgeInsets.symmetric(vertical: 3),
+      padding: const EdgeInsets.symmetric(vertical: 3),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          // Left side with icon and heading (unchanged)
           Container(
             padding: const EdgeInsets.only(left: 8),
             child: Row(
@@ -161,15 +162,18 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                   child: Text(
                     head,
                     style: GoogleFonts.poppins(
-                        decoration: TextDecoration.none,
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400),
+                      decoration: TextDecoration.none,
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           ),
+
+          // Right side container
           GestureDetector(
             onTap: () async {
               var ds = await Navigator.of(context).push(MaterialPageRoute(
@@ -193,50 +197,56 @@ class _SearchPreferencesState extends State<SearchPreferences> {
             },
             child: Row(
               children: [
-                (val.isEmpty)
-                    ? Text(
-                        "Add",
-                        style: GoogleFonts.poppins(
+                // Text container with right alignment but LTR text
+                Container(
+                  width: 100,
+                  alignment: Alignment.centerRight,
+                  child: (val.isEmpty)
+                      ? Text(
+                          "Add",
+                          style: GoogleFonts.poppins(
                             decoration: TextDecoration.none,
                             color: Colors.black38,
                             fontSize: 16,
-                            fontWeight: FontWeight.w400),
-                      )
-                    : val.contains("Any")
-                        ? Text(
-                            "Any",
-                            style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w400,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        )
+                      : val.contains("Any")
+                          ? Text(
+                              "Any",
+                              style: GoogleFonts.poppins(
                                 decoration: TextDecoration.none,
                                 color: Colors.black38,
                                 fontSize: 16,
-                                fontWeight: FontWeight.w400),
-                          )
-                        : SizedBox(
-                            width: 80,
-                            child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      val.toString().substring(
-                                          1, val.toString().length - 1),
-                                      style: GoogleFonts.poppins(
-                                          decoration: TextDecoration.none,
-                                          color: Colors.black38,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ],
-                                )),
-                          ),
-                const Icon(
+                                fontWeight: FontWeight.w400,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            )
+                          : SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              physics: const BouncingScrollPhysics(),
+                              child: Text(
+                                val.join(', '),
+                                style: GoogleFonts.poppins(
+                                  decoration: TextDecoration.none,
+                                  color: Colors.black38,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                ),
+
+                // Arrow icon
+                Icon(
                   Icons.arrow_forward_ios_rounded,
                   color: Colors.black38,
                   size: 16,
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -276,7 +286,7 @@ class _SearchPreferencesState extends State<SearchPreferences> {
           GestureDetector(
             onTap: () async {
               var ds = await tap(context, val);
-      
+
               if (ds != null) {
                 print("$ds kjsl");
                 // if (!mounted) return;
@@ -294,7 +304,7 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                     val.addAll(ds);
                   });
                 }
-      
+
                 // for (var i = 0; i < ds.length; i++) {
                 //   if (!mounted) return;
                 //   setState(() {
@@ -334,7 +344,6 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                                 )),
                           )
                         : SizedBox(
-                            width: 65,
                             child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
@@ -366,7 +375,7 @@ class _SearchPreferencesState extends State<SearchPreferences> {
   nameContainer3(icon, String head, Function tap, List<dynamic> val) {
     // onTap = AgeDialog();
     return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 3),
+      padding: const EdgeInsets.symmetric(vertical: 3),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -527,10 +536,11 @@ class _SearchPreferencesState extends State<SearchPreferences> {
       List<String> options) {
     // onTap = AgeDialog();
     return Padding(
-     padding: const EdgeInsets.symmetric(vertical: 3),
+      padding: const EdgeInsets.symmetric(vertical: 3),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          // Left side with icon and heading
           Container(
             padding: const EdgeInsets.only(left: 8),
             child: Row(
@@ -545,24 +555,25 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                   child: Text(
                     head,
                     style: const TextStyle(
-                        decoration: TextDecoration.none,
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'Sans-serif'),
+                      decoration: TextDecoration.none,
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'Sans-serif',
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           ),
+
+          // Right side with values and arrow
           GestureDetector(
             onTap: () async {
               var ds = await tap(context, val);
               print("$ds hello");
               if (ds != null) {
-                // setState(() {
                 val.clear();
-                // });
                 svp.HeightList.addAll(ds);
                 print(svp.HeightList);
                 for (var i = 0; i < ds.length; i++) {
@@ -574,59 +585,58 @@ class _SearchPreferencesState extends State<SearchPreferences> {
             },
             child: Row(
               children: [
-                (val.isEmpty)
-                    ? Text(
-                        "Add",
-                        style: GoogleFonts.poppins(
+                // Text container with right alignment
+                Container(
+                  width: head == "Location" ? 150 : 110,
+                  alignment: Alignment.centerRight,
+                  child: (val.isEmpty)
+                      ? Text(
+                          "Add",
+                          style: GoogleFonts.poppins(
                             decoration: TextDecoration.none,
                             color: Colors.black38,
                             fontSize: 16,
-                            fontWeight: FontWeight.w400),
-                      )
-                    : (head == "Location")
-                        ? SizedBox(
-                            width: 150,
-                            child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      val.toString().substring(
-                                          1, val.toString().length - 1),
-                                      style: GoogleFonts.poppins(
-                                          decoration: TextDecoration.none,
-                                          color: Colors.black38,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ],
-                                )),
-                          )
-                        : SizedBox(
-                            width: 110,
-                            child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      "${options[int.parse(val[0])].substring(0, 4)}-${options[int.parse(val[1])]}",
-                                      style: GoogleFonts.poppins(
-                                          decoration: TextDecoration.none,
-                                          color: Colors.black38,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ],
-                                )),
+                            fontWeight: FontWeight.w400,
                           ),
-                const Icon(
+                          overflow: TextOverflow.ellipsis,
+                        )
+                      : SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          reverse: false, // Show text from left to right
+                          physics: const BouncingScrollPhysics(),
+                          child: head == "Location"
+                              ? Text(
+                                  val
+                                      .toString()
+                                      .substring(1, val.toString().length - 1),
+                                  style: GoogleFonts.poppins(
+                                    decoration: TextDecoration.none,
+                                    color: Colors.black38,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )
+                              : Text(
+                                  "${options[int.parse(val[0])].substring(0, 4)}-${options[int.parse(val[1])]}",
+                                  style: GoogleFonts.poppins(
+                                    decoration: TextDecoration.none,
+                                    color: Colors.black38,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                        ),
+                ),
+
+                // Arrow icon
+                Icon(
                   Icons.arrow_forward_ios_rounded,
                   color: Colors.black38,
                   size: 16,
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -659,7 +669,8 @@ class _SearchPreferencesState extends State<SearchPreferences> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
       child: Scaffold(
-          appBar:CustomAppBar(title: "Saved Preference", iconImage: "images/icons/filter.png") ,
+          appBar: CustomAppBar(
+              title: "Saved Preference", iconImage: "images/icons/filter.png"),
           body: SafeArea(
             child: Container(
               width: MediaQuery.of(context).size.width,
@@ -675,86 +686,84 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                       ),
                     )
                   : Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                       
-                       Expanded(
-                         child: Column(
-                          
-                          children: [
-                             nameContainer2(
-                              'images/icons/calender.png',
-                              "Age",
-                              functions().AgeDialog,
-                              homeservice.saveprefdata.value.ageList),
-                          nameContainer(
-                              'images/icons/religion.png',
-                              "Religion",
-                              homeservice.saveprefdata.value.religionList,
-                              sdl.Religion),
-                          (userSave.religion == "Hindu")
-                              ? nameContainer(
-                                  'images/icons/kundli.png',
-                                  "Kundli Dosh",
+                        Expanded(
+                          child: Column(
+                            children: [
+                              nameContainer2(
+                                  'images/icons/calender.png',
+                                  "Age",
+                                  functions().AgeDialog,
+                                  homeservice.saveprefdata.value.ageList),
+                              nameContainer(
+                                  'images/icons/religion.png',
+                                  "Religion",
+                                  homeservice.saveprefdata.value.religionList,
+                                  sdl.Religion),
+                              (userSave.religion == "Hindu")
+                                  ? nameContainer(
+                                      'images/icons/kundli.png',
+                                      "Kundli Dosh",
+                                      homeservice
+                                          .saveprefdata.value.kundaliDoshList,
+                                      sdl.KundaliDosh)
+                                  : Container(),
+                              nameContainer(
+                                  'images/icons/marital_status.png',
+                                  "Marital Status",
                                   homeservice
-                                      .saveprefdata.value.kundaliDoshList,
-                                  sdl.KundaliDosh)
-                              : Container(),
-                          nameContainer(
-                              'images/icons/marital_status.png',
-                              "Marital Status",
-                              homeservice.saveprefdata.value.maritalStatusList,
-                              sdl.MaritalStatus),
-                          nameContainer(
-                              'images/icons/food.png',
-                              "Diet",
-                              homeservice.saveprefdata.value.dietList,
-                              sdl.Diet),
-                          nameContainer(
-                              'images/icons/smoke.png',
-                              "Smoke",
-                              homeservice.saveprefdata.value.smokeList,
-                              sdl.Smoke),
-                          nameContainer(
-                              'images/icons/drink.png',
-                              "Drink",
-                              homeservice.saveprefdata.value.drinkList,
-                              sdl.Drink),
-                          nameContainer(
-                              'images/icons/disability.png',
-                              "Disability With Person",
-                              homeservice.saveprefdata.value.disabilityList,
-                              sdl.Disability),
-                          nameContainerHeight(
-                              'images/icons/height.png',
-                              "Height",
-                              functions().HeightDialog,
-                              homeservice.saveprefdata.value.heightList,
-                              sdl.Height),
-                         
-                          nameContainer(
-                              'images/icons/education.png',
-                              "Education",
-                              homeservice.saveprefdata.value.educationList,
-                              sdl.Education),
-                          nameContainer(
-                              'images/icons/profession_suitcase.png',
-                              "Profession",
-                              homeservice.saveprefdata.value.professionList,
-                              sdl.Profession),
-                          nameContainer(
-                              'images/icons/hand_rupee.png',
-                              "Annual Income",
-                              homeservice.saveprefdata.value.incomeList,
-                              sdl.Income),
-                          nameContainer3(
-                              'images/icons/location.png',
-                              "Location",
-                              functions().LocationDialog,
-                              svp.LocatioList),
-                          ],
-                         ),
-                       ),
+                                      .saveprefdata.value.maritalStatusList,
+                                  sdl.MaritalStatus),
+                              nameContainer(
+                                  'images/icons/food.png',
+                                  "Diet",
+                                  homeservice.saveprefdata.value.dietList,
+                                  sdl.Diet),
+                              nameContainer(
+                                  'images/icons/smoke.png',
+                                  "Smoke",
+                                  homeservice.saveprefdata.value.smokeList,
+                                  sdl.Smoke),
+                              nameContainer(
+                                  'images/icons/drink.png',
+                                  "Drinks",
+                                  homeservice.saveprefdata.value.drinkList,
+                                  sdl.Drink),
+                              nameContainer(
+                                  'images/icons/disability.png',
+                                  "Disability With Person",
+                                  homeservice.saveprefdata.value.disabilityList,
+                                  sdl.Disability),
+                              nameContainerHeight(
+                                  'images/icons/height.png',
+                                  "Height",
+                                  functions().HeightDialog,
+                                  homeservice.saveprefdata.value.heightList,
+                                  sdl.Height),
+                              nameContainer(
+                                  'images/icons/education.png',
+                                  "Education",
+                                  homeservice.saveprefdata.value.educationList,
+                                  sdl.Education),
+                              nameContainer(
+                                  'images/icons/profession_suitcase.png',
+                                  "Profession",
+                                  homeservice.saveprefdata.value.professionList,
+                                  sdl.Profession),
+                              nameContainer(
+                                  'images/icons/hand_rupee.png',
+                                  "Annual Income",
+                                  homeservice.saveprefdata.value.incomeList,
+                                  sdl.Income),
+                              nameContainer3(
+                                  'images/icons/location.png',
+                                  "Location",
+                                  functions().LocationDialog,
+                                  svp.LocatioList),
+                            ],
+                          ),
+                        ),
                         // SizedBox(
                         //   height: 100,
                         // ),
@@ -816,8 +825,8 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                                 print(homeservice
                                     .saveprefdata.value.statelocation);
                                 homeservice.createsavepref(
-                                    ageList: homeservice
-                                        .saveprefdata.value.ageList,
+                                    ageList:
+                                        homeservice.saveprefdata.value.ageList,
                                     religionList: homeservice
                                         .saveprefdata.value.religionList,
                                     citylocation: svp.LocatioList[2].isEmpty
@@ -848,8 +857,8 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                                         .saveprefdata.value.drinkList,
                                     disabilityList: homeservice
                                         .saveprefdata.value.disabilityList,
-                                    dietList: homeservice
-                                        .saveprefdata.value.dietList,
+                                    dietList:
+                                        homeservice.saveprefdata.value.dietList,
                                     educationList: homeservice
                                         .saveprefdata.value.educationList,
                                     professionList: homeservice
@@ -861,8 +870,8 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                                             .saveprefdata.value.location
                                         : svp.LocatioList[0]);
                                 AddToProfileService().addtosavedprefprofile(
-                                    ageList: homeservice
-                                        .saveprefdata.value.ageList,
+                                    ageList:
+                                        homeservice.saveprefdata.value.ageList,
                                     name: userSave.name!,
                                     religionList: homeservice
                                         .saveprefdata.value.religionList,
@@ -894,8 +903,8 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                                         .saveprefdata.value.drinkList,
                                     disabilityList: homeservice
                                         .saveprefdata.value.disabilityList,
-                                    dietList: homeservice
-                                        .saveprefdata.value.dietList,
+                                    dietList:
+                                        homeservice.saveprefdata.value.dietList,
                                     educationList: homeservice
                                         .saveprefdata.value.educationList,
                                     professionList: homeservice
@@ -906,7 +915,7 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                                         ? homeservice
                                             .saveprefdata.value.location
                                         : svp.LocatioList[0]);
-              
+
                                 await showDialog(
                                     barrierDismissible: false,
                                     context: context,
@@ -928,8 +937,7 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                                     value: "To Save Preference");
                                 Navigator.of(context).pushAndRemoveUntil(
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            MainAppContainer(
+                                        builder: (context) => MainAppContainer(
                                               notiPage: false,
                                             )),
                                     (route) => false);
@@ -1050,14 +1058,12 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                                     });
                                 Navigator.of(context).pushAndRemoveUntil(
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            MainAppContainer(
+                                        builder: (context) => MainAppContainer(
                                               notiPage: false,
                                             )),
                                     (route) => false);
                                 if (resetsearchads.isNotEmpty) {
-                                  showadsbar(context, resetsearchads,
-                                      () async {
+                                  showadsbar(context, resetsearchads, () async {
                                     Get.back();
                                   });
                                 } else {}
@@ -1065,7 +1071,9 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                       ],
                     ),
             ),
