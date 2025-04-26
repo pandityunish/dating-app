@@ -102,6 +102,8 @@ class _MannualEducationState extends State<MannualEducationUpdate> {
                                     .enforced, // show error message
                                 // maxLengthEnforcedMessage: 'You have reached the maximum character limit of 50',
                                 placeholder: "Enter Education",
+                                cursorColor: mainColor,
+                                cursorWidth: 2,
                                 focusNode: _focusNode1,
                                 controller: name,
                                 decoration: BoxDecoration(

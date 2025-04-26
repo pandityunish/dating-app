@@ -7,6 +7,7 @@ import 'package:ristey/screens/audio_clip/audio_clip_accept.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:audioplayers/audioplayers.dart';
 import 'package:get/get.dart' as getx;
+
 class AudioSharingController extends GetxController {
   getx.RxString myId = ''.obs;
   getx.RxString audioFilePath = ''.obs;
@@ -56,11 +57,13 @@ class AudioSharingController extends GetxController {
     });
 
     socket.on('audioAccepted', (data) {
-      Get.snackbar('Success', 'User ${data['recipientId']} accepted your audio');
+      Get.snackbar(
+          'Success', 'User ${data['recipientId']} accepted your audio');
     });
 
     socket.on('audioRejected', (data) {
-      Get.snackbar('Rejected', 'User ${data['recipientId']} rejected your audio');
+      Get.snackbar(
+          'Rejected', 'User ${data['recipientId']} rejected your audio');
     });
 
     socket.on('error', (data) {
@@ -78,10 +81,10 @@ class AudioSharingController extends GetxController {
     }
   }
 
-  
-
   void sendAudio() {
-    if (audioFilePath.value.isNotEmpty && selectedUserId != null && selectedUserId!.value.isNotEmpty) {
+    if (audioFilePath.value.isNotEmpty &&
+        selectedUserId != null &&
+        selectedUserId!.value.isNotEmpty) {
       socket.emit('sendAudio', {
         'audioUrl': audioFilePath.value,
         'recipientId': selectedUserId!.value,

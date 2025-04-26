@@ -59,55 +59,54 @@ class _ReligionState extends State<AddPics> {
       data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
       child: Scaffold(
         appBar: PreferredSize(
-  preferredSize: const Size.fromHeight(100), // Adjust AppBar height
-  child: AppBar(
-    leading: GestureDetector(
-      onTap: () {
-        Navigator.of(context).pop();
-      },
-      child: Icon(
-        Icons.arrow_back_ios_new,
-        color: mainColor,
-        size: 25,
-      ),
-    ),
-    flexibleSpace: Padding(
-      padding: const EdgeInsets.only(top: 10), // Adjust padding for alignment
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: 30,
-              width: 30,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: mainColor
-              ),
+          preferredSize: const Size.fromHeight(100), // Adjust AppBar height
+          child: AppBar(
+            leading: GestureDetector(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
               child: Icon(
-                Icons.camera_alt,
-                size: 20,
-                color: Colors.white,
-              ),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-             DefaultTextStyle(
-              style: TextStyle(
+                Icons.arrow_back_ios_new,
                 color: mainColor,
-                fontFamily: 'Sans-serif',
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
+                size: 25,
               ),
-              child: Text("Upload Pics"),
             ),
-          ],
+            flexibleSpace: Padding(
+              padding: const EdgeInsets.only(
+                  top: 10), // Adjust padding for alignment
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 30,
+                      width: 30,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle, color: mainColor),
+                      child: Icon(
+                        Icons.camera_alt,
+                        size: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    DefaultTextStyle(
+                      style: TextStyle(
+                        color: mainColor,
+                        fontFamily: 'Sans-serif',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20,
+                      ),
+                      child: Text("Upload Pics"),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ),
-      ),
-    ),
-  ),
-),
         body: Material(
           color: Colors.white,
           child: Padding(
@@ -120,21 +119,19 @@ class _ReligionState extends State<AddPics> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                       
                         const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                          
                             Text(
-                              "93% of the User Visit the Profile After",
+                              "93% of the User Visit the Profile",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              "Seeing Profile Picture",
+                              "After Seeing Profile Picture",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 16,

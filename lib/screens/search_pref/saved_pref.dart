@@ -216,6 +216,7 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                             child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Text(
                                       val.toString().substring(
@@ -320,6 +321,8 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                             child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+
                                   children: [
                                     Text(
                                       val.toString().substring(
@@ -334,10 +337,12 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                                 )),
                           )
                         : SizedBox(
-                            width: 65,
+                            width: 51,
                             child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+
                                   children: [
                                     Text(
                                       "${val[0]} - ${val[1]}",
@@ -416,6 +421,8 @@ class _SearchPreferencesState extends State<SearchPreferences> {
               }
             },
             child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+
               children: [
                 (val[0].isEmpty && val[1].isEmpty && val[2].isEmpty)
                     ? const Text(
@@ -589,6 +596,8 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                             child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+
                                   children: [
                                     Text(
                                       val.toString().substring(
@@ -603,7 +612,7 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                                 )),
                           )
                         : SizedBox(
-                            width: 110,
+                            width: 97,
                             child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(

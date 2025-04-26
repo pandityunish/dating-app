@@ -10,6 +10,7 @@ import 'package:ristey/screens/notification/widget_notification/ads_bar.dart';
 import 'package:ristey/screens/profile/profile_scroll.dart';
 import 'package:ristey/screens/profile/service/notification_service.dart';
 import 'package:ristey/services/chat_services.dart';
+import 'package:ticker_text/ticker_text.dart';
 import 'package:timezone/standalone.dart';
 
 class NotificationWidget3 extends StatefulWidget {
@@ -248,14 +249,35 @@ class _NotificationWidget3State extends State<NotificationWidget3> {
                           scrollDirection: Axis.horizontal,
                           child: Column(
                             children: [
-                              RichText(
-                                  text: TextSpan(
-                                      text: widget.activitiesModel.title,
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontFamily: 'Sans-serif',
-                                          fontWeight: FontWeight.w400))),
+                               SizedBox(
+                                width: 270,
+                                 child: TickerText(
+                                        // default values
+                                        scrollDirection: Axis.horizontal,
+                                        speed: 20,
+                                        startPauseDuration:
+                                            const Duration(seconds: 1),
+                                        endPauseDuration:
+                                            const Duration(seconds: 1),
+                                        returnDuration:
+                                            const Duration(milliseconds: 800),
+                                        primaryCurve: Curves.linear,
+                                        returnCurve: Curves.easeOut,
+                                        child: Text(
+                                         widget.activitiesModel.title,
+                                          textAlign: TextAlign.end,
+                                          style: TextStyle(fontSize: 12),
+                                        ),
+                                      ),
+                               ),
+                              // RichText(
+                              //     text: TextSpan(
+                              //         text: widget.activitiesModel.title,
+                              //         style: const TextStyle(
+                              //             color: Colors.black,
+                              //             fontSize: 12,
+                              //             fontFamily: 'Sans-serif',
+                              //             fontWeight: FontWeight.w400))),
                             ],
                           ),
                         ),
@@ -276,8 +298,8 @@ class _NotificationWidget3State extends State<NotificationWidget3> {
                   InkWell(
                     onTap: widget.onclick as VoidCallback,
                     child: Container(
-                      height: 30,
-                      width: 30,
+                      height: 25,
+                      width: 25,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(color: mainColor, width: 3)),

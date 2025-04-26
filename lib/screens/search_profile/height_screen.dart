@@ -104,7 +104,7 @@ class _HeightScreensState extends State<HeightScreens> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "Please Select Height Preference",
+                    "Please Select Height Criteria",
                     style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 20,
@@ -168,7 +168,7 @@ class _HeightScreensState extends State<HeightScreens> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                              height: 26,
+                              height: 25,
                               width: 70,
                               decoration: BoxDecoration(color: mainColor),
                               child: Center(
@@ -177,7 +177,7 @@ class _HeightScreensState extends State<HeightScreens> {
                                 style: const TextStyle(color: Colors.white),
                               ))),
                           Container(
-                              height: 26,
+                              height: 25,
                               width: 70,
                               decoration: BoxDecoration(color: mainColor),
                               child: Center(
@@ -203,6 +203,7 @@ class _HeightScreensState extends State<HeightScreens> {
                               child: DropdownButton<double>(
                                 underline: const Text(""),
                                 value: _minHeight * 1.0,
+                                padding: EdgeInsets.only(left: 4),
                                 style: TextStyle(fontSize: 10,color: mainColor),
                                 iconEnabledColor: mainColor,
                                 items: _getDropdownItems(0, 60),
@@ -227,6 +228,9 @@ class _HeightScreensState extends State<HeightScreens> {
                               child: DropdownButton<double>(
                                 underline: const Text(""),
                                 value: _maxHeight * 1.0,
+                                padding: EdgeInsets.only(left: 4),
+
+                                
                                 style: TextStyle(fontSize: 10,color: mainColor),
                                 iconEnabledColor: mainColor,
                                 items: _getDropdownItems(_minHeight, 60),

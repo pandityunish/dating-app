@@ -13,6 +13,7 @@ import 'package:intl_phone_field/phone_number.dart';
 import 'package:ristey/assets/calendar.dart';
 import 'package:ristey/assets/error.dart';
 import 'package:ristey/assets/t_page.dart';
+import 'package:ristey/common/ui_helper/ui_helper.dart';
 import 'package:ristey/global_vars.dart';
 import 'package:ristey/models/ads_modal.dart';
 import 'package:ristey/models/location_modal.dart';
@@ -525,7 +526,7 @@ class _LetsStartState extends State<LetsStart> {
               );
             });
       });
-    }  else if (!isNumberValid) {
+    } else if (!isNumberValid) {
       print("Our number isValid ${isNumberValid}");
       setState(() {
         error = "Please Enter Valid Contact Number";
@@ -782,7 +783,7 @@ class _LetsStartState extends State<LetsStart> {
           key: scaffoldKey,
           appBar: AppBar(
             backgroundColor: Colors.white,
-            
+
             leading: GestureDetector(
               onTap: () {
                 Navigator.pushAndRemoveUntil(
@@ -811,99 +812,53 @@ class _LetsStartState extends State<LetsStart> {
                 ),
               ],
             ),
-         
           ),
           body: SizedBox(
             height: MediaQuery.of(context).size.height,
             child: Column(
               children: [
-              
                 Expanded(
                   child: SingleChildScrollView(
-                    controller:_scrollController,
+                    controller: _scrollController,
                     child: Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 3),
-                          child: Card(
-                            elevation: 3,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                            child: SizedBox(
-                              height: 50,
-                              child: CupertinoTextField(
-                                // height: 20.0,
-                                maxLength: 12,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(RegExp(
-                                      "[a-zA-Z]")), // Allow only alphabets
-                                ],
-                                maxLengthEnforcement: MaxLengthEnforcement
-                                    .enforced, // show error message
-                                // maxLengthEnforcedMessage: 'You have reached the maximum character limit of 50',
-                                placeholder: "Enter Name",
-                                placeholderStyle: TextStyle(color: newtextColor),
-                                focusNode: _focusNode1,
-                                controller: name,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: _focusNode1.hasFocus
-                                        ? mainColor
-                                        : Colors.white,
-                                  ),
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                textInputAction: TextInputAction.next,
-                                onChanged: (name) => {
-                                  setState(() {
-                                    User_Name = name;
-                                  })
-                                },
-                              ),
-                            ),
-                          ),
+                        CustomRoundedInputField(
+                          controller: name,
+                          focusNode: _focusNode1,
+                          placeholder: "Enter Name",
+                          placeholderColor: newtextColor,
+                          activeBorderColor: mainColor,
+                          inactiveBorderColor: Colors.white,
+                          length: 12,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp("[a-zA-Z]")),
+                          ],
+                          onChanged: (value) {
+                            setState(() {
+                              User_Name = value;
+                            });
+                          },
                         ),
-                  
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 3, horizontal: 10),
-                          child: Card(
-                            elevation: 3,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                            child: SizedBox(
-                              height: 50,
-                              child: CupertinoTextField(
-                                maxLength: 12,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(RegExp(
-                                      "[a-zA-Z]")), // Allow only alphabets
-                                ],
-                                maxLengthEnforcement:
-                                    MaxLengthEnforcement.enforced,
-                                placeholder: "Enter Surname",
-                                placeholderStyle: TextStyle(color: newtextColor),
-                                focusNode: _focusNode2,
-                                controller: surname,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: _focusNode2.hasFocus
-                                        ? mainColor
-                                        : Colors.white,
-                                  ),
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                textInputAction: TextInputAction.next,
-                                onChanged: (surname) => {
-                                  setState(() {
-                                    User_SurName = surname;
-                                  })
-                                },
-                              ),
-                            ),
-                          ),
+                        CustomRoundedInputField(
+                          controller: surname,
+                          focusNode: _focusNode2,
+                          placeholder: "Enter Name",
+                          placeholderColor: newtextColor,
+                          activeBorderColor: mainColor,
+                          inactiveBorderColor: Colors.white,
+                          length: 12,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp("[a-zA-Z]")),
+                          ],
+                          onChanged: (surname) => {
+                            setState(() {
+                              User_SurName = surname;
+                            })
+                          },
                         ),
+
                         // SizedBox(
                         //   height: 20,
                         // ),
@@ -922,11 +877,11 @@ class _LetsStartState extends State<LetsStart> {
                                   FilteringTextInputFormatter.allow(
                                       RegExp(r'[0-9]')),
                                 ],
-                  
+
                                 decoration: InputDecoration(
                                   focusColor: mainColor,
                                   hoverColor: mainColor,
-                  
+
                                   //decoration for Input Field
                                   contentPadding: const EdgeInsets.only(
                                     top: 25,
@@ -934,10 +889,9 @@ class _LetsStartState extends State<LetsStart> {
                                     right: 20,
                                   ),
                                   // labelText: 'Phone Number',
-                  
+
                                   hintText: "Enter Contact Number",
-                                  hintStyle:
-                                       TextStyle(color: newtextColor),
+                                  hintStyle: TextStyle(color: newtextColor),
                                   border: InputBorder.none,
                                   errorStyle: const TextStyle(
                                     color: Colors.red, // Error text color
@@ -1058,7 +1012,8 @@ class _LetsStartState extends State<LetsStart> {
                           ),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(left: 20, bottom: 15,top: 15),
+                          margin: const EdgeInsets.only(
+                              left: 20, bottom: 15, top: 15),
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -1074,12 +1029,12 @@ class _LetsStartState extends State<LetsStart> {
                             ],
                           ),
                         ),
-                  
+
                         Calender(
                           useTwentyOneYears: male_gender,
                           setdate: updateMaleDate,
                         ),
-                  
+
                         DefaultTextStyle(
                             style: const TextStyle(
                               fontFamily: 'Sans-serif',
@@ -1092,7 +1047,7 @@ class _LetsStartState extends State<LetsStart> {
                         ),
                         Container(
                           margin: const EdgeInsets.only(left: 20, bottom: 15),
-                          child:  Row(
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
@@ -1125,11 +1080,14 @@ class _LetsStartState extends State<LetsStart> {
                                       color: Colors.white,
                                     ),
                                     value: selectedhours,
-                  iconEnabledColor: newtextColor,
+                                    iconEnabledColor: newtextColor,
                                     items: hours.map((value) {
                                       return DropdownMenuItem<String>(
                                         value: value,
-                                        child: Text(value,style: TextStyle(color: newtextColor),),
+                                        child: Text(
+                                          value,
+                                          style: TextStyle(color: newtextColor),
+                                        ),
                                       );
                                     }).toList(),
                                     onChanged: (newValue) {
@@ -1161,7 +1119,9 @@ class _LetsStartState extends State<LetsStart> {
                                     items: minutes.map((value) {
                                       return DropdownMenuItem<String>(
                                         value: value,
-                                        child: Text(value,style: TextStyle(color: newtextColor)),
+                                        child: Text(value,
+                                            style:
+                                                TextStyle(color: newtextColor)),
                                       );
                                     }).toList(),
                                     onChanged: (newValue) {
@@ -1193,7 +1153,9 @@ class _LetsStartState extends State<LetsStart> {
                                     items: ampm.map((value) {
                                       return DropdownMenuItem<String>(
                                         value: value,
-                                        child: Text(value,style: TextStyle(color: newtextColor)),
+                                        child: Text(value,
+                                            style:
+                                                TextStyle(color: newtextColor)),
                                       );
                                     }).toList(),
                                     onChanged: (newValue) {
@@ -1208,7 +1170,7 @@ class _LetsStartState extends State<LetsStart> {
                             ),
                           ],
                         ),
-                  
+
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 3),
@@ -1236,7 +1198,7 @@ class _LetsStartState extends State<LetsStart> {
                                 );
                               },
                               focusNode: _focusNode3,
-                              decoration:  InputDecoration(
+                              decoration: InputDecoration(
                                   hintText: "Enter Place of Birth",
                                   hintStyle: TextStyle(color: newtextColor),
                                   border: InputBorder.none,
@@ -1261,7 +1223,7 @@ class _LetsStartState extends State<LetsStart> {
                                               "${data.countrycity},${data.countrystate},${data.countryname}"),
                                           onTap: () {
                                             _onSelectedPlace1(data);
-                  
+
                                             setState(() {
                                               height_suggest1 = 0.0;
                                             });
@@ -1273,10 +1235,58 @@ class _LetsStartState extends State<LetsStart> {
                             ),
                           ],
                         ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: SizedBox(
+                            // margin: EdgeInsets.only(left: 15),
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            child: ElevatedButton(
+                                style: ButtonStyle(
+                                    shadowColor: WidgetStateColor.resolveWith(
+                                        (states) => Colors.black),
+                                    padding: WidgetStateProperty.all<
+                                            EdgeInsetsGeometry?>(
+                                        const EdgeInsets.symmetric(
+                                            vertical: 15)),
+                                    shape: WidgetStateProperty.all<
+                                            RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(60.0),
+                                            side: BorderSide(
+                                              color: (color_done2 == false)
+                                                  ? Colors.white
+                                                  : mainColor,
+                                            ))),
+                                    backgroundColor: WidgetStateProperty.all<Color>(
+                                        Colors.white)),
+                                onPressed: () {
+                                  onpressed();
+                                },
+                                child: Text(
+                                  "Register",
+                                  style: (color_done2 == false)
+                                      ? const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: 'Serif')
+                                      : TextStyle(
+                                          color: mainColor,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: 'Serif'),
+                                )),
+                          ),
+                        ),
+
                         // const SizedBox(
                         //   height: 10,
                         // ),
-                      
+
                         // const SizedBox(
                         //   height: 20,
                         // ),
@@ -1284,50 +1294,6 @@ class _LetsStartState extends State<LetsStart> {
                     ),
                   ),
                 ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: SizedBox(
-                          // margin: EdgeInsets.only(left: 15),
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          child: ElevatedButton(
-                              style: ButtonStyle(
-                                  shadowColor: WidgetStateColor.resolveWith(
-                                      (states) => Colors.black),
-                                  padding: WidgetStateProperty.all<
-                                          EdgeInsetsGeometry?>(
-                                      const EdgeInsets.symmetric(vertical: 15)),
-                                  shape: WidgetStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(60.0),
-                                          side: BorderSide(
-                                            color: (color_done2 == false)
-                                                ? Colors.white
-                                                : mainColor,
-                                          ))),
-                                  backgroundColor:
-                                      WidgetStateProperty.all<Color>(
-                                          Colors.white)),
-                              onPressed: () {
-                                onpressed();
-                              },
-                              child: Text(
-                                "Register",
-                                style: (color_done2 == false)
-                                    ? const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
-                                        fontFamily: 'Serif')
-                                    : TextStyle(
-                                        color: mainColor,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
-                                        fontFamily: 'Serif'),
-                              )),
-                        ),
-                  ),
               ],
             ),
           )),

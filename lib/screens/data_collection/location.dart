@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -55,7 +57,7 @@ class _LocationState extends State<Location1> {
       await Geolocator.requestPermission();
       throw Exception('Error');
     }
-    
+
     return await Geolocator.getCurrentPosition();
   }
 
@@ -70,6 +72,7 @@ class _LocationState extends State<Location1> {
   void getalllocation() async {
     alllocations = await Searchservice().getData();
     setState(() {});
+    log("message $alllocations");
   }
 
   @override
@@ -97,6 +100,7 @@ class _LocationState extends State<Location1> {
       }
     }
     setState(() {});
+    log("message $alllist");
   }
 
   final _searchController = TextEditingController();
@@ -162,7 +166,8 @@ class _LocationState extends State<Location1> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
       child: Scaffold(
-        appBar:CustomAppBar(title: "I Live In", iconImage: 'images/icons/location_home.png'),
+        appBar: CustomAppBar(
+            title: "I Live In", iconImage: 'images/icons/location_home.png'),
         body: SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
@@ -180,11 +185,9 @@ class _LocationState extends State<Location1> {
                           child: Column(
                             // mainAxisAlignment: MainAxisAlignment.,
                             children: [
-                            
                               Container(
-                                width:
-                                    MediaQuery.of(context).size.width *0.9,
-                                    height: 43,
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                height: 43,
                                 decoration: BoxDecoration(
                                     color: Colors.black12,
                                     borderRadius: BorderRadius.circular(10)),
@@ -193,18 +196,19 @@ class _LocationState extends State<Location1> {
                                   cursorColor: mainColor,
                                   decoration: InputDecoration(
                                       hintText: 'Search for location',
- contentPadding: EdgeInsets.only(top: 10),
+                                      contentPadding: EdgeInsets.only(top: 10),
                                       prefixIcon: Icon(
                                         Icons.search,
                                         color: mainColor,
                                       ),
                                       border: InputBorder.none),
                                   onChanged: (value) {
+                                    _fileterlocation(value);
+
                                     setState(() {
                                       isvisiable = false;
                                     });
                                     // _onSearchChanged(value);
-                                    _fileterlocation(value);
                                   },
                                 ),
                               ),
@@ -233,7 +237,7 @@ class _LocationState extends State<Location1> {
                                       );
                                     },
                                   )
-                          
+
                                   // }),
                                   ),
                             ],

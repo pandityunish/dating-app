@@ -10,6 +10,7 @@ import 'package:ristey/models/admin_modal.dart';
 import 'package:ristey/models/new_user_modal.dart';
 import 'package:ristey/screens/mobile_chat_screen.dart';
 import 'package:ristey/screens/navigation/service/home_service.dart';
+import 'package:ristey/screens/profile/service/notification_controller.dart';
 import 'package:ristey/screens/profile/service/notification_service.dart';
 import 'package:ristey/services/add_to_profile_service.dart';
 import '../../Assets/Error.dart';
@@ -570,6 +571,8 @@ class _PbuttonsState extends State<Pbuttons> {
 
   @override
   Widget build(BuildContext context) {
+    final NotificationController noticontroller = Get.find();
+
     return Center(
       child: Container(
         // padding: EdgeInsets.only(left: 28),
@@ -653,6 +656,8 @@ class _PbuttonsState extends State<Pbuttons> {
                                           BorderRadius.all(Radius.circular(50)),
                                     )),
                                 onPressed: () async {
+                          noticontroller.fetchUnreadCount();
+
                                   if (buttonclicked) {
                                     buttonclicked = false;
                                     await accept_req();
@@ -894,6 +899,8 @@ class _PbuttonsState extends State<Pbuttons> {
                                 const BorderRadius.all(Radius.circular(50)),
                           )),
                       onPressed: () async {
+                          noticontroller.fetchUnreadCount();
+
                         if (buttonclicked) {
                           // print(isblocked);
                           // buttonclicked = false;
@@ -978,6 +985,8 @@ class _PbuttonsState extends State<Pbuttons> {
                                 const BorderRadius.all(Radius.circular(50)),
                           )),
                       onPressed: () async {
+                          noticontroller.fetchUnreadCount();
+
                         if (buttonclicked) {
                           buttonclicked = false;
                           if (reportFriend.contains(widget.profileData!.id)) {
@@ -1066,6 +1075,8 @@ class _PbuttonsState extends State<Pbuttons> {
                                     fontWeight: FontWeight.w700,
                                     fontSize: 18)),
                         onPressed: () async {
+                          noticontroller.fetchUnreadCount();
+
                           if (buttonclicked) {
                             buttonclicked = false;
 

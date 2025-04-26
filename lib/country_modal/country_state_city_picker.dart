@@ -262,7 +262,7 @@ class _SelectStateDataState extends State<SelectStateData> {
   //   setState(() {});
   // }
 
-// 🇦🇫    Afghanistan
+// 
   @override
   Widget build(BuildContext context) {
     // void onSearchChanged(String value) async {

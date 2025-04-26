@@ -28,6 +28,7 @@ import 'package:ristey/screens/profile/maintainence_screen.dart';
 import 'package:ristey/screens/profile/profile_scroll.dart';
 import 'package:ristey/screens/profile/profile_verify.dart';
 import 'package:ristey/screens/profile/review_screen.dart';
+import 'package:ristey/screens/profile/service/notification_controller.dart';
 import 'package:ristey/screens/profile/service/notification_service.dart';
 import 'package:ristey/screens/profile/verification/contact_verify.dart';
 import 'package:ristey/screens/search_pref/saved_pref.dart';
@@ -211,9 +212,13 @@ class _SplashVideoState extends State<SplashVideo> {
 
       int profilepercentage = await profile.profileComplete();
       userProfilePercentage = profilepercentage;
-    if (data != null && data.isNotEmpty && data[0] != null && data[0].containsKey("isUnder") && data[0]["isUnder"] == true) {
-    Get.offAll(const MeintenanceScreen());
-} else {
+      if (data != null &&
+          data.isNotEmpty &&
+          data[0] != null &&
+          data[0].containsKey("isUnder") &&
+          data[0]["isUnder"] == true) {
+        Get.offAll(const MeintenanceScreen());
+      } else {
         if ((useremail == null && userlocation == null) ||
             (useremail == "" && userlocation == "")) {
           await FirebaseAuth.instance.signOut();
@@ -232,6 +237,8 @@ class _SplashVideoState extends State<SplashVideo> {
               websocketUrl: "$baseurl/videocall",
               selfCallerID: userSave.uid!,
             );
+    Get.put(NotificationController());
+
             if (userSave.isLogOut == "false") {
               FirebaseAuth.instance.signOut();
               final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -326,10 +333,11 @@ class _SplashVideoState extends State<SplashVideo> {
                     MaterialPageRoute(builder: (context) => const Use()),
                     (route) => false,
                   );
-                }else if (sendlinks.contains("OTP Verify")) {
+                } else if (sendlinks.contains("OTP Verify")) {
                   Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => const ContactVerify()),
+                    MaterialPageRoute(
+                        builder: (context) => const ContactVerify()),
                     (route) => false,
                   );
                 } else if (sendlinks.contains("To Save Preference")) {
@@ -474,14 +482,13 @@ class _SplashVideoState extends State<SplashVideo> {
                       });
                     }
                   }
-                }else if (sendlinks.contains("Audio Clip")) {
+                } else if (sendlinks.contains("Audio Clip")) {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>  IncomingAudioClipScreen()),
+                        builder: (context) => IncomingAudioClipScreen()),
                     (route) => false,
                   );
-                 
                 } else {
                   is9Ads = true;
 
@@ -498,6 +505,7 @@ class _SplashVideoState extends State<SplashVideo> {
                 is9Ads = true;
                 userSave.email = useremail;
                 HomeService().getuserdata();
+
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(

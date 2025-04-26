@@ -200,6 +200,7 @@ class _NavHomeState extends State<NavHome> with TickerProviderStateMixin {
           child:DefaultTabController(
                   initialIndex: 0,
                   length: 2,
+
                   child: Scaffold(
                       resizeToAvoidBottomInset: false,
                       appBar: PreferredSize(
@@ -277,7 +278,9 @@ class _NavHomeState extends State<NavHome> with TickerProviderStateMixin {
                             indicatorColor: mainColor,
                             tabs: <Widget>[
                               Tab(
+
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text('Notifications',
                                         style: TextStyle(
@@ -315,6 +318,7 @@ class _NavHomeState extends State<NavHome> with TickerProviderStateMixin {
                               ),
                               Tab(
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text('Activities',
                                         style: TextStyle(

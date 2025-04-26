@@ -279,22 +279,30 @@ class _VideoPlayerWidget1State extends State<VideoPlayerWidget1> {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  AspectRatio(
-                    aspectRatio: _videoPlayerController.value.aspectRatio,
-                    child: VideoPlayer(_videoPlayerController),
+                  ClipRRect(
+                    borderRadius:
+                        BorderRadius.circular(10), // Ensure rounded corners
+                    child: SizedBox.expand(
+                      child: FittedBox(
+                        fit: BoxFit
+                            .cover, // Makes video behave like a cover image
+                        child: SizedBox(
+                          width: _videoPlayerController.value.size.width,
+                          height: _videoPlayerController.value.size.height,
+                          child: VideoPlayer(_videoPlayerController),
+                        ),
+                      ),
+                    ),
                   ),
                   if (!_isPlaying)
-                    // Icon(
-                    //   Icons.play_arrow,
-                    //   size: 50,
-                    //   color: Colors.white,
-                    // ),
                     Positioned.fill(
                       child: Center(
                         child: IconButton(
                           icon: Icon(
-                            _isPlaying ? Icons.pause : Icons.play_arrow,
-                            color: mainColor,
+                            _isPlaying
+                                ? Icons.pause
+                                : Icons.play_circle_outline_outlined,
+                            color: Colors.white,
                             size: 40,
                           ),
                           onPressed: _toggleVideoPlayback,

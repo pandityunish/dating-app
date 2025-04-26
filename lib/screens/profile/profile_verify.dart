@@ -216,8 +216,7 @@ class _VerifyState extends State<Verify> {
           builder: (context) {
             return const AlertDialog(
               content: SnackBarContent(
-                error_text:
-                    "Video Has Been Uploaded Successfully",
+                error_text: "Uploaded Successfully",
                 appreciation: "",
                 icon: Icons.check_circle_rounded,
                 sec: 3,
@@ -328,16 +327,20 @@ class _VerifyState extends State<Verify> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
       child: Scaffold(
-          appBar:CustomAppBar(title: "Profile Verification", iconImage: "images/icons/verified.png",onBackButtonPressed: ()async{
-               ProfileCompletion profile = ProfileCompletion();
-                int profilepercentage =  profile.profileComplete();
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MyProfile(
-                              profilepercentage: profilepercentage,
-                            )));
-          },) ,
+          appBar: CustomAppBar(
+            title: "Profile Verification",
+            iconImage: "images/icons/verified.png",
+            onBackButtonPressed: () async {
+              ProfileCompletion profile = ProfileCompletion();
+              int profilepercentage = profile.profileComplete();
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => MyProfile(
+                            profilepercentage: profilepercentage,
+                          )));
+            },
+          ),
           body: Center(
             child: userSave.verifiedStatus == "verified"
                 ? Text(
@@ -353,102 +356,125 @@ class _VerifyState extends State<Verify> {
                 : Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                    
-                      Expanded(child: Column(
+                      Expanded(
+                          child: Column(
                         children: [
                           const Text(
-                        "Upload a video About you in brief",
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                            fontFamily: 'Sans-serif',
-                            decoration: TextDecoration.none,
-                            fontSize: 18,
-                            color: Color(0xFF555555),
-                            fontWeight: FontWeight.w600),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      SizedBox(
-                          height: 200,
-                          width: Get.width*0.9,
-                          child: (isuploading)
-                              ? Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      CircularProgressIndicator(
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                                mainColor),
-                                        value: uploadProgress,
-                                        color: mainColor,
+                            "Upload a Video About You in Brief",
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                fontFamily: 'Sans-serif',
+                                decoration: TextDecoration.none,
+                                fontSize: 18,
+                                color: Color(0xFF555555),
+                                fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          SizedBox(
+                              height: 200,
+                              width: Get.width * 0.9,
+                              child: (isuploading)
+                                  ? Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                                    mainColor),
+                                            value: uploadProgress,
+                                            color: mainColor,
+                                          ),
+                                          const SizedBox(height: 20),
+                                          Text(
+                                            "Uploading Video: ${(uploadProgress).toStringAsFixed(0)}%",
+                                            style: const TextStyle(
+                                              fontFamily: 'Sans-serif',
+                                              decoration: TextDecoration.none,
+                                              fontSize: 16,
+                                              color: Colors.black54,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      const SizedBox(height: 20),
-                                      Text(
-                                        "Uploading Video: ${(uploadProgress).toStringAsFixed(0)}%",
-                                        style: const TextStyle(
-                                          fontFamily: 'Sans-serif',
-                                          decoration: TextDecoration.none,
-                                          fontSize: 16,
-                                          color: Colors.black54,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              : (userSave.videoLink == null ||
-                                      userSave.videoLink == '')
-                                  ? FloatingActionButton(
-                                      onPressed: () {
-                                        _showPicker(context: context);
-                                      },
-                                      backgroundColor: Colors.white,
-                                      foregroundColor: Colors.black,
-                                      shape:  RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: const Icon(Icons.add,size: 50,),
                                     )
-                                  : VideoPlayerWidget1(
-                                      videoUrl: userSave.videoLink!)),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        "How To Upload Video About You In Brief",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            decoration: TextDecoration.none,
-                            fontSize: 18,
-                            fontFamily: 'Sans-serif',
-                            color: Color(0xFF555555),
-                            fontWeight: FontWeight.w600),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-
-                      Card(
-                        elevation: 4,
-                           color: Colors.white,
-                        child: SizedBox(
-                            height: 200,
-                            width: Get.width*0.9,
-                            child: VideoPlayerWidget1(
-                                videoUrl: (userSave.gender != "male")
-                                    ? "https://firebasestorage.googleapis.com/v0/b/couplematch-47708.appspot.com/o/videos%2Ffemalevideo.mp4?alt=media&token=46d36b9f-e321-4fe8-ac66-496a27aca7c7"
-                                    : "https://firebasestorage.googleapis.com/v0/b/couplematch-47708.appspot.com/o/videos%2Fmalevideo.mp4?alt=media&token=96c5c184-1ee7-49c2-80dd-ba63f564766d")),
-                      ),
+                                  : (userSave.videoLink == null ||
+                                          userSave.videoLink == '')
+                                      ? FloatingActionButton(
+                                          onPressed: () {
+                                            _showPicker(context: context);
+                                          },
+                                          backgroundColor: Colors.white,
+                                          foregroundColor: Colors.black,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: const Icon(
+                                            Icons.add,
+                                            size: 50,
+                                            color: Colors.grey,
+                                          ),
+                                        )
+                                      : VideoPlayerWidget1(
+                                          videoUrl: userSave.videoLink!)),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          const Text(
+                            "How To Upload Video About You In Brief",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                decoration: TextDecoration.none,
+                                fontSize: 18,
+                                fontFamily: 'Sans-serif',
+                                color: Color(0xFF555555),
+                                fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Card(
+                            elevation: 4,
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  10), // Consistent border radius
+                            ),
+                            child: SizedBox(
+                              height: 200,
+                              width: Get.width * 0.9,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                    10), // Ensuring video is rounded too
+                                child: FittedBox(
+                                  fit: BoxFit
+                                      .cover, // Ensures the video fills the card like a cover
+                                  child: SizedBox(
+                                    width:
+                                        Get.width * 0.9, // Matches card width
+                                    height: 200, // Matches card height
+                                    child: VideoPlayerWidget1(
+                                      videoUrl: (userSave.gender != "male")
+                                          ? "https://firebasestorage.googleapis.com/v0/b/couplematch-47708.appspot.com/o/videos%2Ffemalevideo.mp4?alt=media&token=46d36b9f-e321-4fe8-ac66-496a27aca7c7"
+                                          : "https://firebasestorage.googleapis.com/v0/b/couplematch-47708.appspot.com/o/videos%2Fmalevideo.mp4?alt=media&token=96c5c184-1ee7-49c2-80dd-ba63f564766d",
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
                         ],
                       )),
                       // BigText(text: 'A Video About Me'),
 
-                     
                       (userSave.verifiedStatus != "verified")
                           ? SizedBox(
                               height: 50,
-                              width: 300,
+                              width: Get.width * 0.9,
                               child: ElevatedButton(
                                 // enabled: userSave.verifiedStatus != "verified",
                                 style: ButtonStyle(
@@ -496,7 +522,9 @@ class _VerifyState extends State<Verify> {
                                       },
                               ))
                           : SizedBox(height: 0, width: 0),
-                          SizedBox(height: 5,),
+                      SizedBox(
+                        height: 5,
+                      ),
                     ],
                   ),
           )),

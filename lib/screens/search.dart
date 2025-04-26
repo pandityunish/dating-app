@@ -589,7 +589,7 @@ class _SearchState extends State<Search> {
       data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
       child: Scaffold(
           appBar: CustomAppBar(
-            title: "Search",
+            title: "Search Profile",
             iconImage: 'images/icons/search.png',
             onBackButtonPressed: () {
               selectedCity!.clear();
@@ -622,7 +622,7 @@ class _SearchState extends State<Search> {
                                 Container(
                                   margin: const EdgeInsets.only(left: 10),
                                   child: Text(
-                                    "Search By Profile Id",
+                                    "Search By Profile ID",
                                     style: TextStyle(
                                         decoration: TextDecoration.none,
                                         color: mainColor,
@@ -653,11 +653,12 @@ class _SearchState extends State<Search> {
                                           color: Colors.white,
                                           child: TextField(
                                             controller: _searchController,
+                                            cursorColor: mainColor,
                                             decoration: InputDecoration(
                                                 contentPadding:
                                                     EdgeInsets.only(
                                                         top: 5, left: 10),
-                                                hintText: 'Enter Profile Id',
+                                                hintText: 'Enter Profile ID',
                                                 border: OutlineInputBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -829,49 +830,63 @@ class _SearchState extends State<Search> {
                                 Material(
                                   color: Colors.white,
                                   child:SliderTheme(
-  data: SliderTheme.of(context).copyWith(
-    valueIndicatorColor: Colors.black, // Custom Gray Color
-    thumbShape: RoundSliderThumbShape(
-      enabledThumbRadius: 8.0, // Size of the thumb
-      disabledThumbRadius: 8.0,
-      elevation: 0, // No elevation
-    ),
-    thumbColor: Colors.white, // Fill color of the thumb (white)
-    overlayShape: RoundSliderOverlayShape(
-      overlayRadius: 0, // No overlay
-    ),
-  ),
-  child: RangeSlider(
-    activeColor: mainColor,
-    values: _currentRangeValues,
-    min: 0,
-    max: 200,
-    divisions: 10,
-    labels: RangeLabels(
-      _currentRangeValues.start.round().toString(),
-      _currentRangeValues.end.round().toString(),
-    ),
-    onChanged: (forIos)
-        ? (RangeValues values) {
-            if (!mounted) return;
-
-            // Enforce a minimum range of 20
-            if ((values.end - values.start) >= 20) {
-              setState(() {
-                _currentRangeValues = values;
-              });
-            } else {
-              setState(() {
-                _currentRangeValues = RangeValues(
-                  values.start,
-                  values.start + 20 > 200 ? 200 : values.start + 20,
-                );
-              });
-            }
-          }
-        : null,
-  ),
-),
+                                      data: SliderTheme.of(context).copyWith(
+                                     rangeThumbShape: const CircleThumbShape(
+          thumbRadius: 10.0, // Size of the thumb
+        ),
+                                        thumbColor: Colors.transparent, // Transparent fill for hollow center
+                                        overlayColor: Colors.transparent, // No overlay when thumb is pressed
+                                        activeTrackColor: mainColor, // Track color for selected range
+                                        inactiveTrackColor: mainColor.withOpacity(0.3), // Track color for unselected range
+                                        trackHeight: 4.0, // Thickness of the track
+                                      
+                                      ),
+                                      child: RangeSlider(
+                                        activeColor: mainColor,
+                                        values: _currentRangeValues,
+                                        min: 0,
+                                        max: 200,
+                                        divisions: 10,
+                                        labels: RangeLabels(
+                                          _currentRangeValues.start.round().toString(),
+                                          _currentRangeValues.end.round().toString(),
+                                        ),
+                                        onChanged: forIos
+                                            ? (RangeValues values) {
+                                                if (!mounted) return;
+                                  
+                                                setState(() {
+                                                  // Adjust values to maintain a minimum gap of 20
+                                                  double newStart = values.start;
+                                                  double newEnd = values.end;
+                                  
+                                                  // If the range is less than 20, adjust the appropriate thumb
+                                                  if (newEnd - newStart < 20) {
+                                                    // If the user is moving the start thumb
+                                                    if ((values.start - _currentRangeValues.start).abs() >
+                                                        (values.end - _currentRangeValues.end).abs()) {
+                                                      newEnd = newStart + 20;
+                                                      if (newEnd > 200) {
+                                                        newEnd = 200;
+                                                        newStart = 200 - 20;
+                                                      }
+                                                    }
+                                                    // If the user is moving the end thumb
+                                                    else {
+                                                      newStart = newEnd - 20;
+                                                      if (newStart < 0) {
+                                                        newStart = 0;
+                                                        newEnd = 20;
+                                                      }
+                                                    }
+                                                  }
+                                  
+                                                  _currentRangeValues = RangeValues(newStart, newEnd);
+                                                });
+                                              }
+                                            : null,
+                                      ),
+                                    ),
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
@@ -1534,5 +1549,97 @@ class _SearchState extends State<Search> {
         // num = userlist.length;
       });
     });
+  }
+}
+
+class _CustomRangeThumbShape extends RangeSliderThumbShape {
+  final Color borderColor;
+  final double borderWidth;
+
+  const _CustomRangeThumbShape({
+    required this.borderColor,
+    this.borderWidth = 2.0,
+  });
+
+  @override
+  Size getPreferredSize(bool isEnabled, bool isDiscrete) {
+    return const Size.fromRadius(8.0); // Matches enabledThumbRadius
+  }
+
+  @override
+  void paint(
+    PaintingContext context,
+    Offset center, {
+    required Animation<double> activationAnimation,
+    required Animation<double> enableAnimation,
+    bool isDiscrete = false,
+    bool isEnabled = false,
+    bool? isOnTop,
+    bool? isPressed,
+    required SliderThemeData sliderTheme,
+    TextDirection? textDirection,
+    Thumb? thumb,
+  }) {
+    final Canvas canvas = context.canvas;
+
+    final Paint borderPaint = Paint()
+      ..color = borderColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = borderWidth;
+
+    // Draw hollow circle (border only)
+    canvas.drawCircle(
+      center,
+      sliderTheme.thumbShape!.getPreferredSize(isEnabled, isDiscrete).width / 2,
+      borderPaint,
+    );
+  }
+}
+
+// Custom track shape to avoid drawing under thumbs
+
+
+
+class CircleThumbShape extends RangeSliderThumbShape {
+  final double thumbRadius;
+
+  const CircleThumbShape({
+    this.thumbRadius = 6.0,
+  });
+
+  @override
+  Size getPreferredSize(bool isEnabled, bool isDiscrete) {
+    return Size.fromRadius(thumbRadius);
+  }
+
+  @override
+  void paint(
+    PaintingContext context,
+    Offset center, {
+    required Animation<double> activationAnimation,
+    required Animation<double> enableAnimation,
+    bool isDiscrete = false,
+    bool isEnabled = false,
+    bool? isOnTop,
+    bool? isPressed,
+    required SliderThemeData sliderTheme,
+    TextDirection? textDirection,
+    Thumb? thumb,
+  }) {
+    final Canvas canvas = context.canvas;
+
+    final fillPaint = Paint()
+      ..color = Colors.white // White fill for the thumb's center
+      ..style = PaintingStyle.fill;
+
+    final borderPaint = Paint()
+      ..color = sliderTheme.thumbColor ?? Colors.blue // Border color
+      ..strokeWidth = 2
+      ..style = PaintingStyle.stroke;
+
+    // Draw filled circle (white background)
+    canvas.drawCircle(center, thumbRadius, fillPaint);
+    // Draw border circle
+    canvas.drawCircle(center, thumbRadius, borderPaint);
   }
 }

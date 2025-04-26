@@ -551,7 +551,7 @@ class _HelpSupportState extends State<HelpSupport> {
                                                   //   color: CupertinoColors.inactiveGray,
                                                   // ),
                                                   // borderRadius: BorderRadius.circular(30),
-                                                  hintText: "Enter your query here",
+                                                  hintText: "Enter Your Query Here",
                                                 ),
                                                 textInputAction:
                                                     TextInputAction.next,
@@ -745,7 +745,7 @@ class _HelpSupportState extends State<HelpSupport> {
                   error_text:
                       "Your Message Has Been Sent Successfully \n We Will Reply You Soon",
                   appreciation: "",
-                  icon: Icons.check,
+                  icon: Icons.check_circle_rounded,
                   sec: 3,
                 ),
                 backgroundColor: Colors.transparent,
@@ -776,7 +776,7 @@ class ClickableText extends StatelessWidget {
     if (await canLaunch(link.url)) {
       await launch(link.url);
     } else {
-      throw 'Could not launch $link.url';
+      throw 'Could not launch ${link.url}';
     }
   }
 
@@ -784,11 +784,13 @@ class ClickableText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Linkify(
-        onOpen: _onOpen,
-        text: text,
-        style: const TextStyle(color: Colors.black),
-        linkStyle: const TextStyle(color: Colors.blue),
+      child: SingleChildScrollView(
+        child: Linkify(
+          onOpen: _onOpen,
+          text: text,
+          style: const TextStyle(color: Colors.black),
+          linkStyle: const TextStyle(color: Colors.blue),
+        ),
       ),
     );
   }

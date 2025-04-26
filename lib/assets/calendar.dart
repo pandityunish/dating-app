@@ -6,14 +6,15 @@ import 'package:intl/intl.dart';
 
 import '../chat/colors.dart';
 import '../global_vars.dart';
-
 class Calender extends StatefulWidget {
-  Calender({Key? key, required this.useTwentyOneYears, required this.setdate})
-      : super(key: key);
+  const Calender({
+    Key? key,
+    required this.useTwentyOneYears,
+    required this.setdate,
+  }) : super(key: key);
 
-  // final String title;
-  Function setdate;
-  bool useTwentyOneYears;
+  final Function setdate;
+  final bool useTwentyOneYears;
 
   @override
   _CalenderState createState() => _CalenderState();
@@ -22,8 +23,7 @@ class Calender extends StatefulWidget {
 class _CalenderState extends State<Calender> {
   int? _selectedDay;
   String? _selectedMonth;
-  int ?_selectedYear ;
-  String ?_newselectedYear ;
+  int? _selectedYear;
   final int _todayYear = DateTime.now().year;
 
   final Map<String, int> _daysInMonth = {
@@ -61,80 +61,99 @@ class _CalenderState extends State<Calender> {
   @override
   void initState() {
     super.initState();
+    // Initialize with null to show placeholder texts
+    _selectedDay = null;
+    _selectedMonth = null;
+    _selectedYear = null;
+
+    // Generate years list based on useTwentyOneYears
     final startYear =
         widget.useTwentyOneYears ? _todayYear - 21 : _todayYear - 18;
-    setState(() {
-      _selectedYear = startYear;
-    });
     _years = List.generate(
-            widget.useTwentyOneYears ? 50 : 53, (index) => startYear - index)
-        .reversed
-        .toList();
-    // setlist(widget.useTwentyOneYears);
+      widget.useTwentyOneYears ? 50 : 53,
+      (index) => startYear - index,
+    ).reversed.toList();
   }
 
-  setlist() {
-    print("function run again");
-    final startYear =
-        widget.useTwentyOneYears ? _todayYear - 21 : _todayYear - 18;
-    if (widget.useTwentyOneYears) {
-      if (_selectedYear! > startYear) {
-        setState(() {
-          _selectedYear = startYear;
-        });
+  void _updateDaysInMonth() {
+    setState(() {
+      // Only update February's days if month and year are selected
+      if (_selectedMonth == 'February' && _selectedYear != null) {
+        // Correct leap year calculation
+        bool isLeapYear = (_selectedYear! % 4 == 0 &&
+                _selectedYear! % 100 != 0) ||
+            (_selectedYear! % 400 == 0);
+        _daysInMonth['February'] = isLeapYear ? 29 : 28;
+      } else {
+        _daysInMonth['February'] = 28; // Reset February if not selected
+      }
+
+      // Ensure _selectedDay is valid for the current month
+      if (_selectedMonth != null && _selectedDay != null) {
+        final maxDays = _daysInMonth[_selectedMonth] ?? 31;
+        if (_selectedDay! > maxDays) {
+          _selectedDay = maxDays;
+        }
+      }
+    });
+
+    // Call setdate only if all values are selected
+    if (_selectedDay != null &&
+        _selectedMonth != null &&
+        _selectedYear != null) {
+      final monthIndex =
+          _monthNames.indexWhere((element) => element == _selectedMonth) + 1;
+      final birthday = DateTime(_selectedYear!, monthIndex, _selectedDay!);
+      final duration = AgeCalculator.age(birthday);
+
+      if (duration.years == 70) {
+        widget.setdate(
+          DateTime.now().day,
+          DateTime.now().month,
+          _selectedYear,
+        );
+      } else {
+        widget.setdate(_selectedDay, monthIndex, _selectedYear);
       }
     }
-
-    _years = List.generate(
-            widget.useTwentyOneYears ? 50 : 53, (index) => startYear - index)
-        .reversed
-        .toList();
   }
 
-@override
-Widget build(BuildContext context) {
-  if (widget.useTwentyOneYears) {
-    setlist();
-  } else {
-    setlist();
-  }
+  @override
+  Widget build(BuildContext context) {
 
-  // Convert years to strings for the dropdown
-  List<String> _yearsWithText = _years.map((year) => '$year').toList();
-_yearsWithText.add("Year");
-  return Center(
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        // Date Dropdown
-        Card(
-          elevation: 4,
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30)),
-          child: SizedBox(
-            height: 46,
-            width: MediaQuery.of(context).size.width * 0.29,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                DropdownButton<int>(
-                  underline: Container(
-                    color: Colors.white,
-                  ),
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          // Date Dropdown
+          Card(
+            elevation: 4,
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: SizedBox(
+              height: 46,
+              width: MediaQuery.of(context).size.width * 0.29,
+              child: Center(
+                child: DropdownButton<int>(
+                  underline: Container(),
                   value: _selectedDay,
-                  hint: Text(
-                    "Date",
+                  hint:  Text(
+                    "Day",
                     style: TextStyle(color: newtextColor),
                   ),
                   iconEnabledColor: newtextColor,
                   items: List.generate(
-                      _daysInMonth[_selectedMonth ?? "January"] ?? 0,
-                      (index) => index + 1).map((value) {
+                    _daysInMonth[_selectedMonth] ?? _daysInMonth['January']!,
+                    (index) => index + 1,
+                  ).map((value) {
                     return DropdownMenuItem<int>(
                       value: value,
-                      child: Text(value < 10 ? '0$value' : '$value',
-                          style: TextStyle(color: newtextColor)),
+                      child: Text(
+                        value < 10 ? '0$value' : '$value',
+                        style:  TextStyle(color: newtextColor),
+                      ),
                     );
                   }).toList(),
                   onChanged: (newValue) {
@@ -144,152 +163,88 @@ _yearsWithText.add("Year");
                     });
                   },
                 ),
-              ],
-            ),
-          ),
-        ),
-        // Month Dropdown
-        Card(
-          elevation: 4,
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30)),
-          child: SizedBox(
-            height: 46,
-            width: MediaQuery.of(context).size.width * 0.29,
-            child: Center(
-              child: DropdownButton<String>(
-                alignment: AlignmentDirectional.center,
-                underline: Container(
-                  color: Colors.white,
-                ),
-                value: _selectedMonth,
-                hint: Text(
-                  "Month",
-                  style: TextStyle(color: newtextColor),
-                ),
-                iconEnabledColor: newtextColor,
-                items: _monthNames.map((value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value, style: TextStyle(color: newtextColor)),
-                  );
-                }).toList(),
-                onChanged: (newValue) {
-                  setState(() {
-                    _selectedMonth = newValue!;
-                    _updateDaysInMonth();
-                  });
-                },
               ),
             ),
           ),
-        ),
-        // Year Dropdown
-        Card(
-          elevation: 4,
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30)),
-          child: SizedBox(
-            height: 46,
-            width: MediaQuery.of(context).size.width * 0.29,
-            child: Row(
-              children: [
-                const SizedBox(width: 20),
-                DropdownButton<String>(
-                  underline: Container(
-                    color: Colors.white,
-                  ),
-                  value: _newselectedYear != null ? '$_newselectedYear' : "Year",
-                  hint: Text(
-                    "Year",
+          // Month Dropdown
+          Card(
+            elevation: 4,
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: SizedBox(
+              height: 46,
+              width: MediaQuery.of(context).size.width * 0.29,
+              child: Center(
+                child: DropdownButton<String>(
+                  alignment: AlignmentDirectional.center,
+                  underline: Container(),
+                  value: _selectedMonth,
+                  hint:  Text(
+                    "Month",
                     style: TextStyle(color: newtextColor),
                   ),
                   iconEnabledColor: newtextColor,
-                  items: _yearsWithText.map((value) {
+                  items: _monthNames.map((value) {
                     return DropdownMenuItem<String>(
                       value: value,
-                      child: Text(value, style: TextStyle(color: newtextColor)),
+                      child: Text(
+                        value,
+                        style:  TextStyle(color: newtextColor),
+                      ),
                     );
                   }).toList(),
                   onChanged: (newValue) {
                     setState(() {
-                     setState(() {
-                        _newselectedYear=newValue;
-                     });
-
-                      _selectedYear = int.parse(newValue!);
+                      _selectedMonth = newValue!;
                       _updateDaysInMonth();
                     });
                   },
                 ),
-              ],
+              ),
             ),
           ),
-        ),
-      ],
-    ),
-  );
-}
-
-  void _updateDaysInMonth() {
-    // print(_selectedDay);
-    // print(_selectedMonth);
-    // print(_monthNames.indexWhere((element) => element == _selectedMonth) + 1);
-
-    setState(() {
-      if (_selectedMonth == 'February') {
-        if (_selectedYear! % 4 == 0) {
-          if (_selectedYear! % 50 == 0) {
-            if (_selectedYear! % 400 == 0) {
-              _daysInMonth[_selectedMonth!] = 29;
-            } else {
-              _daysInMonth[_selectedMonth!] = 28;
-            }
-          } else {
-            _daysInMonth[_selectedMonth!] = 29;
-          }
-        } else {
-          _daysInMonth[_selectedMonth!] = 28;
-        }
-      } else {
-        _daysInMonth[_selectedMonth!] = _monthNames.contains(_selectedMonth)
-            ? _daysInMonth[_selectedMonth]!
-            : 31;
-      }
-
-      if (_daysInMonth[_selectedMonth]! < _selectedDay!) {
-        _selectedDay = _daysInMonth[_selectedMonth]!;
-      }
-    });
-
-    print(DateTime.now().month);
-
-    DateDuration duration = DateDuration();
-    DateTime birthday = DateTime(
-        _selectedYear!,
-        _monthNames.indexWhere((element) => element == _selectedMonth) + 1,
-        _selectedDay!);
-    duration = AgeCalculator.age(birthday);
-    if (duration.years == 70) {
-      widget.setdate(
-        DateTime.now().day,
-        DateTime.now().month,
-        _selectedYear,
-      );
-    } else {
-      widget.setdate(
-        _selectedDay,
-        _monthNames.indexWhere((element) => element == _selectedMonth) + 1,
-        _selectedYear,
-      );
-    }
-    final startYear =
-        widget.useTwentyOneYears ? _todayYear - 21 : _todayYear - 18;
-    _years = List.generate(
-            widget.useTwentyOneYears ? 50 : 53, (index) => startYear - index)
-        .reversed
-        .toList();
+          // Year Dropdown
+          Card(
+            elevation: 4,
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: SizedBox(
+              height: 46,
+              width: MediaQuery.of(context).size.width * 0.29,
+              child: Center(
+                child: DropdownButton<int>(
+                  underline: Container(),
+                  value: _selectedYear,
+                  hint:  Text(
+                    "Year",
+                    style: TextStyle(color: newtextColor),
+                  ),
+                  iconEnabledColor: newtextColor,
+                  items: _years.map((value) {
+                    return DropdownMenuItem<int>(
+                      value: value,
+                      child: Text(
+                        '$value',
+                        style:  TextStyle(color: newtextColor),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (newValue) {
+                    setState(() {
+                      _selectedYear = newValue!;
+                      _updateDaysInMonth();
+                    });
+                  },
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

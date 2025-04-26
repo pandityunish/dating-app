@@ -955,12 +955,11 @@ class _KundliMatchState extends State<KundliMatch>
                                           });
                                         },
                                         items: List.generate(12, (int index) {
-                                          String hour = (index + 1)
-                                              .toString()
-                                              .padLeft(2, '0');
+                                          String minute =
+                                              index.toString().padLeft(2, '0');
                                           return DropdownMenuItem<String>(
-                                            value: hour,
-                                            child: Text(hour),
+                                            value: minute,
+                                            child: Text(minute),
                                           );
                                         }),
                                       ),

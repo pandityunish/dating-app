@@ -214,7 +214,6 @@ class _EditProfileState extends State<EditProfile> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                
                   Container(
                     child: Column(children: [
                       Padding(
@@ -244,7 +243,7 @@ class _EditProfileState extends State<EditProfile> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text("Hide Pis"),
+                          Text("Hide Pic"),
                           Align(
                             alignment: Alignment.centerRight,
                             child: Padding(
@@ -694,7 +693,7 @@ class _EditProfileState extends State<EditProfile> {
                           const SizedBox(
                             height: 2,
                           ),
-                          nameContainer('images/icons/email.png', "Email",
+                          nameContainer('images/icons/email.png', "Email ID",
                               "${userSave.email}"),
                           const SizedBox(
                             height: 2,
@@ -811,7 +810,7 @@ class _EditProfileState extends State<EditProfile> {
                           SizedBox(
                             height: 2,
                           ),
-                           Container(
+                          Container(
                             padding: EdgeInsets.only(left: 25, right: 25),
                             margin: EdgeInsets.only(bottom: 5),
                             child: Column(children: [
@@ -822,12 +821,14 @@ class _EditProfileState extends State<EditProfile> {
                                   Row(
                                     children: [
                                       ImageIcon(
-                                        AssetImage('images/icons/disability.png'),
+                                        AssetImage(
+                                            'images/icons/disability.png'),
                                         color: mainColor,
                                       ),
                                       Container(
                                           margin: EdgeInsets.only(left: 5),
-                                          child: BigText(text: "Disability With Person")),
+                                          child: BigText(
+                                              text: "Disability With Person")),
                                     ],
                                   ),
                                   Container(

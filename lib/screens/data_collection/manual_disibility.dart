@@ -42,7 +42,9 @@ class _MannualEducationState extends State<MannualDisibility> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
       child: Scaffold(
-          appBar:CustomAppBar(title: "Disability With Person", iconImage: 'images/icons/education.png'),
+          appBar: CustomAppBar(
+              title: "Disability With Person",
+              iconImage: 'images/icons/disability.png'),
           body: Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: Column(
@@ -50,7 +52,6 @@ class _MannualEducationState extends State<MannualDisibility> {
               children: [
                 Column(
                   children: [
-                  
                     Center(
                         child: Container(
                       // height: MediaQuery.of(context).size.height * 0.85,
@@ -58,36 +59,29 @@ class _MannualEducationState extends State<MannualDisibility> {
                         child: Column(
                           children: [
                             Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 3),
-                                child: SizedBox(
-                                  height: 65,
-                                  child: TextField(
-                                    // height: 20.0,
-                                    
-                                    maxLength: 15,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 3),
+                              child: SizedBox(
+                                height: 65,
+                                child: TextField(
+                                  // height: 20.0,
+                                  cursorColor: mainColor,
+                                  cursorWidth: 2, // Set your custom color
+                                  maxLength: 15,
                                   maxLines: 1,
-                                                                  
-                                    maxLengthEnforcement: MaxLengthEnforcement
-                                        .enforced, // show error message
-                                    // maxLengthEnforcedMessage: 'You have reached the maximum character limit of 50',
-                                    
-                                    focusNode: _focusNode1,
-                                    controller: name,
-                                    decoration: InputDecoration(
-                                      hintText: "Enter Disability",
-                                      contentPadding: const EdgeInsets.only(left: 20,bottom: 10),
-                                        focusedBorder:  OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: _focusNode1.hasFocus
-                                            ? mainColor
-                                            : Colors.white,
-                                      ),
-                                      
-                                      borderRadius: BorderRadius.circular(30),
-                                      
-                                    ),
-                                      border: OutlineInputBorder(
+
+                                  maxLengthEnforcement: MaxLengthEnforcement
+                                      .enforced, // show error message
+                                  // maxLengthEnforcedMessage: 'You have reached the maximum character limit of 50',
+
+                                  focusNode: _focusNode1,
+                                  controller: name,
+
+                                  decoration: InputDecoration(
+                                    hintText: "Enter Disability",
+                                    contentPadding: const EdgeInsets.only(
+                                        left: 20, bottom: 10),
+                                    focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: _focusNode1.hasFocus
                                             ? mainColor
@@ -95,14 +89,20 @@ class _MannualEducationState extends State<MannualDisibility> {
                                       ),
                                       borderRadius: BorderRadius.circular(30),
                                     ),
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: _focusNode1.hasFocus
+                                            ? mainColor
+                                            : Colors.white,
+                                      ),
+                                      borderRadius: BorderRadius.circular(30),
                                     ),
-                                    textInputAction: TextInputAction.done,
-                                    onChanged: (name) => {
-                                     
-                                    },
                                   ),
+                                  textInputAction: TextInputAction.done,
+                                  onChanged: (name) => {},
                                 ),
                               ),
+                            ),
                             SizedBox(
                               height: Get.height * 0.5,
                             ),
@@ -139,7 +139,7 @@ class _MannualEducationState extends State<MannualDisibility> {
                                 return const AlertDialog(
                                   content: SnackBarContent(
                                     appreciation: "",
-                                    error_text: "Please Enter Disibility",
+                                    error_text: "Please Enter Disability",
                                     icon: Icons.error,
                                     sec: 2,
                                   ),
@@ -148,7 +148,8 @@ class _MannualEducationState extends State<MannualDisibility> {
                                 );
                               });
                         } else {
-                          userService.userdata.addAll({"disability": name.text});
+                          userService.userdata
+                              .addAll({"disability": name.text});
                           Navigator.push(
                               context,
                               PageRouteBuilder(
@@ -156,8 +157,7 @@ class _MannualEducationState extends State<MannualDisibility> {
                                       const Duration(milliseconds: 0),
                                   reverseTransitionDuration:
                                       const Duration(milliseconds: 0),
-                                  pageBuilder: (_, __, ___) =>
-                                      const Height()));
+                                  pageBuilder: (_, __, ___) => const Height()));
                           if (allads.isNotEmpty) {
                             showadsbar(context, allads, () {
                               Navigator.pop(context);

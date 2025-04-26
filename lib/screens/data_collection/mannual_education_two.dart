@@ -41,7 +41,9 @@ class _MannulProfessionState extends State<MannulProfession> {
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
       child: Scaffold(
-          appBar:CustomAppBar(title: "Profession", iconImage: 'images/icons/profession_suitcase.png'),
+          appBar: CustomAppBar(
+              title: "Profession",
+              iconImage: 'images/icons/profession_suitcase.png'),
           body: Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: Column(
@@ -49,7 +51,6 @@ class _MannulProfessionState extends State<MannulProfession> {
               children: [
                 Column(
                   children: [
-                   
                     Center(
                         child: Container(
                       // height: MediaQuery.of(context).size.height * 0.85,
@@ -57,37 +58,33 @@ class _MannulProfessionState extends State<MannulProfession> {
                         child: Column(
                           children: [
                             Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 3),
-                                child: SizedBox(
-                                  height: 65,
-                                  child: TextField(
-                                    // height: 20.0,
-                                    
-                                    maxLength: 15,
-                                  maxLines: 1,
-                                                                  
-                                    maxLengthEnforcement: MaxLengthEnforcement
-                                        .enforced, // show error message
-                                    // maxLengthEnforcedMessage: 'You have reached the maximum character limit of 50',
-                                    
-                                    focusNode: _focusNode1,
-                                    controller: name,
-                                    decoration: InputDecoration(
-                                      hintText: "Enter Profession",
-                                        focusedBorder:  OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: mainColor
-                                      
-                                      ),
-                                      
-                                      borderRadius: BorderRadius.circular(30),
-                                      
-                                    ),
-                                        contentPadding: const EdgeInsets.only(left: 20,bottom: 10),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 3),
+                              child: SizedBox(
+                                height: 65,
+                                child: TextField(
+                                  // height: 20.0,
 
-                                      border: OutlineInputBorder(
-                                        
+                                  maxLength: 15,
+                                  maxLines: 1,
+
+                                  maxLengthEnforcement: MaxLengthEnforcement
+                                      .enforced, // show error message
+                                  // maxLengthEnforcedMessage: 'You have reached the maximum character limit of 50',
+
+                                  focusNode: _focusNode1,
+                                  controller: name,
+                                  cursorColor: mainColor,
+                                  cursorWidth: 2,
+                                  decoration: InputDecoration(
+                                    hintText: "Enter Profession",
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: mainColor),
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    contentPadding: const EdgeInsets.only(
+                                        left: 20, bottom: 10),
+                                    border: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: _focusNode1.hasFocus
                                             ? mainColor
@@ -95,14 +92,12 @@ class _MannulProfessionState extends State<MannulProfession> {
                                       ),
                                       borderRadius: BorderRadius.circular(30),
                                     ),
-                                    ),
-                                    textInputAction: TextInputAction.done,
-                                    onChanged: (name) => {
-                                     
-                                    },
                                   ),
+                                  textInputAction: TextInputAction.done,
+                                  onChanged: (name) => {},
                                 ),
                               ),
+                            ),
                           ],
                         ),
                       ),

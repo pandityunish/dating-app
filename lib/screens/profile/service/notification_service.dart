@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:http/http.dart' as http;
@@ -37,7 +38,7 @@ class NotificationService {
           body: jsonEncode({
             "userId": userSave.uid,
           }));
-      print(res.body);
+      log("new data ${res.body}");
       if (res.statusCode == 200) {
         return number = jsonDecode(res.body);
       }

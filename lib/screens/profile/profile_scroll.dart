@@ -19,6 +19,7 @@ import 'package:ristey/screens/mobile_chat_screen.dart';
 import 'package:ristey/screens/navigation/navigation.dart';
 import 'package:ristey/screens/navigation/service/home_service.dart';
 import 'package:ristey/screens/profile/profile_page.dart';
+import 'package:ristey/screens/profile/service/notification_controller.dart';
 import 'package:ristey/screens/profile/service/notification_service.dart';
 import 'package:ristey/services/audio_call.dart';
 import 'package:ristey/services/audio_sharing_service.dart';
@@ -62,7 +63,7 @@ class _SlideProfileState extends State<SlideProfile> {
   int pagecount = 2;
   int profilepercentage = 0;
   bool load = false;
-  int _unreadCount = 0;
+  // int _unreadCount = 0;
   // User userSave = User();
   List<User> userlist = [];
   List<User> largeuserlist = [];
@@ -72,7 +73,7 @@ class _SlideProfileState extends State<SlideProfile> {
   HomeService homeservice = Get.put(HomeService());
   ProfileCompletion profile = ProfileCompletion();
   void getalluserlists() async {
-    _unreadCount = await NotificationService().getnumberofnoti();
+    // _unreadCount = await NotificationService().getnumberofnoti();
     HomeService().updatelogin(email: userSave.email!, mes: "true");
     HomeService().updateoffiletime(
         email: userSave.email!, time: DateTime.now().toString());
@@ -347,6 +348,7 @@ Get.put(AudioSharingController());
   );
   @override
   Widget build(BuildContext context) {
+    final NotificationController noticontroller = Get.find();
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(
@@ -559,7 +561,8 @@ Get.put(AudioSharingController());
                       right: MediaQuery.of(context).size.width * 0.004,
                       top: MediaQuery.of(context).size.height * 0.04,
                       child: IconButton(
-                        icon: Stack(
+                        icon:Obx(
+          () => Stack(
                           children: [
                             Container(
                               padding: const EdgeInsets.all(3),
@@ -573,7 +576,7 @@ Get.put(AudioSharingController());
                                 ],
                               ),
                             ),
-                            if (_unreadCount > 0)
+                            if (noticontroller.unreadCount.value > 0)
                               Positioned(
                                 right: 3,
                                 top: 2.0,
@@ -590,7 +593,7 @@ Get.put(AudioSharingController());
                                   ),
                                   child: Center(
                                     child: Text(
-                                      _unreadCount.toString(),
+                                      noticontroller.unreadCount.value.toString(),
                                       style: const TextStyle(
                                           color: Colors.white, fontSize: 10),
                                     ),
@@ -598,9 +601,9 @@ Get.put(AudioSharingController());
                                 ),
                               ),
                           ],
-                        ),
+                        )),
                         onPressed: () {
-                          _unreadCount = 0;
+                          noticontroller.fetchUnreadCount();
                           setState(() {});
                           NotificationService().updatenumberofnoti();
                           NotificationService().addtoadminnotification(
@@ -637,7 +640,7 @@ Get.put(AudioSharingController());
                       ),
                     ),
             ],
-          ),
+        ),
         ),
       ),
     );

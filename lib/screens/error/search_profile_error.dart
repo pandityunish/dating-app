@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ristey/global_vars.dart';
+import 'package:ristey/screens/data_collection/custom_appbar.dart';
 import 'package:ristey/screens/search.dart';
 
 class SearchProfileError extends StatefulWidget {
@@ -20,38 +22,18 @@ class _SearchProfileErrorState extends State<SearchProfileError> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-          leading: GestureDetector(
-            onTap: () {
-              Navigator.of(context).pop();
+    return Scaffold(
+          appBar: CustomAppBar(
+            title: "Search Profile",
+            iconImage: 'images/icons/search.png',
+            onBackButtonPressed: () {
+              selectedCity!.clear();
+              selectedCounty!.clear();
+              selectedState!.clear();
+             Get.back();
             },
-            child: widget.issearchempty == true
-                ? const Center()
-                : Icon(
-                    Icons.arrow_back_ios_new,
-                    color: mainColor,
-                    size: 25,
-                  ),
           ),
-          middle: Row(
-            children: [
-              // Icon(
-              //   Icons.chevron_left,
-              //   size: 45,
-              //   color: Colors.black,
-              // ),
-              BigText(
-                text: "Search Profile",
-                size: 20,
-                color: mainColor,
-                fontWeight: FontWeight.w700,
-              ),
-            ],
-          ),
-          previousPageTitle: "",
-        ),
-        child: SafeArea(
+        body: SafeArea(
           child: Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
@@ -78,7 +60,7 @@ class _SearchProfileErrorState extends State<SearchProfileError> {
                       Container(
                         margin: const EdgeInsets.only(left: 18, bottom: 120),
                         child: const Text(
-                            "Sorry! No Match Found. Please Change your Search Criteria for Better Results",
+                            "Sorry! No Match Found. Please Change Your Search Criteria for Better Results",
                             textAlign: TextAlign.center ,
                             style: TextStyle(
                               
