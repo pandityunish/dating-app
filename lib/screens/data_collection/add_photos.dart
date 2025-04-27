@@ -131,7 +131,7 @@ class _ReligionState extends State<AddPics> {
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              "After Seeing Profile Picture",
+                              "After Seeing Profile Pics",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 16,
