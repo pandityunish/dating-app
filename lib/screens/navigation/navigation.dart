@@ -478,7 +478,6 @@ class _MyProfileState extends State<MyProfile> {
             children: [
               Container(
                 margin: const EdgeInsets.only(top: 35, bottom: 15),
-                padding: const EdgeInsets.only(left: 1),
                 child: Column(
                   children: [
                     Padding(
@@ -486,143 +485,139 @@ class _MyProfileState extends State<MyProfile> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          GestureDetector(
-                            onTap: () async {},
-                            child: Container(
-                              child: Row(
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      // Navigator.pop(context);
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              MainAppContainer(
-                                            notiPage: false,
-                                          ),
+                          Row(
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.only(right: 15),
+                                child: IconButton(
+                                  padding: EdgeInsets.only(left: 5),
+                                  constraints: const BoxConstraints(),
+                                  onPressed: () {
+                                    // Navigator.pop(context);
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MainAppContainer(
+                                          notiPage: false,
                                         ),
-                                      );
-                                    },
-                                    icon: Icon(
-                                      Icons.arrow_back_ios_new,
-                                      color: mainColor,
-                                    ),
-                                  ),
-                                  Container(
-                                    width: 45,
-                                    height: 45,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(35),
-                                      border: (userSave.imageUrls == null ||
-                                              userSave.imageUrls!.isEmpty)
-                                          ? Border.all(
-                                              width: 1,
-                                              color: mainColor,
-                                            )
-                                          : Border.all(
-                                              width: 2,
-                                              color: Colors.white,
-                                            ),
-                                      color: Colors.white,
-                                      image: DecorationImage(
-                                        image: (userSave.imageUrls == null ||
-                                                userSave.imageUrls!.isEmpty)
-                                            ? const NetworkImage(
-                                                "https://firebasestorage.googleapis.com/v0/b/couplematch-47708.appspot.com/o/impImage%2FnavImageError.png?alt=media&token=49f90276-0a97-4f1f-910f-28e95f1ac29c",
-                                              )
-                                            // "https://firebasestorage.googleapis.com/v0/b/couplematch-47708.appspot.com/o/Images%2F70.png?alt=media&token=05816459-b75e-44ee-8ca6-a6b9b4d9cbf8")
-                                            : NetworkImage(
-                                                userSave.imageUrls![0],
-                                              ),
                                       ),
-                                    ),
+                                    );
+                                  },
+                                  icon: Icon(
+                                    Icons.arrow_back_ios_new,
+                                    color: mainColor,
                                   ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                ),
+                              ),
+                              Container(
+                                width: 45,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(35),
+                                  border: (userSave.imageUrls == null ||
+                                          userSave.imageUrls!.isEmpty)
+                                      ? Border.all(
+                                          width: 1,
+                                          color: mainColor,
+                                        )
+                                      : Border.all(
+                                          width: 2,
+                                          color: Colors.white,
+                                        ),
+                                  color: Colors.white,
+                                  image: DecorationImage(
+                                    image: (userSave.imageUrls == null ||
+                                            userSave.imageUrls!.isEmpty)
+                                        ? const NetworkImage(
+                                            "https://firebasestorage.googleapis.com/v0/b/couplematch-47708.appspot.com/o/impImage%2FnavImageError.png?alt=media&token=49f90276-0a97-4f1f-910f-28e95f1ac29c",
+                                          )
+                                        // "https://firebasestorage.googleapis.com/v0/b/couplematch-47708.appspot.com/o/Images%2F70.png?alt=media&token=05816459-b75e-44ee-8ca6-a6b9b4d9cbf8")
+                                        : NetworkImage(
+                                            userSave.imageUrls![0],
+                                          ),
+                                  ),
+                                ),
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Row(
                                     children: [
-                                      Row(
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                margin: const EdgeInsets.only(
-                                                  left: 5,
-                                                ),
+                                          Container(
+                                            margin: const EdgeInsets.only(
+                                              left: 5,
+                                            ),
 
-                                                // width: textWidth,
-                                                child: SizedBox(
-                                                  width: Get.width * 0.33,
-                                                  child: SingleChildScrollView(
-                                                    scrollDirection:
-                                                        Axis.horizontal,
-                                                    child: BigText(
-                                                      text: (userSave.name ==
-                                                              null)
-                                                          ? "Ghanshyam Ramayiyavasta"
-                                                          : "${userSave.name![0].toUpperCase() + userSave.name!.substring(1)} ${userSave.surname![0].toUpperCase() + userSave.surname!.substring(1)}",
-                                                      size: 14,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                    ),
-                                                  ),
+                                            // width: textWidth,
+                                            child: SizedBox(
+                                              width: Get.width * 0.33,
+                                              child: SingleChildScrollView(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                child: BigText(
+                                                  text: (userSave.name == null)
+                                                      ? "Ghanshyam Ramayiyavasta"
+                                                      : "${userSave.name![0].toUpperCase() + userSave.name!.substring(1)} ${userSave.surname![0].toUpperCase() + userSave.surname!.substring(1)}",
+                                                  size: 14,
+                                                  fontWeight: FontWeight.w700,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                 ),
                                               ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Clipboard.setData(ClipboardData(
-                                                text: userSave.puid??""))
-                                            .then((value) {
-                                          //only if ->
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
-                                                  content: Text(
-                                                      "Copied successfully")));
-                                        });
-                                                },
-                                                child: Container(
-                                                  margin: const EdgeInsets.only(
-                                                      left: 5),
-                                                  child: BigText(
-                                                    // text: uid.toString().substring(uid.length()-5),
-                                                    text:
-                                                        (userSave.puid != null)
-                                                            ? userSave.puid!
-                                                            : "",
-                                                            color: mainColor,
-                                                    size: 12,
-                                                  ),
-                                                ),
+                                            ),
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              Clipboard.setData(ClipboardData(
+                                                      text:
+                                                          userSave.puid ?? ""))
+                                                  .then((value) {
+                                                //only if ->
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(const SnackBar(
+                                                        content: Text(
+                                                            "Copied successfully")));
+                                              });
+                                            },
+                                            child: Container(
+                                              margin: const EdgeInsets.only(
+                                                  left: 5),
+                                              child: BigText(
+                                                // text: uid.toString().substring(uid.length()-5),
+                                                text: (userSave.puid != null)
+                                                    ? userSave.puid!
+                                                    : "",
+                                                color: mainColor,
+                                                size: 12,
                                               ),
-                                            ],
+                                            ),
                                           ),
-                                          Column(
-                                            children: [
-                                              (userSave.verifiedStatus ==
-                                                          "verified" &&
-                                                      userSave.imageUrls!
-                                                          .isNotEmpty)
-                                                  ? Icon(
-                                                      Icons.verified_user,
-                                                      color: mainColor,
-                                                      size: 35,
-                                                    )
-                                                  : const Text(""),
-                                              const SizedBox(height: 4),
-                                            ],
-                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          (userSave.verifiedStatus ==
+                                                      "verified" &&
+                                                  userSave
+                                                      .imageUrls!.isNotEmpty)
+                                              ? Icon(
+                                                  Icons.verified_user,
+                                                  color: mainColor,
+                                                  size: 25,
+                                                )
+                                              : const Text(""),
+                                          const SizedBox(height: 4),
                                         ],
                                       ),
                                     ],
                                   ),
                                 ],
                               ),
-                            ),
+                            ],
                           ),
                           Container(
                             margin: EdgeInsets.only(
@@ -676,7 +671,7 @@ class _MyProfileState extends State<MyProfile> {
                         alignment: Alignment.centerRight,
                         child: Container(
                           height: 8,
-                          width: MediaQuery.of(context).size.width * 0.82,
+                          width: MediaQuery.of(context).size.width * 0.84,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             border: Border.all(color: mainColor),
@@ -687,7 +682,7 @@ class _MyProfileState extends State<MyProfile> {
                                 child: Container(
                                   height: 8,
                                   width: MediaQuery.of(context).size.width *
-                                      0.82 *
+                                      0.84 *
                                       userProfilePercentage /
                                       100,
                                   decoration: BoxDecoration(
@@ -723,31 +718,32 @@ class _MyProfileState extends State<MyProfile> {
                         GestureDetector(
                           onTap: () async {
                             is25Ads = true;
+                            HomeService().getuserdata();
                             int statusCode = await UserService().finduser(
                               userSave.email!,
                             );
                             if (statusCode == 200) {
-                              if(userSave.isLogOut == "true"){
-                                 Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                  builder: (context) => const FirstScreen(),
-                                ),
-                                (route) => false,
-                              );
-                              SharedPreferences sharedPreferences =
-                                  await SharedPreferences.getInstance();
-                              sharedPreferences.clear();
-                              }else{
- Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                  builder:
-                                      (context) =>
-                                          MainAppContainer(notiPage: false),
-                                ),
-                                (route) => false,
-                              );
-                              }
+                              if (userSave.isLogOut == "true") {
+                                GoogleSignIn().signOut();
+                                Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                    builder: (context) => const FirstScreen(),
+                                  ),
+                                  (route) => false,
+                                );
+                                SharedPreferences sharedPreferences =
+                                    await SharedPreferences.getInstance();
+                                sharedPreferences.clear();
+                              } else {
                              
+                                Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        MainAppContainer(notiPage: false),
+                                  ),
+                                  (route) => false,
+                                );
+                              }
                             } else {
                               Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
@@ -838,6 +834,7 @@ class _MyProfileState extends State<MyProfile> {
                       children: [
                         GestureDetector(
                           onTap: () {
+                            HomeService().clearSavePrefData();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -1558,11 +1555,9 @@ class _MyProfileState extends State<MyProfile> {
                         content: MediaQuery(
                           data: MediaQuery.of(
                             context,
-                          ).copyWith(textScaleFactor: 1.0),
+                          ).copyWith(textScaler: TextScaler.linear(1.0)),
                           child: SizedBox(
-                            height: 180
-                            
-                            ,
+                            height: 200,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -1579,18 +1574,14 @@ class _MyProfileState extends State<MyProfile> {
                                   margin: const EdgeInsets.only(left: 6),
                                   width:
                                       MediaQuery.of(context).size.width * 0.8,
+                                      height: 48,
                                   child: ElevatedButton(
                                     style: ButtonStyle(
                                       shadowColor:
                                           MaterialStateColor.resolveWith(
                                         (states) => Colors.black,
                                       ),
-                                      padding: MaterialStateProperty.all<
-                                          EdgeInsetsGeometry?>(
-                                        const EdgeInsets.symmetric(
-                                          vertical: 12,
-                                        ),
-                                      ),
+                                    
                                       shape: MaterialStateProperty.all<
                                           RoundedRectangleBorder>(
                                         RoundedRectangleBorder(
@@ -1651,19 +1642,14 @@ class _MyProfileState extends State<MyProfile> {
                                   margin: const EdgeInsets.only(left: 6),
                                   width:
                                       MediaQuery.of(context).size.width * 0.8,
+                                      height: 48,
                                   child: ElevatedButton(
                                     style: ButtonStyle(
                                       shadowColor:
-                                          MaterialStateColor.resolveWith(
+                                          WidgetStateColor.resolveWith(
                                         (states) => Colors.black,
                                       ),
-                                      padding: MaterialStateProperty.all<
-                                          EdgeInsetsGeometry?>(
-                                        const EdgeInsets.symmetric(
-                                          vertical: 12,
-                                        ),
-                                      ),
-                                      shape: MaterialStateProperty.all<
+                                      shape: WidgetStateProperty.all<
                                           RoundedRectangleBorder>(
                                         RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(

@@ -42,7 +42,7 @@ class _ReligionState extends State<Income> {
       },
       style: ButtonStyle(
           padding: WidgetStateProperty.all<EdgeInsetsGeometry?>(
-              const EdgeInsets.symmetric(horizontal: 65, vertical: 15)),
+              const EdgeInsets.symmetric(horizontal: 65, vertical: 17)),
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(60.0),

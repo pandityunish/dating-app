@@ -591,9 +591,10 @@ class _PbuttonsState extends State<Pbuttons> {
                       style: ElevatedButton.styleFrom(
                           // minimumSize: Size(200, 50),
                           minimumSize: Size(
-                              MediaQuery.of(context).size.width * 0.87, 40),
+                              MediaQuery.of(context).size.width * 0.87, 48),
                           elevation: 0,
                           backgroundColor: Colors.white,
+                         
                           shadowColor: Colors.black,
                           shape: RoundedRectangleBorder(
                             side: BorderSide(width: 1, color: mainColor),
@@ -645,9 +646,10 @@ class _PbuttonsState extends State<Pbuttons> {
                                 style: ElevatedButton.styleFrom(
                                     minimumSize: Size(
                                         MediaQuery.of(context).size.width * 0.4,
-                                        40),
+                                        48),
                                     elevation: 0,
                                     backgroundColor: Colors.white,
+                                    
                                     shadowColor: Colors.black,
                                     shape: const RoundedRectangleBorder(
                                       side: BorderSide(
@@ -691,9 +693,10 @@ class _PbuttonsState extends State<Pbuttons> {
                               style: ElevatedButton.styleFrom(
                                   minimumSize: Size(
                                       MediaQuery.of(context).size.width * 0.4,
-                                      40),
+                                      48),
                                   elevation: 0,
                                   backgroundColor: Colors.white,
+                                  
                                   shadowColor: Colors.black,
                                   shape: const RoundedRectangleBorder(
                                     side: BorderSide(
@@ -723,10 +726,12 @@ class _PbuttonsState extends State<Pbuttons> {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               minimumSize: Size(
-                                  MediaQuery.of(context).size.width * 0.95, 40),
+                                  MediaQuery.of(context).size.width * 0.95, 48),
                               elevation: 0,
+
                               backgroundColor: Colors.white,
-                              shadowColor: Colors.black,
+                                shadowColor: Colors.black,
+
                               shape: RoundedRectangleBorder(
                                 side:
                                     (friends.contains(widget.profileData!.id) ||
@@ -871,7 +876,7 @@ class _PbuttonsState extends State<Pbuttons> {
                         ),
                       ),
           ),
-        
+        SizedBox(height: 3),
           Container(
               width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.only(left: 5, right: 5),
@@ -884,10 +889,11 @@ class _PbuttonsState extends State<Pbuttons> {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           minimumSize: Size(
-                              MediaQuery.of(context).size.width*0.28, 40),
+                              MediaQuery.of(context).size.width*0.28, 48),
                           // minimumSize: Size(150, 50),
                           elevation: 0,
                           backgroundColor: Colors.white,
+                        
                           shadowColor: Colors.black,
                           shape: RoundedRectangleBorder(
                             side: (blocFriend.contains(widget.profileData!.id))
@@ -971,9 +977,10 @@ class _PbuttonsState extends State<Pbuttons> {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           minimumSize: Size(
-                              MediaQuery.of(context).size.width*0.28, 40),
+                              MediaQuery.of(context).size.width*0.28, 48),
                           elevation: 0,
                           backgroundColor: Colors.white,
+
                           shadowColor: Colors.black,
                           shape: RoundedRectangleBorder(
                             side:
@@ -1048,7 +1055,7 @@ class _PbuttonsState extends State<Pbuttons> {
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             minimumSize: Size(
-                                MediaQuery.of(context).size.width*0.28, 40),
+                                MediaQuery.of(context).size.width*0.28, 48),
                             elevation: 0,
                             backgroundColor: Colors.white,
                             shadowColor: Colors.black,

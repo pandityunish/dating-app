@@ -596,6 +596,7 @@ class _KundliMatchState extends State<KundliMatch>
                                 controller: groomnamecontroller,
                                 textInputAction: TextInputAction.next,
                                 keyboardType: TextInputType.name,
+                                maxLength: 50, // Increased to allow more than 30 characters
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return "Enter your name";
@@ -606,6 +607,7 @@ class _KundliMatchState extends State<KundliMatch>
                                     hintText: "Enter Groom's Name",
                                     hintStyle: TextStyle(color: newtextColor),
                                     border: InputBorder.none,
+                                    counterText: "", // Hide the character counter
                                     contentPadding: EdgeInsets.all(10)),
                               ),
                             ),
@@ -662,7 +664,8 @@ class _KundliMatchState extends State<KundliMatch>
                                         ),
                                         value: mselectedHour,
                                         iconEnabledColor: newtextColor,
-
+ isExpanded: true,
+                  padding: EdgeInsets.symmetric(horizontal: 12),
                                         hint:  Text(
                                           "Hour",
                                           style: TextStyle(color: newtextColor),
@@ -724,6 +727,8 @@ class _KundliMatchState extends State<KundliMatch>
                                         ),
                                         value: mselectedMinute,
                                         iconEnabledColor: newtextColor,
+                                         isExpanded: true,
+                  padding: EdgeInsets.symmetric(horizontal: 12),
                                         hint:  Text(
                                           "Minute",
                                           style: TextStyle(color: newtextColor),
@@ -766,7 +771,8 @@ class _KundliMatchState extends State<KundliMatch>
                                         ),
                                         value: mselectedAMPM,
                                         iconEnabledColor: newtextColor,
-
+                                        isExpanded: true,
+                                        padding: EdgeInsets.symmetric(horizontal: 12),
                                         onChanged: (value) {
                                           if (!mounted) return;
                                           setState(() {
@@ -878,6 +884,7 @@ class _KundliMatchState extends State<KundliMatch>
                                 controller: bridenamecontroller,
                                 textInputAction: TextInputAction.next,
                                 keyboardType: TextInputType.name,
+                                maxLength: 50, // Increased to allow more than 30 characters
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return "Enter your name";
@@ -887,8 +894,8 @@ class _KundliMatchState extends State<KundliMatch>
                                 decoration:  InputDecoration(
                                     hintText: "Enter Bride's Name",
                                     border: InputBorder.none,
-                                        hintStyle: TextStyle(color: newtextColor),
-
+                                    hintStyle: TextStyle(color: newtextColor),
+                                    counterText: "", // Hide the character counter
                                     contentPadding: EdgeInsets.all(10)),
                               ),
                             ),
@@ -943,6 +950,8 @@ class _KundliMatchState extends State<KundliMatch>
                                           color: Colors.white,
                                         ),
                                         value: fselectedHour,
+                                         isExpanded: true,
+                  padding: EdgeInsets.symmetric(horizontal: 12),
                                         hint:  Text(
                                           "Hour",
                                           style: TextStyle(color: newtextColor),
@@ -981,6 +990,8 @@ class _KundliMatchState extends State<KundliMatch>
                                           color: Colors.white,
                                         ),
                                         value: fselectedMinute,
+                                         isExpanded: true,
+                  padding: EdgeInsets.symmetric(horizontal: 12),
                                         hint: Text(
                                           "Minute",
                                           style: TextStyle(color: newtextColor),
@@ -1022,6 +1033,8 @@ class _KundliMatchState extends State<KundliMatch>
                                           color: Colors.white,
                                         ),
                                         value: fselectedAMPM,
+                                         isExpanded: true,
+                  padding: EdgeInsets.symmetric(horizontal: 12),
                                         onChanged: (value) {
                                           if (!mounted) return;
                                           setState(() {

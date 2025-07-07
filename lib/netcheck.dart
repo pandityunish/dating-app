@@ -34,7 +34,7 @@ class InternetController extends GetxController {
                   const SizedBox(height: 10),
                   Text(
                     'No Internet Connection',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
                   ),
                   SizedBox(
                     height: 40,

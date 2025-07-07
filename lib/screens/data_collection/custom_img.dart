@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:ristey/assets/image.dart';
 import 'package:ristey/global_vars.dart';
+import 'package:ristey/screens/navigation/service/home_service.dart';
 import 'package:ristey/screens/profile/service/notification_service.dart';
 import 'package:ristey/storage/storage_repo.dart';
 
@@ -207,7 +208,15 @@ class _CustomImageContainerState extends State<CustomImageContainer> {
 
   deleteImg() async {
     SharedPref sharedPref = SharedPref();
-
+if(num == 0){
+  setState(() {
+    userSave.isBlur = false;
+  });
+    HomeService()
+                                        .updateblur(
+                                            email: userSave.email!,
+                                            isblur: false);
+}
     print("deleting image");
 
     try {
@@ -317,7 +326,11 @@ class _CustomImageContainerState extends State<CustomImageContainer> {
                                     onTap: () {
                                       onPressed2(url!);
                                     },
-                                    child: Image.asset("images/icons/edit.png")
+                                    child: Image.asset("images/icons/edit.png",
+                                        color: Colors.grey,
+                                        colorBlendMode: BlendMode.srcATop,
+                                        width: 18,
+                                        height: 18)
 
                                     // Icon(
                                     //   Icons.edit_square,
@@ -332,16 +345,14 @@ class _CustomImageContainerState extends State<CustomImageContainer> {
                                 GestureDetector(
                                     onTap: deleteImg,
                                     child:
-                                        Image.asset("images/icons/delete.png")
-                                    //  Icon(
-                                    //   Icons.delete,
-                                    //   size: 18,
-                                    //   color: Colors.white,
-                                    //   shadows: <Shadow>[
-                                    //     Shadow(
-                                    //         color: Colors.black, blurRadius: 15.0)
-                                    //   ],
-                                    // ),
+                                        Image.asset(
+                                          "images/icons/delete.png",
+                                          color: Colors.grey,
+                                          colorBlendMode: BlendMode.srcATop,
+                                          width: 18,
+                                          height: 18,
+                                        ),
+                                
                                     )
                               ],
                             ),
@@ -349,11 +360,20 @@ class _CustomImageContainerState extends State<CustomImageContainer> {
                         ],
                       ),
                     )
-              : SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(mainColor)),
+              : Container(
+                  height: 100,
+                  width: 100,
+                  color: Colors.white,
+                  child: Center(
+                    child: SizedBox(
+                      height: 30,
+                      width: 30,
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(mainColor),
+                        strokeWidth: 3,
+                      ),
+                    ),
+                  ),
                 );
         });
   }

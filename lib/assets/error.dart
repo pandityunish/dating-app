@@ -59,7 +59,7 @@ class _SnackBarContentState extends State<SnackBarContent> {
                         ? 0
                         : 20,
                     color: Colors.black,
-                    fontWeight: FontWeight.w600),
+                    fontWeight: FontWeight.w400),
               ),
             ),
             Column(

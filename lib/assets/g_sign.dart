@@ -19,6 +19,7 @@ import 'package:ristey/screens/navigation/service/notification_local_function.da
 import 'package:ristey/screens/notification/widget_notification/ads_bar.dart';
 import 'package:ristey/screens/profile/profile_scroll.dart';
 import 'package:ristey/screens/profile/service/notification_service.dart';
+import 'package:ntp/ntp.dart';
 import '../models/user_modal.dart' as usr;
 
 class G_Sign extends StatefulWidget {
@@ -146,61 +147,172 @@ Future<dynamic> signup(BuildContext context) async {
 
     print("Executing signup...");
 
+    // --- Validate device time -------------------------------------------------
+    try {
+      final DateTime ntpTime = await NTP.now();
+      final DateTime localTime = DateTime.now();
+      final Duration drift = ntpTime.difference(localTime).abs();
+      // If drift is greater than 5 minutes, abort sign-in to avoid stale tokens
+      if (drift > const Duration(minutes: 5)) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text(
+              "Your device time appears to be incorrect. Please enable automatic date & time and try again."),
+          duration: Duration(seconds: 5),
+        ));
+        return;
+      }
+    } catch (ntpError) {
+      // NTP failed – carry on but log the problem
+      debugPrint("NTP check failed: $ntpError");
+    }
+    // -------------------------------------------------------------------------
+
     // Getting the current location (assuming this is a method from a class)
     _G_SignState location = _G_SignState();
     await location._getCurrentLocation();
-
-    // Google Sign-In process
+    
+    // Define result variable at a higher scope
+    UserCredential? result;
+    User? user;
+    
+    // Google Sign-In process with stale token handling
     final GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
-    final GoogleSignInAccount? googleSignInAccount =
-        await googleSignIn.signIn();
-
-    // Proceed if user has successfully signed in
-    if (googleSignInAccount != null) {
+    
+    // Handle sign-out more gracefully
+    try {
+      // First try to sign out from Firebase
+      await FirebaseAuth.instance.signOut();
+      
+      // Then try to sign out from Google Sign-In
+      try {
+        await googleSignIn.signOut();
+      } catch (googleSignOutError) {
+        // If Google Sign-Out fails, try disconnecting first
+        try {
+          await googleSignIn.disconnect();
+        } catch (disconnectError) {
+          print("Google Sign-In disconnect error (can be ignored): $disconnectError");
+        }
+        print("Google Sign-Out error (can be ignored): $googleSignOutError");
+      }
+    } catch (e) {
+      // Ignore any sign-out errors as we're about to start a fresh sign-in
+      print("Sign-out status (can be ignored): $e");
+    }
+    
+    // Then attempt a fresh sign-in
+    final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+    
+    if (googleSignInAccount == null) {
+      print("Google sign-in canceled by user");
+      return;
+    }
+    
+    try {
+      // Get fresh authentication tokens
       final GoogleSignInAuthentication googleSignInAuthentication =
           await googleSignInAccount.authentication;
-
-      // Creating auth credentials
+      
+      if (googleSignInAuthentication.idToken == null || 
+          googleSignInAuthentication.accessToken == null) {
+        throw Exception('Failed to get valid authentication tokens');
+      }
+      
+      // Create fresh credentials
       final AuthCredential authCredential = GoogleAuthProvider.credential(
         idToken: googleSignInAuthentication.idToken,
         accessToken: googleSignInAuthentication.accessToken,
       );
-
-      // Signing in with credentials
-      UserCredential result = await auth.signInWithCredential(authCredential);
-      User? user = result.user;
-
-      // If user is not null
-      if (user != null) {
-        SharedPref sharedPref = SharedPref();
-        usr.User userSave = usr.User();
-
-        userSave.displayName = user.displayName;
-        userSave.email = user.email!;
-        userSave.uid =
-            uid; // Ensure `uid` and `deviceToken` are defined elsewhere
-        userSave.token = deviceToken;
-
-        await sharedPref.save("user", userSave);
-        await sharedPref.save("currentEmail", user.email);
-
-        is8Ads = true; // Assuming this is defined elsewhere
-
-        if (result.additionalUserInfo!.isNewUser) {
-          // New user flow
-          await _handleNewUser(result);
-        } else {
-          // Existing user flow
-          await _handleExistingUser(result, userSave);
+      
+      // Sign in with fresh credentials
+      result = await auth.signInWithCredential(authCredential);
+      user = result.user;
+      
+      if (user == null) {
+        throw Exception('User sign-in completed but user is null');
+      }
+      
+    } catch (e) {
+      print("Error during Google sign-in: $e");
+      
+      // Handle sign-out more gracefully in error case
+      try {
+        await FirebaseAuth.instance.signOut();
+        try {
+          await googleSignIn.signOut();
+        } catch (e) {
+          try {
+            await googleSignIn.disconnect();
+          } catch (e) {
+            print("Error during Google Sign-Out (can be ignored): $e");
+          }
+        }
+      } catch (e) {
+        print("Error during sign out (can be ignored): $e");
+      }
+      
+      // Check for specific error conditions
+      if (e.toString().contains('stale') || 
+          e.toString().contains('expired') ||
+          e.toString().contains('invalid-credential')) {
+        // Show user-friendly error message
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Authentication session expired. Please try signing in again."),
+              duration: Duration(seconds: 5),
+              action: SnackBarAction(
+                label: 'RETRY',
+                onPressed: () {
+                  // Retry the sign-in process
+                  signup(context);
+                },
+              ),
+            ),
+          );
+        }
+        return; // Exit the current sign-in attempt
+      } else {
+        // For other errors, show a generic error message
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Sign-in failed: ${e.toString()}"),
+              duration: Duration(seconds: 5),
+            ),
+          );
         }
       }
-    } else {
-      print("Google sign-in canceled.");
+      // If we reach here, the sign-in failed
+      return;
+    }
+
+    // If user is not null, proceed with post-sign-in flow
+    if (user != null && result != null) {
+      SharedPref sharedPref = SharedPref();
+      usr.User userSave = usr.User();
+
+      userSave.displayName = user.displayName;
+      userSave.email = user.email!;
+      userSave.uid = uid; // Ensure `uid` and `deviceToken` are defined elsewhere
+      userSave.token = deviceToken;
+
+      await sharedPref.save("user", userSave);
+      await sharedPref.save("currentEmail", user.email);
+
+      is8Ads = true; // Assuming this is defined elsewhere
+
+      if (result.additionalUserInfo!.isNewUser) {
+        // New user flow
+        await _handleNewUser(result);
+      } else {
+        // Existing user flow
+        await _handleExistingUser(result, userSave);
+      }
     }
   } catch (e) {
     // Handle any errors during the sign-in process
     print("Error during sign-up: $e");
-    // You can show a dialog or toast for better user experience
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text("Error occurred during sign-up: $e"),
     ));

@@ -285,7 +285,7 @@ class _VideoPlayerWidget1State extends State<VideoPlayerWidget1> {
                     child: SizedBox.expand(
                       child: FittedBox(
                         fit: BoxFit
-                            .cover, // Makes video behave like a cover image
+                            .fill, // Makes video behave like a cover image
                         child: SizedBox(
                           width: _videoPlayerController.value.size.width,
                           height: _videoPlayerController.value.size.height,

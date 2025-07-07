@@ -44,8 +44,7 @@ class _Kundali_DoshState extends State<Kundali_Dosh> {
         // });
       },
       style: ButtonStyle(
-          padding: WidgetStateProperty.all<EdgeInsetsGeometry?>(
-              const EdgeInsets.symmetric(horizontal: 100, vertical: 15)),
+     minimumSize: WidgetStatePropertyAll(Size(double.infinity, 48)),
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(60.0),

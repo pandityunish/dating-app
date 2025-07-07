@@ -40,7 +40,7 @@ class _ReligionState extends State<MStatus> {
       },
       style: ButtonStyle(
           padding: WidgetStateProperty.all<EdgeInsetsGeometry?>(
-              const EdgeInsets.symmetric(vertical: 15)),
+              const EdgeInsets.symmetric(vertical: 17)),
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(60.0),
@@ -78,9 +78,9 @@ class _ReligionState extends State<MStatus> {
                                 width: MediaQuery.of(context).size.width * 0.9,
                                 child: CustomRadioButton("Married", 1))
                             : Container(),
-                        // const SizedBox(
-                        //   height: 10,
-                        // ),
+                        userService.userdata["religion"] == "Muslim" ? const SizedBox(
+                          height: 10,
+                        ) : Container(),
                         SizedBox(
                             width: MediaQuery.of(context).size.width * 0.9,
                             child: CustomRadioButton("Unmarried", 2)),

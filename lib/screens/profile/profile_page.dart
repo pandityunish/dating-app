@@ -725,30 +725,30 @@ class _ProfilePageState extends State<ProfilePage>
   // }
 
   bool isExpanded = false;
-  connectivityCheck() async {
-    try {
-      final result = await InternetAddress.lookup('example.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        // ignore: avoid_print
-      }
-    } on SocketException catch (_) {
-      showDialog(
-          barrierDismissible: false,
-          context: context,
-          builder: (context) {
-            return const AlertDialog(
-              content: SnackBarContent(
-                error_text: "No Internet Connection",
-                appreciation: "",
-                icon: Icons.error,
-                sec: 2,
-              ),
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-            );
-          });
-    }
-  }
+  // connectivityCheck() async {
+  //   try {
+  //     final result = await InternetAddress.lookup('example.com');
+  //     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+  //       // ignore: avoid_print
+  //     }
+  //   } on SocketException catch (_) {
+  //     showDialog(
+  //         barrierDismissible: false,
+  //         context: context,
+  //         builder: (context) {
+  //           return const AlertDialog(
+  //             content: SnackBarContent(
+  //               error_text: "No Internet Connection",
+  //               appreciation: "",
+  //               icon: Icons.error,
+  //               sec: 2,
+  //             ),
+  //             backgroundColor: Colors.transparent,
+  //             elevation: 0,
+  //           );
+  //         });
+  //   }
+  // }
 
   int numindex = 0;
   List<Widget> _createImgList() {

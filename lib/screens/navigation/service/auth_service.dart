@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -322,7 +323,7 @@ class UserService extends GetxController {
       http.Response res = await http.post(Uri.parse(createincompleteuserurl),
           headers: {'Content-Type': 'Application/json'},
           body: userModel.toJson());
-      print(res.body);
+      log(res.body);
       if (res.statusCode == 200) {
       } else {
         print("Something went wrong");

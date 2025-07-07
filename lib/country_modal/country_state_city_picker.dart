@@ -53,11 +53,16 @@ class _SelectStateDataState extends State<SelectStateData> {
           state: []));
     }
     for (var i = 0; i < selectedCity!.length; i++) {
-      cityname.add(selectedCity![i]["name"]);
+      selectedCityList.add(selectedCity![i]["name"]);
     }
     for (var i = 0; i < selectedState!.length; i++) {
-      statename.add(
-        selectedState![i]["name"],
+      selectedStateList.add(
+        StatusModel.State(
+          id: i,
+          name: selectedState![i]["name"],
+          countryId: 0,
+          city: []
+        )
       );
     }
     setState(() {});
@@ -68,6 +73,9 @@ class _SelectStateDataState extends State<SelectStateData> {
     setdata();
     addlocation();
     getCounty();
+   getState();
+   getCity();
+
     super.initState();
   }
 
@@ -183,7 +191,7 @@ class _SelectStateDataState extends State<SelectStateData> {
   final state = TextEditingController();
   final city = TextEditingController();
   List<StatusModel.StatusModel> countryDataList = [];
-  List<StatusModel.State>? stateDataList = [];
+  List<StatusModel.State> stateDataList = [];
   List<StatusModel.City> cityDataList = [];
 
   countryData(List<StatusModel.StatusModel> data, String val) {
@@ -247,8 +255,8 @@ class _SelectStateDataState extends State<SelectStateData> {
   // List<Prediction> _predictions = [];
   // List<Prediction> _citypredictions = [];
   // final _searchController = TextEditingController();
-  List<String> statename = [];
-  List<String> cityname = [];
+  // List<String> statename = [];
+  // List<String> cityname = [];
 
   // void onselectstate(Prediction prediction) async {
   //   statename.add(prediction.structuredFormatting!.mainText);
@@ -312,8 +320,8 @@ class _SelectStateDataState extends State<SelectStateData> {
         resizeToAvoidBottomInset: false,
         appBar: CustomAppBar(title: "Location", iconImage: 'images/icons/location.png',onBackButtonPressed: () {
             if (selectedCountryList.isEmpty &&
-                  statename.isEmpty &&
-                  cityname.isEmpty) {
+                  selectedStateList.isEmpty &&
+                  selectedStateList.isEmpty) {
                 homeservice.saveprefdata.value.statelocation = [];
                 homeservice.saveprefdata.value.citylocation = [];
                 homeservice.saveprefdata.value.location = [];
@@ -322,23 +330,23 @@ class _SelectStateDataState extends State<SelectStateData> {
                 for (var element in selectedCountryList) {
                   selectedLocation[0].add(element.name.toString());
                 }
-                for (var element in statename) {
-                  selectedLocation[1].add(element.toString());
+                for (var element in selectedStateList ) {
+                  selectedLocation[1].add(element.name.toString());
                 }
-                for (var element in cityname) {
-                  selectedLocation[2].add(element);
+                for (var element in selectedCityList) {
+                  selectedLocation[2].add(element.name.toString());
                 }
                 selectedCity!.clear();
                 selectedCounty!.clear();
                 selectedState!.clear();
-                for (var i = 0; i < cityname.length; i++) {
-                  selectedCity!.add({"name": cityname[i]});
+                for (var i = 0; i < selectedCityList.length; i++) {
+                  selectedCity!.add({"name": selectedCityList[i].name});
                 }
                 for (var i = 0; i < selectedCountryList.length; i++) {
                   selectedCounty!.add({"name": selectedCountryList[i].name});
                 }
-                for (var i = 0; i < statename.length; i++) {
-                  selectedState!.add({"name": statename[i]});
+                for (var i = 0; i < selectedStateList.length; i++) {
+                  selectedState!.add({"name": selectedStateList[i].name});
                 }
                 setState(() {});
               }
@@ -523,14 +531,14 @@ class _SelectStateDataState extends State<SelectStateData> {
                               scrollDirection: Axis.horizontal,
                               // child: ListView(
                               children: [
-                                ...List<Widget>.generate(
-                                    statename.length,
+                                ...List<Widget>.generate (
+                                    selectedStateList.length,
                                     (index) => GestureDetector(
                                           onTap: () {
                                             setState(() {
-                                              statename.removeWhere(
+                                              selectedStateList.removeWhere(
                                                   (element) =>
-                                                      statename[index] ==
+                                                      selectedStateList[index] ==
                                                       element);
                                               // kkk
                                             });
@@ -555,7 +563,7 @@ class _SelectStateDataState extends State<SelectStateData> {
                                                         228)),
                                             child: Row(
                                               children: [
-                                                Text(statename[index]),
+                                                Text(selectedStateList[index].name!),
                                                 Icon(
                                                   size: 15,
                                                   CupertinoIcons
@@ -582,7 +590,11 @@ class _SelectStateDataState extends State<SelectStateData> {
                                     // focusNode: countryfocus,
                                     controller: stateController,
                                     onChanged: (value) {
-                                      // onSearchChanged(value);
+                                      // Call the stateData function to filter states
+                                      stateData(_states, value);
+                                      setState(() {
+                                        statefocus = true;
+                                      });
                                     },
                                   ),
                                 ),
@@ -601,7 +613,7 @@ class _SelectStateDataState extends State<SelectStateData> {
                               MediaQuery.of(context).size.height * 0.22,
                           child: SingleChildScrollView(
                             child: Column(
-                                // children: stateSuggetion1(_predictions),
+                                children: stateSuggetion(stateDataList),
                                 ),
                           ),
                         )
@@ -626,13 +638,13 @@ class _SelectStateDataState extends State<SelectStateData> {
                               scrollDirection: Axis.horizontal,
                               children: [
                                 ...List<Widget>.generate(
-                                    cityname.length,
+                                    selectedCityList.length,
                                     (index) => GestureDetector(
                                           onTap: () {
                                             setState(() {
-                                              cityname.removeWhere(
+                                              selectedCityList.removeWhere(
                                                   (element) =>
-                                                      cityname[index] ==
+                                                      selectedCityList[index] ==
                                                       element);
                                             });
                                           },
@@ -656,7 +668,7 @@ class _SelectStateDataState extends State<SelectStateData> {
                                                         228)),
                                             child: Row(
                                               children: [
-                                                Text(cityname[index]),
+                                                Text(selectedCityList[index].name!),
                                                 Icon(
                                                   size: 15,
                                                   CupertinoIcons
@@ -683,7 +695,11 @@ class _SelectStateDataState extends State<SelectStateData> {
                                     // focusNode: countryfocus,
                                     controller: cityController,
                                     onChanged: (value) {
-                                      // cityonSearchChanged(value);
+                                      // Call the cityData function to filter cities
+                                      cityData(_cities, value);
+                                      setState(() {
+                                        cityfocus = true;
+                                      });
                                     },
                                   ),
                                 ),
@@ -704,7 +720,7 @@ class _SelectStateDataState extends State<SelectStateData> {
                               MediaQuery.of(context).size.height * 0.15,
                           child: SingleChildScrollView(
                             child: Column(
-                                // children: citySuggetion1(_citypredictions),
+                                children: citySuggetion(cityDataList),
                                 ),
                           ),
                         )
@@ -762,8 +778,8 @@ class _SelectStateDataState extends State<SelectStateData> {
                       ),
                       onPressed: () {
                         if (selectedCountryList.isEmpty &&
-                            statename.isEmpty &&
-                            cityname.isEmpty) {
+                            selectedStateList.isEmpty &&
+                            selectedCityList.isEmpty) {
                           homeservice.saveprefdata.value.statelocation =
                               [];
                           homeservice.saveprefdata.value.citylocation =
@@ -775,11 +791,11 @@ class _SelectStateDataState extends State<SelectStateData> {
                             selectedLocation[0]
                                 .add(element.name.toString());
                           }
-                          for (var element in statename) {
-                            selectedLocation[1].add(element.toString());
+                          for (var element in selectedStateList) {
+                            selectedLocation[1].add(element.name.toString());
                           }
-                          for (var element in cityname) {
-                            selectedLocation[2].add(element);
+                          for (var element in selectedCityList) {
+                            selectedLocation[2].add(element.name.toString());
                           }
                           homeservice.saveprefdata.value.citylocation
                               .clear();
@@ -790,8 +806,8 @@ class _SelectStateDataState extends State<SelectStateData> {
                           selectedCity!.clear();
                           selectedCounty!.clear();
                           selectedState!.clear();
-                          for (var i = 0; i < cityname.length; i++) {
-                            selectedCity!.add({"name": cityname[i]});
+                          for (var i = 0; i < selectedCityList.length; i++) {
+                            selectedCity!.add({"name": selectedCityList[i].name});
                           }
                           for (var i = 0;
                               i < selectedCountryList.length;
@@ -799,8 +815,8 @@ class _SelectStateDataState extends State<SelectStateData> {
                             selectedCounty!.add(
                                 {"name": selectedCountryList[i].name});
                           }
-                          for (var i = 0; i < statename.length; i++) {
-                            selectedState!.add({"name": statename[i]});
+                          for (var i = 0; i < selectedStateList.length; i++) {
+                            selectedState!.add({"name": selectedStateList[i].name});
                           }
                           setState(() {});
                         }
@@ -822,6 +838,7 @@ class _SelectStateDataState extends State<SelectStateData> {
 
   void removeState() {
     _states = [];
+    selectedStateList = [];
     stateDataList = [];
     getState().then((value) {
       var i = selectedStateList.length - 1;
@@ -840,6 +857,7 @@ class _SelectStateDataState extends State<SelectStateData> {
 
   void removeCity() {
     _cities = [];
+    selectedCityList = [];
     cityDataList = [];
     // getState();
 
@@ -894,6 +912,7 @@ class _SelectStateDataState extends State<SelectStateData> {
               } else {
                 selectedCountryList.add(country);
                 _states = [];
+                selectedStateList = [];
                 stateDataList = [];
                 getState();
                 countryfocus = false;
@@ -950,6 +969,7 @@ class _SelectStateDataState extends State<SelectStateData> {
               selectedStateList.add(state);
               statefocus = false;
               stateController.clear();
+              selectedCityList = [];
               cityDataList = [];
               _cities = [];
               getCity();
@@ -969,6 +989,51 @@ class _SelectStateDataState extends State<SelectStateData> {
     return statetemp;
   }
 
+  List<Widget> citySuggetion(List<StatusModel.City> cityList) {
+    List<Widget> citytemp = [];
+    for (StatusModel.City city in cityList) {
+      citytemp.add(Container(
+        margin: const EdgeInsets.symmetric(
+          horizontal: 10,
+        ),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(
+                color: const Color.fromARGB(255, 225, 223, 223), width: 1)),
+        child: ListTile(
+          iconColor: Colors.black,
+          leading: Icon(
+            Icons.location_on_outlined,
+            color: mainColor,
+          ),
+          title: Text(city.name!,
+              style: TextStyle(
+                color: mainColor,
+              )),
+          onTap: () {
+            if (selectedCityList.contains(city)) {
+              selectedCityList.remove(city);
+              setState(() {});
+            } else {
+              selectedCityList.add(city);
+              cityfocus = false;
+              cityController.clear();
+              setState(() {});
+            }
+          },
+          trailing: selectedCityList.map((e) => e.id).contains(city.id)
+              ? Icon(
+                  CupertinoIcons.check_mark,
+                  color: mainColor,
+                )
+              : null,
+        ),
+      ));
+    }
+    return citytemp;
+  }
+  
   // List<Widget> stateSuggetion1(List<Prediction> stateList) {
   //   List<Widget> statetemp = [];
   //   for (Prediction state in stateList) {

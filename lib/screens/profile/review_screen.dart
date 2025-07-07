@@ -433,7 +433,7 @@ class _MeintenanceScreenState extends State<ReviewScreen> {
                     padding: const EdgeInsets.all(15.0),
                     child: Center(
                       child: SizedBox(
-                        height: 400,
+                        height: 320,
                         child: Material(
                             elevation: 10,
                             borderRadius:
@@ -447,12 +447,12 @@ class _MeintenanceScreenState extends State<ReviewScreen> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const SizedBox(height: 20),
+                                    const SizedBox(height: 10),
                                     const Text(
                                       'Please Rate Us',
-                                      style: TextStyle(fontSize: 25),
+                                      style: TextStyle(fontSize: 22),
                                     ),
-                                    const SizedBox(height: 20),
+                                    const SizedBox(height: 10),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
@@ -464,15 +464,13 @@ class _MeintenanceScreenState extends State<ReviewScreen> {
                                         buildStar(5),
                                       ],
                                     ),
-                                    const SizedBox(
-                                      height: 30,
-                                    ),
-                                    const SizedBox(height: 20),
-                                    _rating == 5
+                                    const SizedBox(height: 10),
+                                    _rating == 0 || _rating > 4
                                         ? const Center()
                                         : Container(
                                             margin: const EdgeInsets.only(
                                                 left: 15, right: 15),
+                                            height: 120, // Fixed height
                                             child: TextField(
                                               controller: controller,
                                               minLines: 3,
@@ -496,7 +494,7 @@ class _MeintenanceScreenState extends State<ReviewScreen> {
                                             ),
                                           ),
                                     const SizedBox(
-                                      height: 30,
+                                      height: 15,
                                     ),
                                     Align(
                                       alignment: Alignment.centerRight,
@@ -586,7 +584,7 @@ class _MeintenanceScreenState extends State<ReviewScreen> {
                                                         appreciation: "",
                                                         error_text:
                                                             "Feedback Submit Successfully",
-                                                        icon: Icons.check,
+                                                        icon: Icons.check_circle_rounded,
                                                         sec: 2,
                                                       ),
                                                       backgroundColor:

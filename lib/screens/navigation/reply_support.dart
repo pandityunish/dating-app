@@ -440,122 +440,127 @@ class _HelpSupportState extends State<ReplySupport> {
               // ),
               data1 == null
                   ? const Center()
-                  : Center(
-                      child: SizedBox(
-                        height: 350,
-                        child: Material(
-                            elevation: 10,
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(12)),
-                            child: Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 20),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                //crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  const Text(
-                                    "Help & Support",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 20),
-                                  ),
-                                  const Divider(
-                                    thickness: 1,
-                                  ),
-                                  const SizedBox(height: 5),
-                                  const Text(
-                                    "Enquiry Form",
-                                    style: TextStyle(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  const SizedBox(height: 10),
-                                  SingleChildScrollView(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    child: Container(
-                                      alignment: Alignment.topLeft,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(30.0),
-                                          color: Colors.white,
-                                          boxShadow: const [
-                                            BoxShadow(blurRadius: 0.05)
-                                          ]),
-                                      // margin: EdgeInsets.only(
-                                      //   left: 5,
-                                      //   right: 5,
-                                      // ),
-                                      padding: const EdgeInsets.only(
-                                          left: 7, right: 5, top: 7, bottom: 7),
-                                      child: TextField(
-                                        maxLength: 300,
-                                        // enabled: !messageSend,
-                                        // enabled: true,
-                                        minLines: 3,
-                                        maxLines: 5,
-                                        // scrollPhysics:AlwaysScrollableScrollPhysics(),
-                                        controller: descController,
-                                        scrollController: ScrollController(),
-                                        decoration: const InputDecoration(
-                                          border: InputBorder.none,
-                                          // border: Border.all(
-                                          //   color: CupertinoColors.inactiveGray,
-                                          // ),
-                                          // borderRadius: BorderRadius.circular(30),
-                                          hintText: "Enter your Message",
-                                        ),
-                                        textInputAction: TextInputAction.next,
-                                        onChanged: (name) => {
-                                          /*setState(() {
-                                        this.User_Name = name;
-                                      })*/
-                                        },
-                                        //onSubmitted: (User_Name) => print('Submitted $User_Name'),
-                                      ),
+                  : Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                        child: SizedBox(
+                          height: 350,
+                          child: Material(
+                              elevation: 10,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(12)),
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  //crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(
+                                      height: 10,
                                     ),
-                                  ),
-                                  const SizedBox(height: 25),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      sendQuery();
-                                    },
-                                    style: ButtonStyle(
-                                        padding: WidgetStateProperty.all<EdgeInsetsGeometry?>(
-                                            const EdgeInsets.symmetric(
-                                                horizontal: 65, vertical: 20)),
-                                        shape: WidgetStateProperty.all<
-                                                RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(60.0),
-                                                side: const BorderSide(
-                                                    color: Colors.white))),
-                                        backgroundColor:
-                                            WidgetStateProperty.all<Color>(
-                                                Colors.white)),
-                                    child: const Text(
-                                      'Send Message',
+                                    const Text(
+                                      "Help & Support",
                                       style: TextStyle(
-                                        fontFamily: 'Serif',
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 20,
-                                        color: Colors.black,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 20),
+                                    ),
+                                    const Divider(
+                                      thickness: 1,
+                                    ),
+                                    const SizedBox(height: 5),
+                                    const Text(
+                                      "Enquiry Form",
+                                      style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    const SizedBox(height: 10),
+                                    SingleChildScrollView(
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      child: Container(
+                                        height: 150,
+                                        alignment: Alignment.topLeft,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(15.0),
+                                            color: Colors.white,
+                                            boxShadow: const [
+                                              BoxShadow(blurRadius: 0.05)
+                                            ]),
+                                        // margin: EdgeInsets.only(
+                                        //   left: 5,
+                                        //   right: 5,
+                                        // ),
+                                        padding: const EdgeInsets.only(
+                                            left: 7, right: 5, top: 2, bottom: 2),
+                                        child: TextField(
+                                          maxLength: 300,
+                                          // enabled: !messageSend,
+                                          // enabled: true,
+                                          minLines: 5,
+                                          maxLines: 10,
+                                          // scrollPhysics:AlwaysScrollableScrollPhysics(),
+                                          controller: descController,
+                                          scrollController: ScrollController(),
+                                          cursorColor: mainColor,
+                                          decoration: const InputDecoration(
+                                            border: InputBorder.none,
+                                            // border: Border.all(
+                                            //   color: CupertinoColors.inactiveGray,
+                                            // ),
+                                            // borderRadius: BorderRadius.circular(30),
+                                            hintText: "Enter Your Query Here",
+                                          ),
+                                          textInputAction: TextInputAction.next,
+                                          onChanged: (name) => {
+                                            /*setState(() {
+                                          this.User_Name = name;
+                                        })*/
+                                          },
+                                          //onSubmitted: (User_Name) => print('Submitted $User_Name'),
+                                        ),
                                       ),
                                     ),
-                                  )
-                                ],
-                              ),
-                            )),
+                                    const SizedBox(height: 25),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        sendQuery();
+                                      },
+                                      style: ButtonStyle(
+                                          padding: WidgetStateProperty.all<EdgeInsetsGeometry?>(
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 65, vertical: 20)),
+                                          shape: WidgetStateProperty.all<
+                                                  RoundedRectangleBorder>(
+                                              RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(60.0),
+                                                  side: const BorderSide(
+                                                      color: Colors.white))),
+                                          backgroundColor:
+                                              WidgetStateProperty.all<Color>(
+                                                  Colors.white)),
+                                      child: const Text(
+                                        'Send Message',
+                                        style: TextStyle(
+                                          fontFamily: 'Serif',
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 20,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )),
+                        ),
                       ),
-                    ),
+                  ),
             ],
           )),
     );

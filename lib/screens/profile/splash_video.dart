@@ -433,20 +433,22 @@ class _SplashVideoState extends State<SplashVideo> {
                       });
                     }
                   }
-                } else if (sendlinks.contains("To Ask Rating")) {
-                  Get.offAll(const ReviewScreen());
-                  if (userratingads.isNotEmpty) {
-                    showadsbar(context, userratingads, () {
-                      Get.back();
-                    });
-                  } else {
-                    if (ratingads.isNotEmpty) {
-                      showadsbar(context, ratingads, () {
-                        Get.back();
-                      });
-                    }
-                  }
-                } else if (sendlinks.contains("To Save Profession Manually")) {
+                } 
+                // else if (sendlinks.contains("To Ask Rating")) {
+                //   Get.offAll(const ReviewScreen());
+                //   if (userratingads.isNotEmpty) {
+                //     showadsbar(context, userratingads, () {
+                //       Get.back();
+                //     });
+                //   } else {
+                //     if (ratingads.isNotEmpty) {
+                //       showadsbar(context, ratingads, () {
+                //         Get.back();
+                //       });
+                //     }
+                //   }
+                // }
+                else if (sendlinks.contains("To Save Profession Manually")) {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(

@@ -109,6 +109,7 @@ class _DeleteConfirmState extends State<DeleteConfirm> {
                           ),
                         ),
                          Container(
+                          height: Get.height*0.2,
                       margin: EdgeInsets.only(left: 15, right: 15),
                       child: TextField(
                         controller: _deleteReason,

@@ -36,6 +36,27 @@ class HomeService extends GetxController {
       professionList: [],
       incomeList: [],
       location: []));
+      void clearSavePrefData() {
+        saveprefdata.value = NewSavePrefModel(
+      email: "",
+      ageList: [],
+      citylocation: [],
+      statelocation: [],
+      id: "",
+      v: 0,
+      religionList: [],
+      kundaliDoshList: [],
+      maritalStatusList: [],
+      dietList: [],
+      drinkList: [],
+      smokeList: [],
+      disabilityList: [],
+      heightList: [],
+      educationList: [],
+      professionList: [],
+      incomeList: [],
+      location: []);
+      }
   Future<List<NewUserModel>> getalluserdata(
       {required String gender,
       required String email,

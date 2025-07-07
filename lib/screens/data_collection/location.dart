@@ -10,6 +10,8 @@ import 'package:geocoding/geocoding.dart' as location3;
 
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:ristey/common/custom_button.dart';
+import 'package:ristey/common/widgets/custom_button.dart';
 import 'package:ristey/global_vars.dart';
 import 'package:ristey/models/location_modal.dart';
 import 'package:ristey/models/user_modal.dart';
@@ -311,81 +313,46 @@ class _LocationState extends State<Location1> {
                   // SizedBox(
                   //   height: MediaQuery.of(context).size.height * 0.3,
                   // ),
-                  SizedBox(
-                    // margin: EdgeInsets.only(left: 15),
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    child: ElevatedButton(
-                        style: ButtonStyle(
-                            shadowColor: WidgetStateColor.resolveWith(
-                                (states) => Colors.black),
-                            padding:
-                                WidgetStateProperty.all<EdgeInsetsGeometry?>(
-                                    const EdgeInsets.symmetric(vertical: 15)),
-                            shape:
-                                WidgetStateProperty.all<RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(60.0),
-                                        side: BorderSide(
-                                          color: (colorDone2 == false)
-                                              ? Colors.white
-                                              : mainColor,
-                                        ))),
-                            backgroundColor:
-                                WidgetStateProperty.all<Color>(Colors.white)),
-                        onPressed: () {
-                          print("$location hello");
-                          print(lat);
-                          print(lng);
-                          if ((lng != null && lng != "")) {
-                            setState(() {
-                              colorDone2 = true;
-                            });
-                            print(state);
-                            print(country);
 
-                            Navigator.push(
-                                context,
-                                PageRouteBuilder(
-                                    transitionDuration:
-                                        const Duration(milliseconds: 0),
-                                    reverseTransitionDuration:
-                                        const Duration(milliseconds: 0),
-                                    pageBuilder: (_, __, ___) =>
-                                        const AboutMe()));
-                          } else {
-                            showDialog(
-                                barrierDismissible: false,
-                                context: context,
-                                builder: (context) {
-                                  return const AlertDialog(
-                                    content: SnackBarContent(
-                                      error_text:
-                                          "Please Provide Your \n Living Address",
-                                      appreciation: "",
-                                      icon: Icons.error,
-                                      sec: 2,
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    elevation: 0,
-                                  );
-                                });
-                          }
-                        },
-                        child: Text(
-                          "Continue",
-                          style: (colorDone2 == false)
-                              ? const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontFamily: 'Serif',
-                                  fontWeight: FontWeight.w700)
-                              : TextStyle(
-                                  color: mainColor,
-                                  fontSize: 20,
-                                  fontFamily: 'Serif',
-                                  fontWeight: FontWeight.w700),
-                        )),
+                  CustomButton(
+                    text: "Continue",
+                    onPressed: () {
+                      if ((lng != null && lng != "")) {
+                        setState(() {
+                          colorDone2 = true;
+                        });
+                        print(state);
+                        print(country);
+
+                        Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                                transitionDuration:
+                                    const Duration(milliseconds: 0),
+                                reverseTransitionDuration:
+                                    const Duration(milliseconds: 0),
+                                pageBuilder: (_, __, ___) => const AboutMe()));
+                      } else {
+                        showDialog(
+                            barrierDismissible: false,
+                            context: context,
+                            builder: (context) {
+                              return const AlertDialog(
+                                content: SnackBarContent(
+                                  error_text:
+                                      "Please Provide Your \n Living Address",
+                                  appreciation: "",
+                                  icon: Icons.error,
+                                  sec: 2,
+                                ),
+                                backgroundColor: Colors.transparent,
+                                elevation: 0,
+                              );
+                            });
+                      }
+                    },
+                    mainColor: mainColor,
+                    colorDone: colorDone2,
                   ),
                 ]),
           ),

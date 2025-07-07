@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ristey/screens/navigation/service/support_service.dart';
+import 'package:ristey/screens/profile/profile_scroll.dart';
 import 'package:vibration/vibration.dart';
 
 import 'package:ristey/chat/colors.dart';
@@ -104,7 +105,13 @@ class _IncomingCallScreenState extends State<IncomingAudioClipScreen> {
                          SupprotService().deletesendlink(
                                       email: userSave.email!,
                                       value: "Audio Clip");
-                      Get.back();
+          
+                           Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MainAppContainer(notiPage: false),
+                      ),
+                      (route) => false);
                     },
                     child: Container(
                       height: 60,

@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -23,6 +23,7 @@ import 'package:ristey/screens/navigation/service/home_service.dart';
 import 'package:ristey/screens/profile/splash_video.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest.dart';
+import 'package:ristey/theme_config.dart';
 
 import './global_vars.dart' as glb;
 
@@ -31,6 +32,20 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
+
+
+  // Initialize Firebase App Check
+  await FirebaseAppCheck.instance.activate(
+    // Use debug provider for development
+
+    // webRecaptchaSiteKey: 'recaptcha-v3-site-key',
+    // For Android debug builds, use debug provider
+    androidProvider: AndroidProvider.debug,
+    
+    // For iOS debug builds, use debug provider
+    appleProvider: AppleProvider.debug,
+  );
+  
   initializeTimeZones();
 
   final NotificationData notificationData = NotificationData();
@@ -101,10 +116,7 @@ class AuthenticatedApp extends StatelessWidget {
             name: '/audio-incoming-call',
             page: () => IncomingAudioCallScreen()),
       ],
-      theme: ThemeData(
-          useMaterial3: false,
-          scaffoldBackgroundColor: Colors.white,
-          appBarTheme: AppBarTheme(color: Colors.white, elevation: 0)),
+      theme: getAppTheme(),
       navigatorKey: NavigationService.navigatorKey,
       debugShowCheckedModeBanner: false,
       home: const SplashVideo(),
@@ -245,10 +257,7 @@ class _MainAppState extends State<MainApp> {
             name: '/audio-incoming-call',
             page: () => IncomingAudioCallScreen()),
       ],
-      theme: ThemeData(
-          useMaterial3: false,
-          scaffoldBackgroundColor: Colors.white,
-          appBarTheme: AppBarTheme(color: Colors.white, elevation: 0)),
+      theme: getAppTheme(),
       title: 'Couple Mate',
       home: const SplashVideo(),
       debugShowCheckedModeBanner: false,

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:ristey/common/widgets/custom_button.dart';
 import 'dart:convert';
 
 import 'package:age_calculator/age_calculator.dart';
@@ -133,7 +134,7 @@ List<String> list5 = <String>[
 ];
 
 List<String> minutes = <String>[
-  'Minute',
+  // 'Minute',
   "00",
   "01",
   "02",
@@ -194,10 +195,9 @@ List<String> minutes = <String>[
   "58",
   "59"
 ];
-String selectedhours = "Hour";
-String selectedminutes = "Minute";
+String? selectedhours;
+String? selectedminutes;
 List<String> hours = <String>[
-  'Hour',
   '01',
   '02',
   '03',
@@ -418,6 +418,7 @@ class _LetsStartState extends State<LetsStart> {
   void dispose() {
     _focusNode1.dispose();
     _focusNode2.dispose();
+    _focusNode3.dispose();
     _scrollController.dispose();
     super.dispose();
   }
@@ -622,7 +623,7 @@ class _LetsStartState extends State<LetsStart> {
               );
             });
       });
-    } else if (selectedhours == "Hours") {
+    } else if (selectedhours == null) {
       setState(() {
         error = "";
         showDialog(
@@ -641,7 +642,7 @@ class _LetsStartState extends State<LetsStart> {
               );
             });
       });
-    } else if (selectedminutes == "Minutes") {
+    } else if (selectedminutes == "Minutes" || selectedminutes == null) {
       setState(() {
         error = "";
         showDialog(
@@ -843,7 +844,7 @@ class _LetsStartState extends State<LetsStart> {
                         CustomRoundedInputField(
                           controller: surname,
                           focusNode: _focusNode2,
-                          placeholder: "Enter Name",
+                          placeholder: "Enter Surname",
                           placeholderColor: newtextColor,
                           activeBorderColor: mainColor,
                           inactiveBorderColor: Colors.white,
@@ -869,7 +870,9 @@ class _LetsStartState extends State<LetsStart> {
                             color: Colors.white,
                             child: Container(
                               child: IntlPhoneField(
+                                
                                 focusNode: _focusNode,
+
                                 flagsButtonPadding:
                                     const EdgeInsets.only(top: 20, bottom: 0),
                                 controller: Phone,
@@ -881,6 +884,7 @@ class _LetsStartState extends State<LetsStart> {
                                 decoration: InputDecoration(
                                   focusColor: mainColor,
                                   hoverColor: mainColor,
+                                
 
                                   //decoration for Input Field
                                   contentPadding: const EdgeInsets.only(
@@ -891,6 +895,8 @@ class _LetsStartState extends State<LetsStart> {
                                   // labelText: 'Phone Number',
 
                                   hintText: "Enter Contact Number",
+                                  iconColor: mainColor,
+                                  prefixIconColor: mainColor,
                                   hintStyle: TextStyle(color: newtextColor),
                                   border: InputBorder.none,
                                   errorStyle: const TextStyle(
@@ -927,7 +933,7 @@ class _LetsStartState extends State<LetsStart> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               SizedBox(
-                                height: 46,
+                                height: 48,
                                 width: 150,
                                 child: ElevatedButton(
                                     onPressed: () {
@@ -969,7 +975,7 @@ class _LetsStartState extends State<LetsStart> {
                               ),
                               SizedBox(
                                 width: 150,
-                                height: 46,
+                                height: 48,
                                 child: ElevatedButton(
                                     onPressed: () {
                                       _focusNode.unfocus();
@@ -1071,22 +1077,32 @@ class _LetsStartState extends State<LetsStart> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30)),
                               child: SizedBox(
-                                height: 46,
+                                height: 48,
                                 width: MediaQuery.of(context).size.width * 0.29,
                                 child: Center(
                                   child: DropdownButton<String>(
-                                    alignment: AlignmentDirectional.center,
                                     underline: Container(
                                       color: Colors.white,
                                     ),
                                     value: selectedhours,
-                                    iconEnabledColor: newtextColor,
+                                    alignment: Alignment.center,
+
+                                    iconEnabledColor: selectedhours != null ? Colors.black : newtextColor,
+                                    isExpanded: true,
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 12),
+                                    hint: Text(
+                                      "Hour",
+                                      style: TextStyle(color: newtextColor),
+                                    ),
                                     items: hours.map((value) {
                                       return DropdownMenuItem<String>(
                                         value: value,
+                                        alignment: Alignment.center,
                                         child: Text(
                                           value,
-                                          style: TextStyle(color: newtextColor),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(color: selectedhours == value ? Colors.black : newtextColor),
                                         ),
                                       );
                                     }).toList(),
@@ -1106,22 +1122,31 @@ class _LetsStartState extends State<LetsStart> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30)),
                               child: SizedBox(
-                                height: 46,
+                                height: 48,
                                 width: MediaQuery.of(context).size.width * 0.29,
                                 child: Center(
                                   child: DropdownButton<String>(
-                                    alignment: AlignmentDirectional.center,
                                     underline: Container(
                                       color: Colors.white,
                                     ),
                                     value: selectedminutes,
-                                    iconEnabledColor: newtextColor,
+                                    iconEnabledColor: selectedminutes != null ? Colors.black : newtextColor,
+                                    isExpanded: true,
+                                    alignment: Alignment.center,
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 12),
+                                    hint: Text(
+                                      "Minute",
+                                      style: TextStyle(color: newtextColor),
+                                    ),
                                     items: minutes.map((value) {
                                       return DropdownMenuItem<String>(
                                         value: value,
+                                        alignment: Alignment.center,
                                         child: Text(value,
+                                            textAlign: TextAlign.center,
                                             style:
-                                                TextStyle(color: newtextColor)),
+                                                TextStyle(color: selectedminutes == value ? Colors.black : newtextColor)),
                                       );
                                     }).toList(),
                                     onChanged: (newValue) {
@@ -1140,22 +1165,27 @@ class _LetsStartState extends State<LetsStart> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30)),
                               child: SizedBox(
-                                height: 46,
+                                height: 48,
                                 width: MediaQuery.of(context).size.width * 0.29,
                                 child: Center(
                                   child: DropdownButton<String>(
-                                    alignment: AlignmentDirectional.center,
                                     underline: Container(
                                       color: Colors.white,
                                     ),
                                     value: selectedampm,
-                                    iconEnabledColor: newtextColor,
+                                    iconEnabledColor: Colors.black,
+                                    isExpanded: true,
+                                    alignment: Alignment.center,
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 12),
                                     items: ampm.map((value) {
                                       return DropdownMenuItem<String>(
                                         value: value,
+                                        alignment: Alignment.center,
                                         child: Text(value,
+                                            textAlign: TextAlign.center,
                                             style:
-                                                TextStyle(color: newtextColor)),
+                                                TextStyle(color: selectedampm == value ? Colors.black : newtextColor)),
                                       );
                                     }).toList(),
                                     onChanged: (newValue) {
@@ -1172,39 +1202,70 @@ class _LetsStartState extends State<LetsStart> {
                         ),
 
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 3),
-                          child: Card(
-                            elevation: 4,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                            child: TextFormField(
-                              controller: birthPlaceController,
-                              textInputAction: TextInputAction.next,
-                              keyboardType: TextInputType.name,
-                              onChanged: (value) {
-                                _fileterlocation(value);
-                                _scrollController.animateTo(
-                                  _scrollController.position.maxScrollExtent,
-                                  duration: const Duration(seconds: 1),
-                                  curve: Curves.easeOut,
-                                );
-                              },
-                              onTap: () {
-                                _scrollController.animateTo(
-                                  _scrollController.position.maxScrollExtent,
-                                  duration: const Duration(seconds: 1),
-                                  curve: Curves.easeOut,
-                                );
-                              },
-                              focusNode: _focusNode3,
-                              decoration: InputDecoration(
-                                  hintText: "Enter Place of Birth",
-                                  hintStyle: TextStyle(color: newtextColor),
-                                  border: InputBorder.none,
-                                  contentPadding: EdgeInsets.all(10)),
-                            ),
+                          padding: const EdgeInsets.symmetric(vertical: 3),
+                          child: CustomRoundedInputField(
+                            controller: birthPlaceController,
+                            focusNode: _focusNode3,
+                            placeholder: "Enter Place of Birth",
+                            placeholderColor: newtextColor,
+                            activeBorderColor: mainColor,
+                            inactiveBorderColor: Colors.white,
+                            length: 12,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp("[a-zA-Z]")),
+                            ],
+                            onChanged: (value) {
+                              _fileterlocation(value);
+                              _scrollController.animateTo(
+                                _scrollController.position.maxScrollExtent,
+                                duration: const Duration(seconds: 1),
+                                curve: Curves.easeOut,
+                              );
+                            },
                           ),
+                          //  Card(
+                          //   elevation: 4,
+                          //   shape: RoundedRectangleBorder(
+                          //       borderRadius: BorderRadius.circular(30)),
+                          //   child: SizedBox(
+                          //     height: 50,
+                          //     child: CupertinoTextField(
+                          //       cursorColor: mainColor,
+                          //       cursorWidth: 2,
+
+                          //       controller: birthPlaceController,
+                          //       textInputAction: TextInputAction.next,
+                          //       keyboardType: TextInputType.name,
+                          //       placeholder: "Enter Place of Birth",
+                          //       focusNode: _focusNode3,
+                          //       onChanged: (value) {
+                          //         _fileterlocation(value);
+                          //         _scrollController.animateTo(
+                          //           _scrollController.position.maxScrollExtent,
+                          //           duration: const Duration(seconds: 1),
+                          //           curve: Curves.easeOut,
+                          //         );
+                          //       },
+                          //          decoration: BoxDecoration(
+                          //           border: Border.all(
+                          //             color: _focusNode3.hasFocus
+                          //                 ? mainColor
+                          //                 : Colors.white,
+                          //           ),
+                          //           borderRadius: BorderRadius.circular(30),
+                          //         ),
+                          //       onTap: () {
+                          //         _scrollController.animateTo(
+                          //           _scrollController.position.maxScrollExtent,
+                          //           duration: const Duration(seconds: 1),
+                          //           curve: Curves.easeOut,
+                          //         );
+                          //       },
+
+                          //     ),
+                          //   ),
+                          // ),
                         ),
                         Stack(
                           children: [
@@ -1238,50 +1299,7 @@ class _LetsStartState extends State<LetsStart> {
                         const SizedBox(
                           height: 20,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: SizedBox(
-                            // margin: EdgeInsets.only(left: 15),
-                            width: MediaQuery.of(context).size.width * 0.9,
-                            child: ElevatedButton(
-                                style: ButtonStyle(
-                                    shadowColor: WidgetStateColor.resolveWith(
-                                        (states) => Colors.black),
-                                    padding: WidgetStateProperty.all<
-                                            EdgeInsetsGeometry?>(
-                                        const EdgeInsets.symmetric(
-                                            vertical: 15)),
-                                    shape: WidgetStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(60.0),
-                                            side: BorderSide(
-                                              color: (color_done2 == false)
-                                                  ? Colors.white
-                                                  : mainColor,
-                                            ))),
-                                    backgroundColor: WidgetStateProperty.all<Color>(
-                                        Colors.white)),
-                                onPressed: () {
-                                  onpressed();
-                                },
-                                child: Text(
-                                  "Register",
-                                  style: (color_done2 == false)
-                                      ? const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w700,
-                                          fontFamily: 'Serif')
-                                      : TextStyle(
-                                          color: mainColor,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w700,
-                                          fontFamily: 'Serif'),
-                                )),
-                          ),
-                        ),
+                      
 
                         // const SizedBox(
                         //   height: 10,
@@ -1294,6 +1312,16 @@ class _LetsStartState extends State<LetsStart> {
                     ),
                   ),
                 ),
+                  Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: CustomButton(
+                          width: MediaQuery.of(context).size.width * 0.93,
+                            text: "Register",
+                            onPressed: onpressed,
+                            mainColor: mainColor,
+                            colorDone: color_done2,
+                          ),
+                        ),
               ],
             ),
           )),
@@ -1301,5 +1329,7 @@ class _LetsStartState extends State<LetsStart> {
   }
 
   bool color_done2 = false;
+  // State variable to track temporary border highlight
+  bool showBorderHighlight = false;
   DateDuration? PickedDate;
 }

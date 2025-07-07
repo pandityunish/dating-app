@@ -2,7 +2,10 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:cross_file/cross_file.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
@@ -147,7 +150,7 @@ class _PdfDesignState extends State<PdfDesign> {
                         content: SnackBarContent(
                           error_text: "Download Successfully",
                           appreciation: "",
-                          icon: Icons.done,
+                          icon: Icons.check_circle,
                           sec: 2,
                         ),
                         backgroundColor: Colors.transparent,
@@ -210,7 +213,7 @@ class _PdfDesignState extends State<PdfDesign> {
                         content: SnackBarContent(
                           error_text: "Download Successfully",
                           appreciation: "",
-                          icon: Icons.done,
+                          icon: Icons.check_circle,
                           sec: 2,
                         ),
                         backgroundColor: Colors.transparent,
@@ -354,7 +357,7 @@ class _PdfDesignState extends State<PdfDesign> {
                                   ]),
                                 ),
                                 Positioned(
-                                  left: 255,
+                                  left: 275,
                                   child: Container(
                                     child: Padding(
                                       padding: const EdgeInsets.only(left: 8.0),
@@ -717,7 +720,7 @@ class _PdfDesignState extends State<PdfDesign> {
                       ),
 
                       SizedBox(
-                        width: 325,
+                        width: 345,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -744,7 +747,7 @@ class _PdfDesignState extends State<PdfDesign> {
                       ),
 
                       SizedBox(
-                        width: 325,
+                        width: 345,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -899,7 +902,7 @@ class _PdfDesignState extends State<PdfDesign> {
                                                 error_text:
                                                     "Download Successfully",
                                                 appreciation: "",
-                                                icon: Icons.done,
+                                                icon: Icons.check_circle,
                                                 sec: 2,
                                               ),
                                               backgroundColor:
@@ -995,7 +998,7 @@ class _PdfDesignState extends State<PdfDesign> {
                                                 error_text:
                                                     "Download Successfully",
                                                 appreciation: "",
-                                                icon: Icons.done,
+                                                icon: Icons.check_circle,
                                                 sec: 2,
                                               ),
                                               backgroundColor:
@@ -1287,38 +1290,32 @@ class _PdfDesignState extends State<PdfDesign> {
           build: (pw.Context context) {
             return pw.Image(
               pw.MemoryImage(_imageFile!),
-              // width: PdfPageFormat.a4.width,
-              // alignment: pw.Alignment.centerLeft,
-              // height: PdfPageFormat.a4.height,
               fit: pw.BoxFit.contain,
             );
           },
         ),
       );
 
-      // Save the PDF to a file
-      // final output = await getTemporaryDirectory();
-      // final filePath = File('${output.path}/${userSave.puid}.pdf');
-      // await filePath.writeAsBytes(await pdf.save());
-
-      // print(filePath);
-
-      // // Convert the file to Uint8List
-      // List<int> fileBytes = await filePath.readAsBytes();
-
-      // // Share the PDF file
-      // // await Share.file(
-      // //   'Free Risthey Wala',
-      // //   '${userSave.puid}.pdf',
-      // //   fileBytes,
-      // //   'application/pdf', // MIME type for PDF
-      // //   text: 'Check out this PDF',
-      // // );
-      // isContactvisible = true;
-      // isSizedvisible = false;
-      // setState(() {});
+      // Save the PDF to a temporary file
+      final output = await getTemporaryDirectory();
+      final filePath = File('${output.path}/${userSave.puid}.pdf');
+      await filePath.writeAsBytes(await pdf.save());
+      
+      // Import the share_plus package at the top of the file if not already imported
+      // import 'package:share_plus/share_plus.dart';
+      
+      // Share the PDF file
+      await Share.shareXFiles(
+        [XFile(filePath.path)],
+        text: 'Check out my profile from Free Risthey Wala',
+        subject: 'Free Risthey Wala Profile',
+      );
+      
+      isContactvisible = true;
+      isSizedvisible = false;
+      setState(() {});
     }).catchError((onError) {
-      print(onError);
+      print("Error sharing PDF: $onError");
     });
   }
 

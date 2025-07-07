@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:ristey/assets/image.dart';
+import 'package:ristey/common/widgets/custom_button.dart';
 import 'package:ristey/global_vars.dart';
 import 'package:ristey/models/user_modal.dart';
 import 'package:ristey/screens/data_collection/custom_appbar.dart';
@@ -124,14 +125,14 @@ class _ReligionState extends State<AddPics> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              "93% of the User Visit the Profile",
+                              "93% User Visit the Profile",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              "After Seeing Profile Pics",
+                              "After Seen Profile Picture",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 16,
@@ -322,28 +323,10 @@ class _ReligionState extends State<AddPics> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  // margin: EdgeInsets.only(left: 15),
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child: ElevatedButton(
-                      style: ButtonStyle(
-                          shadowColor: WidgetStateColor.resolveWith(
-                              (states) => Colors.black),
-                          padding: WidgetStateProperty.all<EdgeInsetsGeometry?>(
-                              const EdgeInsets.symmetric(vertical: 17)),
-                          shape:
-                              WidgetStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(60.0),
-                                      side: BorderSide(
-                                        color: (color_done2 == false)
-                                            ? Colors.white
-                                            : mainColor,
-                                      ))),
-                          backgroundColor:
-                              WidgetStateProperty.all<Color>(Colors.white)),
-                      onPressed: () async {
-                        setState(() {
+                  CustomButton(
+                        text: "Continue",
+                        onPressed: () async{
+                         setState(() {
                           color_done2 = true;
                         });
                         // Shared
@@ -454,22 +437,11 @@ class _ReligionState extends State<AddPics> {
                               token: userSave.token!,
                               dob: userService.userdata["dob"]);
                         }
-                      },
-                      child: Text(
-                        "Continue",
-                        style: (color_done2 == false)
-                            ? const TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontFamily: 'Serif',
-                                fontWeight: FontWeight.w700)
-                            : TextStyle(
-                                color: mainColor,
-                                fontSize: 20,
-                                fontFamily: 'Serif',
-                                fontWeight: FontWeight.w700),
-                      )),
-                ),
+                        },
+                        mainColor: mainColor,
+                        colorDone: color_done2,
+                      ),
+               
               ],
             ),
           ),

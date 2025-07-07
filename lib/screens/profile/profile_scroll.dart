@@ -18,6 +18,7 @@ import 'package:ristey/screens/error/save_pref_error.dart';
 import 'package:ristey/screens/mobile_chat_screen.dart';
 import 'package:ristey/screens/navigation/navigation.dart';
 import 'package:ristey/screens/navigation/service/home_service.dart';
+import 'package:ristey/screens/navigation/service/support_service.dart';
 import 'package:ristey/screens/profile/profile_page.dart';
 import 'package:ristey/screens/profile/service/notification_controller.dart';
 import 'package:ristey/screens/profile/service/notification_service.dart';
@@ -25,6 +26,7 @@ import 'package:ristey/services/audio_call.dart';
 import 'package:ristey/services/audio_sharing_service.dart';
 import 'package:ristey/small_functions/profile_completion.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ristey/assets/error.dart';
 
 import '../../assets/profile_match.dart';
 import '../../global_vars.dart';
@@ -881,18 +883,39 @@ class _MainAppContainerState extends State<MainAppContainer> {
       );
 
   NotificationData notificationData = NotificationData();
+  bool _shouldShowRatingDialog = false;
+  
   @override
   void initState() {
+    super.initState();
     NotificationData().requestNotificationPermission();
     NotificationData().requestNotificationPermission();
-
+    Get.put(NotificationController());
     getprecentage();
     notificationData.setupInteractMessage(context);
     getCurrentLocation();
     getuserdata();
     determinePosition();
 
-    super.initState();
+    // Flag to show rating dialog after build is complete
+    if (sendlinks.contains("To Ask Rating")) {
+      _shouldShowRatingDialog = true;
+    }
+  }
+  
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    
+    // Show rating dialog after the widget is fully built
+    if (_shouldShowRatingDialog) {
+      // Use Future.delayed to ensure we're not in the build phase
+      Future.delayed(Duration.zero, () {
+        showRatingDialog();
+        // Reset flag to prevent showing dialog multiple times
+        _shouldShowRatingDialog = false;
+      });
+    }
   }
 
   NewUserModel? usermodel;
@@ -908,6 +931,233 @@ class _MainAppContainerState extends State<MainAppContainer> {
     profilepercentage = await profile.profileComplete();
     userProfilePercentage = profilepercentage;
     setState(() {});
+  }
+  
+  // Rating dialog variables and methods
+  int _rating = 0;
+  TextEditingController controller = TextEditingController();
+  
+  Widget buildStar(int starRating) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _rating = starRating;
+        });
+      },
+      child: Icon(
+        Icons.star,
+        size: 40,
+        color: _rating >= starRating ? Colors.yellow : Colors.grey,
+      ),
+    );
+  }
+  
+  void showRatingDialog() {
+    // Reset rating when opening dialog
+    _rating = 0;
+    controller.clear();
+    
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext dialogContext) {
+        // Using StatefulBuilder to manage state within the dialog
+        return StatefulBuilder(
+          builder: (context, setState) {
+            // Local buildStar function that updates the dialog's state
+            Widget buildStarInDialog(int starRating) {
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _rating = starRating;
+                  });
+                },
+                child: Icon(
+                  Icons.star,
+                  size: 40,
+                  color: _rating >= starRating ? Colors.yellow : Colors.grey,
+                ),
+              );
+            }
+            
+            return Dialog(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Center(
+                  child: SizedBox(
+                    height:  _rating == 0 || _rating > 4 ? 200 : 320,
+                    child: Material(
+                      elevation: 10,
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 10),
+                              const Text(
+                                'Please Rate Us',
+                                style: TextStyle(fontSize: 22),
+                              ),
+                              const SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  buildStarInDialog(1),
+                                  buildStarInDialog(2),
+                                  buildStarInDialog(3),
+                                  buildStarInDialog(4),
+                                  buildStarInDialog(5),
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+                              _rating == 0 || _rating > 4
+                                  ? const Center()
+                                  : Container(
+                                      margin: const EdgeInsets.only(
+                                          left: 15, right: 15),
+                                      height: 120, // Fixed height
+                                      child: TextField(
+                                        controller: controller,
+                                        minLines: 3,
+                                        maxLines: 5,
+                                        maxLength: 300,
+                                        style: const TextStyle(
+                                            fontFamily: 'Sans-serif',
+                                            fontSize: 17),
+                                        decoration: InputDecoration(
+                                          hintText: "Please write a review",
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: mainColor)),
+                                          focusedBorder: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: mainColor)),
+                                        ),
+                                      ),
+                                    ),
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              _rating == 0 || _rating > 4 ? const SizedBox() : Align(
+                                alignment: Alignment.centerRight,
+                                child: SizedBox(
+                                  width: 100,
+                                  child: ElevatedButton(
+                                      style: ButtonStyle(
+                                          shadowColor: MaterialStateProperty.resolveWith(
+                                              (states) => Colors.black),
+                                          padding: MaterialStateProperty.all<EdgeInsetsGeometry?>(
+                                              const EdgeInsets.symmetric(
+                                                  vertical: 17)),
+                                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                              RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          30.0),
+                                                  side: const BorderSide(
+                                                    color: Colors.white,
+                                                  ))),
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  Colors.white)),
+                                      onPressed: () async {
+                                        if (_rating == 5) {
+                                          NotificationService()
+                                              .addtoadminnotification(
+                                                  userid: userSave.uid!,
+                                                  useremail:
+                                                      userSave.email!,
+                                                  subtitle:
+                                                      "ONLINE PROFILES",
+                                                  userimage: userSave
+                                                          .imageUrls!
+                                                          .isEmpty
+                                                      ? ""
+                                                      : userSave
+                                                          .imageUrls![0],
+                                                  title:
+                                                      "${userSave.name!.substring(0, 1).toUpperCase()} ${userSave.surname!.toUpperCase()} ${userSave.puid} SUBMIT FEEDBACK ${'⭐' * 5}");
+                                          HomeService().createRating(
+                                              email: userSave.uid!,
+                                              number: 5,
+                                              description:
+                                                  controller.text);
+                                          SupprotService().deletesendlink(
+                                              email: userSave.email!,
+                                              value: "To Ask Rating");
+                                          Navigator.pushAndRemoveUntil(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MainAppContainer(
+                                                        notiPage: false),
+                                              ),
+                                              (route) => false);
+                                        } else {
+                                          HomeService().createRating(
+                                              email: userSave.uid!,
+                                              number: _rating,
+                                              description: controller.text);
+                                          SupprotService().deletesendlink(
+                                              email: userSave.email!,
+                                              value: "To Ask Rating");
+                                          NotificationService()
+                                              .addtoadminnotification(
+                                                  userid: userSave.uid!,
+                                                  useremail:
+                                                      userSave.email!,
+                                                  subtitle:
+                                                      "ONLINE PROFILES",
+                                                  userimage: userSave
+                                                          .imageUrls!
+                                                          .isEmpty
+                                                      ? ""
+                                                      : userSave
+                                                          .imageUrls![0],
+                                                  title:
+                                                      "${userSave.name!.substring(0, 1).toUpperCase()} ${userSave.surname!.toUpperCase()} ${userSave.puid} SUBMIT FEEDBACK ${'⭐' * _rating}");
+                                          await showDialog(
+                                              barrierDismissible: false,
+                                              context: context,
+                                              builder: (context) {
+                                                return const AlertDialog(
+                                                  content: SnackBarContent(
+                                                    appreciation: "",
+                                                    error_text:
+                                                        "Feedback Submit Successfully",
+                                                    icon: Icons.check_circle_rounded,
+                                                    sec: 2,
+                                                  ),
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  elevation: 0,
+                                                );
+                                              });
+
+                                         Navigator.pop(context);
+                                        }
+                                      },
+                                      child: const Text("Submit",
+                                          style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w700, fontFamily: 'Serif'))),
+                                ),
+                              ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            )));
+          },
+        );
+      },
+    );
   }
 
   @override

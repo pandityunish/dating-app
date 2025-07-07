@@ -22,6 +22,7 @@ import 'package:ristey/screens/search_profile/user_search_profile.dart';
 import 'package:ristey/services/add_to_profile_service.dart';
 import 'package:ristey/services/search_service.dart';
 import 'package:ristey/small_functions/profile_completion.dart';
+import 'package:ticker_text/ticker_text.dart';
 
 import 'profile/service/notification_service.dart';
 
@@ -36,7 +37,7 @@ class _SearchState extends State<Search> {
   // ignore: prefer_final_fields
   TextEditingController _searchController = TextEditingController();
   // ignore: prefer_final_fields, unused_field
-  RangeValues _currentRangeValues = const RangeValues(40, 80);
+  RangeValues _currentRangeValues = const RangeValues(0, 200);
   double _currentSliderValue = 0;
   // ignore: unused_field, prefer_final_fields
   double _startValue = 20.0;
@@ -128,7 +129,7 @@ class _SearchState extends State<Search> {
                                 )),
                           )
                         : SizedBox(
-                            width: 65,
+                            width: 55,
                             child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
@@ -199,7 +200,7 @@ class _SearchState extends State<Search> {
                 });
                 for (var element in ds) {
                   if (!mounted) return;
-      
+
                   setState(() {
                     val.add(element);
                   });
@@ -211,6 +212,7 @@ class _SearchState extends State<Search> {
               }
             },
             child: Row(
+              
               children: [
                 (val[0].isEmpty && val[1].isEmpty && val[2].isEmpty)
                     ? const Text(
@@ -399,10 +401,11 @@ class _SearchState extends State<Search> {
                       )
                     : (head == "Location")
                         ? SizedBox(
-                            width: 150,
+                            width: 120,
                             child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Text(
                                       val.toString().substring(
@@ -417,10 +420,11 @@ class _SearchState extends State<Search> {
                                 )),
                           )
                         : SizedBox(
-                            width: 110,
+                            width: 100,
                             child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Text(
                                       "${options[int.parse(val[0])].substring(0, 4)}-${options[int.parse(val[1])]}",
@@ -501,7 +505,7 @@ class _SearchState extends State<Search> {
                       head: head,
                       options: options,
                       selectedopt: val)));
-      
+
               if (ds != null) {
                 if (!mounted) return;
                 setState(() {
@@ -539,21 +543,41 @@ class _SearchState extends State<Search> {
                           )
                         : SizedBox(
                             width: 80,
-                            child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      val.toString().substring(
+                            child:
+                            TickerText(
+                                  // default values
+                                  scrollDirection: Axis.horizontal,
+                                  speed: 20,
+                                  startPauseDuration:
+                                      const Duration(seconds: 1),
+                                  endPauseDuration:
+                                      const Duration(seconds: 1),
+                                  returnDuration:
+                                      const Duration(milliseconds: 800),
+                                  primaryCurve: Curves.linear,
+                                  returnCurve: Curves.easeOut,
+                                  child: Text(
+                                     val.toString().substring(
                                           1, val.toString().length - 1),
-                                      style: GoogleFonts.poppins(
-                                          decoration: TextDecoration.none,
-                                          color: Colors.black38,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ],
-                                )),
+                                    textAlign: TextAlign.end,
+                                    style: TextStyle(fontSize: 14,color: Colors.black38,),
+                                  ),
+                                ),
+                            //  SingleChildScrollView(
+                            //     scrollDirection: Axis.horizontal,
+                            //     child: Row(
+                            //       children: [
+                            //         Text(
+                            //           val.toString().substring(
+                            //               1, val.toString().length - 1),
+                            //           style: GoogleFonts.poppins(
+                            //               decoration: TextDecoration.none,
+                            //               color: Colors.black38,
+                            //               fontSize: 18,
+                            //               fontWeight: FontWeight.w400),
+                            //         ),
+                            //       ],
+                            //     )),
                           ),
                 const Icon(
                   Icons.arrow_forward_ios_rounded,
@@ -615,8 +639,7 @@ class _SearchState extends State<Search> {
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 // SizedBox(width:5,),
                                 Container(
@@ -634,17 +657,16 @@ class _SearchState extends State<Search> {
                                 // const SizedBox(
                                 //   width: 5,
                                 // ),
-                                 const SizedBox(
-                                        width: 10,
-                                      ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
                                 Container(
                                   child: Row(
                                     children: [
                                       Container(
-                                        width: MediaQuery.of(context)
-                                                .size
-                                                .width *
-                                            0.36,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.36,
                                         height: 35,
                                         decoration: BoxDecoration(
                                             borderRadius:
@@ -655,9 +677,8 @@ class _SearchState extends State<Search> {
                                             controller: _searchController,
                                             cursorColor: mainColor,
                                             decoration: InputDecoration(
-                                                contentPadding:
-                                                    EdgeInsets.only(
-                                                        top: 5, left: 10),
+                                                contentPadding: EdgeInsets.only(
+                                                    top: 5, left: 10),
                                                 hintText: 'Enter Profile ID',
                                                 border: OutlineInputBorder(
                                                     borderRadius:
@@ -671,12 +692,13 @@ class _SearchState extends State<Search> {
                                                             30),
                                                     borderSide: BorderSide(
                                                         color: mainColor)),
-                                                focusedBorder: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30),
-                                                    borderSide: BorderSide(
-                                                        color: mainColor))),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(30),
+                                                        borderSide: BorderSide(
+                                                            color: mainColor))),
                                             onChanged: (String) {
                                               profileSearch =
                                                   _searchController.text;
@@ -715,8 +737,8 @@ class _SearchState extends State<Search> {
                                                     _currentSliderValue
                                                         .toString(),
                                                 age: svp.AgeList.toString(),
-                                                religion: svp.ReligionList
-                                                    .toString(),
+                                                religion:
+                                                    svp.ReligionList.toString(),
                                                 kundalidosh: svp.KundaliDoshList
                                                     .toString(),
                                                 marital_status:
@@ -728,20 +750,20 @@ class _SearchState extends State<Search> {
                                                 statelocation:
                                                     svp.LocatioList[1],
                                                 diet: svp.dietList.toString(),
-                                                smoke:
-                                                    svp.SmokeList.toString(),
-                                                drink:
-                                                    svp.DrinkList.toString(),
+                                                smoke: svp.SmokeList.toString(),
+                                                drink: svp.DrinkList.toString(),
                                                 disability: svp.DisabilityList
                                                     .toString(),
                                                 height:
                                                     svp.HeightList.toString(),
                                                 education: svp.EducationList
                                                     .toString(),
-                                                profession:
-                                                    svp.ProfessionList.toString(),
-                                                income: svp.IncomeList.toString(),
-                                                location: svp.LocatioList.toString());
+                                                profession: svp.ProfessionList
+                                                    .toString(),
+                                                income:
+                                                    svp.IncomeList.toString(),
+                                                location:
+                                                    svp.LocatioList.toString());
                                             getProfileSearchByProfile();
                                           }
                                         },
@@ -761,13 +783,12 @@ class _SearchState extends State<Search> {
                                 ),
                               ],
                             ),
-                        
+
                             const SizedBox(
                               height: 20,
                             ),
                             Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
                                   margin: const EdgeInsets.only(left: 10),
@@ -802,13 +823,15 @@ class _SearchState extends State<Search> {
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                children: [Text("0km"), Text("200km")],
+                                children: [
+                                  Text(forIos ? "${_currentRangeValues.start.round()}km" : "0km"), 
+                                  Text(forIos ? "${_currentRangeValues.end.round()}km" : "200km")
+                                ],
                               ),
                             ),
-                        
+
                             Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
                                   margin: const EdgeInsets.only(left: 10),
@@ -824,135 +847,165 @@ class _SearchState extends State<Search> {
                                 ),
                               ],
                             ),
-                        
                             Column(
                               children: [
                                 Material(
                                   color: Colors.white,
-                                  child:SliderTheme(
-                                      data: SliderTheme.of(context).copyWith(
-                                     rangeThumbShape: const CircleThumbShape(
-          thumbRadius: 10.0, // Size of the thumb
-        ),
-                                        thumbColor: Colors.transparent, // Transparent fill for hollow center
-                                        overlayColor: Colors.transparent, // No overlay when thumb is pressed
-                                        activeTrackColor: mainColor, // Track color for selected range
-                                        inactiveTrackColor: mainColor.withOpacity(0.3), // Track color for unselected range
-                                        trackHeight: 4.0, // Thickness of the track
-                                      
+                                  child: SliderTheme(
+                                    data: SliderTheme.of(context).copyWith(
+                                      rangeThumbShape: CircleThumbShape(
+                                        thumbColor:
+                                            forIos ? mainColor : Colors.black12,
+                                        thumbRadius: 8.0, // Size of the thumb
                                       ),
-                                      child: RangeSlider(
-                                        activeColor: mainColor,
-                                        values: _currentRangeValues,
-                                        min: 0,
-                                        max: 200,
-                                        divisions: 10,
-                                        labels: RangeLabels(
-                                          _currentRangeValues.start.round().toString(),
-                                          _currentRangeValues.end.round().toString(),
-                                        ),
-                                        onChanged: forIos
-                                            ? (RangeValues values) {
-                                                if (!mounted) return;
-                                  
-                                                setState(() {
-                                                  // Adjust values to maintain a minimum gap of 20
-                                                  double newStart = values.start;
-                                                  double newEnd = values.end;
-                                  
-                                                  // If the range is less than 20, adjust the appropriate thumb
-                                                  if (newEnd - newStart < 20) {
-                                                    // If the user is moving the start thumb
-                                                    if ((values.start - _currentRangeValues.start).abs() >
-                                                        (values.end - _currentRangeValues.end).abs()) {
-                                                      newEnd = newStart + 20;
-                                                      if (newEnd > 200) {
-                                                        newEnd = 200;
-                                                        newStart = 200 - 20;
-                                                      }
-                                                    }
-                                                    // If the user is moving the end thumb
-                                                    else {
-                                                      newStart = newEnd - 20;
-                                                      if (newStart < 0) {
-                                                        newStart = 0;
-                                                        newEnd = 20;
-                                                      }
+                                      thumbColor: Colors
+                                          .transparent, // Transparent fill for hollow center
+                                      overlayColor: Colors
+                                          .transparent, // No overlay when thumb is pressed
+                                      activeTrackColor:
+                                          mainColor, // Track color for selected range
+                                      inactiveTrackColor: mainColor.withOpacity(
+                                          0.3), // Track color for unselected range
+                                      trackHeight:
+                                          4.0, // Thickness of the track
+                                    ),
+                                    child: RangeSlider(
+                                      activeColor: mainColor,
+                                      values: _currentRangeValues,
+                                      min: 0,
+                                      max: 200,
+                                      divisions: 10,
+                                      labels: RangeLabels(
+                                        _currentRangeValues.start
+                                            .round()
+                                            .toString(),
+                                        _currentRangeValues.end
+                                            .round()
+                                            .toString(),
+                                      ),
+                                      onChanged: forIos
+                                          ? (RangeValues values) {
+                                              if (!mounted) return;
+
+                                              setState(() {
+                                                // Adjust values to maintain a minimum gap of 20
+                                                double newStart = values.start;
+                                                double newEnd = values.end;
+
+                                                // If the range is less than 20, adjust the appropriate thumb
+                                                if (newEnd - newStart < 20) {
+                                                  // If the user is moving the start thumb
+                                                  if ((values.start -
+                                                              _currentRangeValues
+                                                                  .start)
+                                                          .abs() >
+                                                      (values.end -
+                                                              _currentRangeValues
+                                                                  .end)
+                                                          .abs()) {
+                                                    newEnd = newStart + 20;
+                                                    if (newEnd > 200) {
+                                                      newEnd = 200;
+                                                      newStart = 200 - 20;
                                                     }
                                                   }
-                                  
-                                                  _currentRangeValues = RangeValues(newStart, newEnd);
-                                                });
-                                              }
-                                            : null,
-                                      ),
+                                                  // If the user is moving the end thumb
+                                                  else {
+                                                    newStart = newEnd - 20;
+                                                    if (newStart < 0) {
+                                                      newStart = 0;
+                                                      newEnd = 20;
+                                                    }
+                                                  }
+                                                }
+
+                                                _currentRangeValues =
+                                                    RangeValues(
+                                                        newStart, newEnd);
+                                              });
+                                            }
+                                          : null,
                                     ),
+                                  ),
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    Container(
-                                      height: 35,
-                                      width: 55,
-                                      decoration: BoxDecoration(
-                                        border:
-                                            Border.all(color: Colors.black12),
-                                        borderRadius:
-                                            BorderRadius.circular(30.0),
-                                      ),
-                                      child: Stack(
-                                        alignment: Alignment.center,
-                                        children: [
-                                          // Track
-                                          AnimatedContainer(
-                                            duration: const Duration(
-                                                milliseconds: 200),
-                                            decoration: BoxDecoration(
-                                              color: forIos
-                                                  ? mainColor
-                                                  : Colors.black12,
-                                              borderRadius:
-                                                  BorderRadius.circular(30.0),
-                                            ),
-                                            width: 55,
-                                            height: 35,
-                                          ),
-                                          // Thumb with text
-                                          Align(
-                                            alignment: forIos
-                                                ? Alignment.centerRight
-                                                : Alignment.centerLeft,
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                setState(() {
-                                                  forIos = !forIos;
-                                                });
-                                              },
-                                              child: AnimatedContainer(
-                                                duration: const Duration(
-                                                    milliseconds: 200),
-                                                height: 30,
-                                                width: 30,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                alignment: Alignment.center,
-                                                child: Text(
-                                                  forIos ? "On" : "Off",
-                                                  style: TextStyle(
-                                                    fontSize: 10,
-                                                    fontWeight:
-                                                        FontWeight.bold,
-                                                    color: Colors.grey,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                   
+                                      Container(
+                                                                  height: 35,
+                                                                  width: 55,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            30.0),
+                                                                  ),
+                                                                  child: Stack(
+                                                                    alignment:
+                                                                        Alignment
+                                                                            .center,
+                                                                    children: [
+                                                                      // Track
+                                                                      AnimatedContainer(
+                                                                        duration:
+                                                                            const Duration(milliseconds: 200),
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          color: forIos==false
+                                                                              ? Colors.black12
+                                                                              : mainColor,
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(30.0),
+                                                                        ),
+                                                                        width:
+                                                                            55,
+                                                                        height:
+                                                                            28,
+                                                                      ),
+                                                                      // Thumb with text
+                                                                      Align(
+                                                                        alignment: forIos==false
+                                                                            ? Alignment.centerLeft
+                                                                            : Alignment.centerRight,
+                                                                        child:
+                                                                            GestureDetector(
+                                                                          onTap:
+                                                                              () {
+                                                                          
+                                                                            setState(() =>
+                                                                                forIos = !forIos);
+                                                                          },
+                                                                          child:
+                                                                              AnimatedContainer(
+                                                                            duration:
+                                                                                const Duration(milliseconds: 200),
+                                                                            height:
+                                                                                20,
+                                                                            width:
+                                                                                30,
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              color: Colors.white,
+                                                                              shape: BoxShape.circle,
+                                                                            ),
+                                                                            alignment:
+                                                                                Alignment.center,
+                                                                            child:
+                                                                                Text(
+                                                                              forIos==false ? "Off" : "On",
+                                                                              style: TextStyle(
+                                                                                fontSize: 10,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                color: Colors.grey,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
                                   ],
                                 ),
                               ],
@@ -979,7 +1032,7 @@ class _SearchState extends State<Search> {
                             const SizedBox(
                               height: 10,
                             ),
-                        
+
                             nameContainer2('images/icons/calender.png', "Age",
                                 functions().AgeDialog, svp.AgeList),
                             const SizedBox(
@@ -1041,11 +1094,8 @@ class _SearchState extends State<Search> {
                             const SizedBox(
                               height: 1,
                             ),
-                            nameContainer(
-                                'images/icons/education.png',
-                                "Education",
-                                svp.EducationList,
-                                sdl.Education),
+                            nameContainer('images/icons/education.png',
+                                "Education", svp.EducationList, sdl.Education),
                             const SizedBox(
                               height: 1,
                             ),
@@ -1096,7 +1146,7 @@ class _SearchState extends State<Search> {
                   ),
                   SizedBox(
                     height: 50,
-                    width: 300,
+                    width: MediaQuery.of(context).size.width * 0.9,
                     child: ElevatedButton(
                       style: ButtonStyle(
                           shadowColor: WidgetStateColor.resolveWith(
@@ -1598,14 +1648,11 @@ class _CustomRangeThumbShape extends RangeSliderThumbShape {
 
 // Custom track shape to avoid drawing under thumbs
 
-
-
 class CircleThumbShape extends RangeSliderThumbShape {
   final double thumbRadius;
-
-  const CircleThumbShape({
-    this.thumbRadius = 6.0,
-  });
+  final Color thumbColor;
+  const CircleThumbShape(
+      {this.thumbRadius = 6.0, this.thumbColor = Colors.blue});
 
   @override
   Size getPreferredSize(bool isEnabled, bool isDiscrete) {
@@ -1633,7 +1680,7 @@ class CircleThumbShape extends RangeSliderThumbShape {
       ..style = PaintingStyle.fill;
 
     final borderPaint = Paint()
-      ..color = sliderTheme.thumbColor ?? Colors.blue // Border color
+      ..color = thumbColor // Border color
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 

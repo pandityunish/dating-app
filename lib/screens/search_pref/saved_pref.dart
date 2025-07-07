@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:ristey/global_vars.dart';
 import 'package:ristey/models/ads_modal.dart';
 import 'package:ristey/models/user_modal.dart';
 import 'package:ristey/screens/data_collection/custom_appbar.dart';
-import 'package:ristey/screens/navigation/navigation.dart';
 import 'package:ristey/screens/navigation/service/ads_service.dart';
 import 'package:ristey/screens/navigation/service/home_service.dart';
 import 'package:ristey/screens/navigation/service/support_service.dart';
@@ -19,6 +19,7 @@ import 'package:ristey/screens/search_profile/function_search.dart';
 import 'package:ristey/screens/search_profile/search_dynamic_page.dart';
 import 'package:ristey/send_utils/noti_function.dart';
 import 'package:ristey/services/add_to_profile_service.dart';
+import 'package:ticker_text/ticker_text.dart';
 // import 'dart:core';
 import '../../Assets/Error.dart';
 
@@ -223,17 +224,54 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                               ),
                               overflow: TextOverflow.ellipsis,
                             )
-                          : SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              physics: const BouncingScrollPhysics(),
-                              child: Text(
-                                val.join(', '),
-                                style: GoogleFonts.poppins(
-                                  decoration: TextDecoration.none,
-                                  color: Colors.black38,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                          : SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.7,
+                              height: 24,
+                              child: ShaderMask(
+                                shaderCallback: (Rect bounds) {
+                                  return LinearGradient(
+                                    colors: [Colors.white, Colors.white.withOpacity(0.05)],
+                                    stops: const [0.8, 1.0],
+                                  ).createShader(bounds);
+                                },
+                                child: TickerText(
+                                    // default values
+                                    scrollDirection: Axis.horizontal,
+                                    speed: 20,
+                                    startPauseDuration:
+                                        const Duration(seconds: 1),
+                                    endPauseDuration:
+                                        const Duration(seconds: 1),
+                                    returnDuration:
+                                        const Duration(milliseconds: 800),
+                                    primaryCurve: Curves.linear,
+                                    returnCurve: Curves.easeOut,
+                                    child: Text(
+                                       val.join(', '),
+                                      textAlign: TextAlign.end,
+                                      style: GoogleFonts.poppins(
+                                        decoration: TextDecoration.none,
+                                        color: Colors.black38,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ), 
+                                //   SingleChildScrollView(
+                                //   scrollDirection: Axis.horizontal,
+                                //   child: Padding(
+                                //     padding: const EdgeInsets.symmetric(horizontal: 10),
+                                //     child: Text(
+                                     
+                                //       style: GoogleFonts.poppins(
+                                //         decoration: TextDecoration.none,
+                                //         color: Colors.black38,
+                                //         fontSize: 16,
+                                //         fontWeight: FontWeight.w400,
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
                               ),
                             ),
                 ),
@@ -438,7 +476,7 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                         style: TextStyle(
                             decoration: TextDecoration.none,
                             color: Colors.black38,
-                            fontSize: 16,
+                            fontSize: 17,
                             fontWeight: FontWeight.w400,
                             fontFamily: 'Sans-serif'),
                       )
@@ -454,7 +492,7 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                                 style: GoogleFonts.poppins(
                                   decoration: TextDecoration.none,
                                   color: Colors.black38,
-                                  fontSize: 16,
+                                  fontSize: 17,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -470,7 +508,7 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                                     style: GoogleFonts.poppins(
                                       decoration: TextDecoration.none,
                                       color: Colors.black38,
-                                      fontSize: 16,
+                                      fontSize: 17,
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
@@ -486,7 +524,7 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                                         style: GoogleFonts.poppins(
                                           decoration: TextDecoration.none,
                                           color: Colors.black38,
-                                          fontSize: 16,
+                                          fontSize: 17,
                                           fontWeight: FontWeight.w400,
                                         ),
                                       ),
@@ -500,7 +538,7 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                                         style: GoogleFonts.poppins(
                                           decoration: TextDecoration.none,
                                           color: Colors.black38,
-                                          fontSize: 16,
+                                          fontSize: 17,
                                           fontWeight: FontWeight.w400,
                                         ),
                                       )
@@ -512,7 +550,7 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                                             style: GoogleFonts.poppins(
                                                 decoration: TextDecoration.none,
                                                 color: Colors.black38,
-                                                fontSize: 16,
+                                                fontSize: 17,
                                                 fontWeight: FontWeight.w400),
                                           )
                                         : Text(
@@ -522,7 +560,7 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                                             style: GoogleFonts.poppins(
                                                 decoration: TextDecoration.none,
                                                 color: Colors.black38,
-                                                fontSize: 16,
+                                                fontSize: 17,
                                                 fontWeight: FontWeight.w400),
                                           ),
                 const Icon(
@@ -623,7 +661,9 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                                   ),
                                 )
                               : Text(
-                                  "${options[int.parse(val[0])].substring(0, 4)}-${options[int.parse(val[1])]}",
+                                  val.length >= 2 && val[0] != null && val[1] != null
+                                      ? "${options[int.parse(val[0])].substring(0, 4)}-${options[int.parse(val[1])]}"
+                                      : "Add",
                                   style: GoogleFonts.poppins(
                                     decoration: TextDecoration.none,
                                     color: Colors.black38,
@@ -697,7 +737,7 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                         Expanded(
                           child: Column(
                             children: [
-                              nameContainer2(
+                              nameContainer2( 
                                   'images/icons/calender.png',
                                   "Age",
                                   functions().AgeDialog,
@@ -776,7 +816,7 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                         Container(
                           margin: const EdgeInsets.only(top: 30),
                           child: SizedBox(
-                            width: 300,
+                            width: Get.width * 0.9,
                             height: 50,
                             child: ElevatedButton(
                               style: ButtonStyle(
@@ -931,7 +971,7 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                                           error_text:
                                               "Preference Save Successfully",
                                           appreciation: "",
-                                          icon: Icons.check,
+                                          icon: Icons.check_circle_sharp,
                                           sec: 3,
                                         ),
                                         backgroundColor: Colors.transparent,
@@ -963,7 +1003,7 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                         Container(
                           margin: const EdgeInsets.only(top: 10),
                           child: SizedBox(
-                            width: 300,
+                            width: Get.width * 0.9,
                             height: 50,
                             child: ElevatedButton(
                               style: ButtonStyle(
@@ -1055,7 +1095,7 @@ class _SearchPreferencesState extends State<SearchPreferences> {
                                           error_text:
                                               "Preference Reset Successfully",
                                           appreciation: "",
-                                          icon: Icons.check,
+                                          icon: Icons.check_circle_sharp,
                                           sec: 3,
                                         ),
                                         backgroundColor: Colors.transparent,

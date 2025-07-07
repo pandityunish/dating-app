@@ -9,11 +9,12 @@ import 'package:ristey/assets/error.dart';
 import 'package:ristey/assets/g_sign.dart';
 import 'package:ristey/assets/notification_pop_up.dart';
 import 'package:ristey/assets/tcp_popup.dart';
+import 'package:ristey/common/widgets/custom_button.dart';
 import 'package:ristey/common/widgets/social_button.dart';
 import 'package:ristey/global_vars.dart';
 import 'package:ristey/models/ads_modal.dart';
 import 'package:ristey/models/shared_pref.dart';
-import 'package:ristey/screens/main_screen.dart';
+// Import removed as it was self-referential
 import 'package:ristey/screens/moving_bubbles.dart';
 import 'package:ristey/screens/navigation/service/ads_service.dart';
 import 'package:ristey/screens/notification/widget_notification/ads_bar.dart';
@@ -172,82 +173,90 @@ class _FirstScreenState extends State<FirstScreen> {
       ),
     ));
   }
- showNotification() {
-    Get.dialog(Dialog(
-
-      insetPadding: const EdgeInsets.symmetric(horizontal: 50),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-      elevation: 3,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-           Icon(Icons.notifications_none_sharp,size: 35,color: mainColor,),
-           SizedBox(height: 5,),
-
-           Text("Allow Notifications",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-           SizedBox(height: 15,),
-           Text("Would You Like To Receive Notifications",style: TextStyle(fontSize: 12),),
-           SizedBox(height: 25,),
-
-           InkWell(
-            onTap: () {
-              Get.back();
-              // showLocation();
-            },
-             child: Container(
-              height: 40,
-              width: Get.width*0.57,
-              color: mainColor,
-                     child: Center(
-                       child: Text("Allow Notification Service",style: TextStyle(color: Colors.white),),
-                     ),
-             ),
-           )
-          ],
-        ),
+  showLocationAndNotification() {
+    bool showNotificationSection = false;
+    
+    Get.dialog(
+      StatefulBuilder(
+        builder: (BuildContext context, StateSetter setDialogState) {
+          return Dialog(
+            insetPadding: const EdgeInsets.symmetric(horizontal: 50),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            elevation: 3,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (!showNotificationSection) ...[  
+                    // Location section
+                    Icon(Icons.location_on_outlined, size: 35, color: mainColor),
+                    SizedBox(height: 5),
+                    Text("Allow Location", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                    SizedBox(height: 15),
+                    Text("GPS is Used To Locate \n  You in Relationship To The Parking Spots", 
+                        textAlign: TextAlign.center, style: TextStyle(fontSize: 12)),
+                    SizedBox(height: 28),
+                    
+                    InkWell(
+                      onTap: () {
+                        // Update the local dialog state to show notification section
+                        setDialogState(() {
+                          showNotificationSection = true;
+                        });
+                      },
+                      child: Container(
+                        height: 40,
+                        width: Get.width*0.57,
+                        color: mainColor,
+                        child: Center(
+                          child: Text("Allow Location Service", style: TextStyle(color: Colors.white)),
+                        ),
+                      ),
+                    ),
+                  ] else ...[  
+                    // Notification section
+                    Icon(Icons.notifications_none_sharp, size: 35, color: mainColor),
+                    SizedBox(height: 5),
+                    Text("Allow Notifications", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                    SizedBox(height: 15),
+                    Text("Would You Like To \n Receive Notifications",textAlign: TextAlign.center, style: TextStyle(fontSize: 12,)),
+                    SizedBox(height: 28),
+                    
+                    InkWell(
+                      onTap: () {
+                        Get.back();
+                        // Add any additional actions after both permissions are granted
+                      },
+                      child: Container(
+                        height: 40,
+                        width: Get.width*0.57,
+                        color: mainColor,
+                        child: Center(
+                          child: Text("Allow Notification Service", style: TextStyle(color: Colors.white)),
+                        ),
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          );
+        },
       ),
-    ),barrierDismissible: false,);
+      barrierDismissible: false,
+    );
   }
+  
+  // Legacy methods kept for reference
+  showNotification() {
+    // Now calls the combined method
+    showLocationAndNotification();
+  }
+  
   showLocation() {
-    Get.dialog(Dialog(
-
-      insetPadding: const EdgeInsets.symmetric(horizontal: 50),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-      elevation: 3,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 40),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-           Icon(Icons.location_on_outlined,size: 35,color: mainColor,),
-           SizedBox(height: 5,),
-
-           Text("Allow Location",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-           SizedBox(height: 15,),
-           Text("GPS is Used To Locate \n  You in Relationship To The Parking Spots",textAlign: TextAlign.center,style: TextStyle(fontSize: 12),),
-           SizedBox(height: 20,),
-
-           InkWell(
-            onTap: () {
-              
-              Get.back();
-              showNotification();
-            },
-             child: Container(
-              height: 40,
-              width: Get.width*0.57,
-              color: mainColor,
-                     child: Center(
-                       child: Text("Allow Location Service",style: TextStyle(color: Colors.white),),
-                     ),
-             ),
-           )
-          ],
-        ),
-      ),
-    ),barrierDismissible: false,);
+    // Now calls the combined method
+    showLocationAndNotification();
   }
   List<AdsModel> allads = [];
   List<AdsModel> allads2 = [];
@@ -303,7 +312,7 @@ class _FirstScreenState extends State<FirstScreen> {
                 ),
                 Image.asset(
                   'images/icons/free_ristawala1.png',
-                  width: MediaQuery.of(context).size.width * 0.8,
+                  width: MediaQuery.of(context).size.width * 0.95,
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.7,
@@ -347,29 +356,23 @@ class _FirstScreenState extends State<FirstScreen> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child: ElevatedButton(
-                      style: ButtonStyle(
-                          shadowColor: WidgetStateColor.resolveWith(
-                              (states) => Colors.black),
-                          padding: WidgetStateProperty.all<EdgeInsetsGeometry?>(
-                              const EdgeInsets.symmetric(vertical: 15)),
-                          shape:
-                              WidgetStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(60.0),
-                                      side: BorderSide(
-                                        color: (color_done == false)
-                                            ? Colors.white
-                                            : mainColor,
-                                      ))),
-                          backgroundColor:
-                              WidgetStateProperty.all<Color>(Colors.white)),
-                      onPressed: () {
-                        setState(() {
+               
+                CustomButton(
+                  text: "Continue",
+                  onPressed: () {
+                      setState(() {
                           color_done = true;
                         });
+
+                        // Reset the border color after 2 seconds
+                        Future.delayed(const Duration(seconds: 2), () {
+                          if (mounted) {
+                            setState(() {
+                              color_done = false;
+                            });
+                          }
+                        });
+                        
                         if (term == false) {
                           showDialog(
                               barrierDismissible: false,
@@ -393,21 +396,10 @@ class _FirstScreenState extends State<FirstScreen> {
                             color_done = false;
                           });
                         }
-                      },
-                      child: Text(
-                        "Continue",
-                        style: (color_done == false)
-                            ? const TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontFamily: 'Serif',
-                                fontWeight: FontWeight.w700)
-                            : TextStyle(
-                                color: mainColor,
-                                fontSize: 20,
-                                fontFamily: 'Serif',
-                                fontWeight: FontWeight.w700),
-                      )),
+                  },
+                  mainColor: mainColor,
+                  colorDone: color_done,
+                  width: MediaQuery.of(context).size.width * 0.95,
                 ),
                 const SizedBox(
                   height: 10,

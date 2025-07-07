@@ -360,7 +360,7 @@ class _VerifyState extends State<Verify> {
                           child: Column(
                         children: [
                           const Text(
-                            "Upload a Video About You in Brief",
+                            "Upload A Video About You in Brief",
                             textAlign: TextAlign.start,
                             style: TextStyle(
                                 fontFamily: 'Sans-serif',
@@ -437,6 +437,36 @@ class _VerifyState extends State<Verify> {
                           const SizedBox(
                             height: 20,
                           ),
+                          // Card(
+                          //   elevation: 4,
+                          //   color: Colors.white,
+                          //   shape: RoundedRectangleBorder(
+                          //     borderRadius: BorderRadius.circular(
+                          //         10), // Consistent border radius
+                          //   ),
+                          //   child: SizedBox(
+                          //     height: 300,
+                          //     width: Get.width * 0.9,
+                          //     child: ClipRRect(
+                          //       borderRadius: BorderRadius.circular(
+                          //           10), // Ensuring video is rounded too
+                          //       child: FittedBox(
+                          //         fit: BoxFit
+                          //             .fill, // Ensures the video fills the card like a cover
+                          //         child: SizedBox(
+                          //           width:
+                          //               Get.width * 0.9, // Matches card width
+                          //           height: 200, // Matches card height
+                          //           child: VideoPlayerWidget1(
+                          //             videoUrl: (userSave.gender != "male")
+                          //                 ? "https://firebasestorage.googleapis.com/v0/b/couplematch-47708.appspot.com/o/videos%2Ffemalevideo.mp4?alt=media&token=46d36b9f-e321-4fe8-ac66-496a27aca7c7"
+                          //                 : "https://firebasestorage.googleapis.com/v0/b/couplematch-47708.appspot.com/o/videos%2Fmalevideo.mp4?alt=media&token=96c5c184-1ee7-49c2-80dd-ba63f564766d",
+                          //           ),
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // )
                           Card(
                             elevation: 4,
                             color: Colors.white,
@@ -445,18 +475,16 @@ class _VerifyState extends State<Verify> {
                                   10), // Consistent border radius
                             ),
                             child: SizedBox(
-                              height: 200,
+                              height: Get.width * 0.98 , // 16:9 ratio plus extra space
                               width: Get.width * 0.9,
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(
-                                    10), // Ensuring video is rounded too
+                                borderRadius: BorderRadius.circular(10),
                                 child: FittedBox(
-                                  fit: BoxFit
-                                      .cover, // Ensures the video fills the card like a cover
+                                  fit: BoxFit.fill,
                                   child: SizedBox(
-                                    width:
-                                        Get.width * 0.9, // Matches card width
-                                    height: 200, // Matches card height
+                                    width: Get.width * 0.9,
+                                    height: Get.width *
+                                        0.95, // 16:9 aspect ratio
                                     child: VideoPlayerWidget1(
                                       videoUrl: (userSave.gender != "male")
                                           ? "https://firebasestorage.googleapis.com/v0/b/couplematch-47708.appspot.com/o/videos%2Ffemalevideo.mp4?alt=media&token=46d36b9f-e321-4fe8-ac66-496a27aca7c7"
@@ -471,57 +499,57 @@ class _VerifyState extends State<Verify> {
                       )),
                       // BigText(text: 'A Video About Me'),
 
-                      (userSave.verifiedStatus != "verified")
-                          ? SizedBox(
-                              height: 50,
-                              width: Get.width * 0.9,
-                              child: ElevatedButton(
-                                // enabled: userSave.verifiedStatus != "verified",
-                                style: ButtonStyle(
-                                    shadowColor: WidgetStateColor.resolveWith(
-                                        (states) => Colors.black),
-                                    shape: WidgetStateProperty.all<
-                                            RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                      // side: const BorderSide(
-                                      //     color: Colors.black)
-                                    )),
-                                    backgroundColor:
-                                        WidgetStateProperty.all<Color>(
-                                            Colors.white)),
-                                child: Text(
-                                  (userSave.videoLink == null ||
-                                          userSave.videoLink == '')
-                                      ? "Upload"
-                                      : "Upload",
-                                  style: const TextStyle(
-                                    fontFamily: 'Serif',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                onPressed: isuploading
-                                    ? null
-                                    : () {
-                                        if (userSave.verifiedStatus !=
-                                            "verified") {
-                                          if (isuploading) {
-                                            print("updating video");
-                                          } else {
-                                            if ((userSave.videoLink == null ||
-                                                userSave.videoLink == '')) {
-                                              _showPicker(context: context);
-                                            } else {
-                                              // _deleteVideo();
-                                            }
-                                          }
-                                        }
-                                        print(_videoFile.path);
-                                      },
-                              ))
-                          : SizedBox(height: 0, width: 0),
+                      // (userSave.verifiedStatus != "verified")
+                      //     ? SizedBox(
+                      //         height: 50,
+                      //         width: Get.width * 0.9,
+                      //         child: ElevatedButton(
+                      //           // enabled: userSave.verifiedStatus != "verified",
+                      //           style: ButtonStyle(
+                      //               shadowColor: WidgetStateColor.resolveWith(
+                      //                   (states) => Colors.black),
+                      //               shape: WidgetStateProperty.all<
+                      //                       RoundedRectangleBorder>(
+                      //                   RoundedRectangleBorder(
+                      //                 borderRadius: BorderRadius.circular(30.0),
+                      //                 // side: const BorderSide(
+                      //                 //     color: Colors.black)
+                      //               )),
+                      //               backgroundColor:
+                      //                   WidgetStateProperty.all<Color>(
+                      //                       Colors.white)),
+                      //           child: Text(
+                      //             (userSave.videoLink == null ||
+                      //                     userSave.videoLink == '')
+                      //                 ? "Upload"
+                      //                 : "Upload",
+                      //             style: const TextStyle(
+                      //               fontFamily: 'Serif',
+                      //               fontSize: 20,
+                      //               fontWeight: FontWeight.w700,
+                      //               color: Colors.black,
+                      //             ),
+                      //           ),
+                      //           onPressed: isuploading
+                      //               ? null
+                      //               : () {
+                      //                   if (userSave.verifiedStatus !=
+                      //                       "verified") {
+                      //                     if (isuploading) {
+                      //                       print("updating video");
+                      //                     } else {
+                      //                       if ((userSave.videoLink == null ||
+                      //                           userSave.videoLink == '')) {
+                      //                         _showPicker(context: context);
+                      //                       } else {
+                      //                         // _deleteVideo();
+                      //                       }
+                      //                     }
+                      //                   }
+                      //                   print(_videoFile.path);
+                      //                 },
+                      //         ))
+                      //     : SizedBox(height: 0, width: 0),
                       SizedBox(
                         height: 5,
                       ),

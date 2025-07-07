@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ristey/global_vars.dart';
 import 'package:ristey/models/user_modal.dart';
+import 'package:ristey/screens/data_collection/custom_appbar.dart';
 import 'package:ristey/screens/data_collection/kundali_dosh.dart';
 import 'package:ristey/screens/data_collection/lets_start.dart';
 import 'package:ristey/screens/data_collection/maritial_status.dart';
@@ -119,8 +120,7 @@ class _ReligionState extends State<Religion> {
         }
       },
       style: ButtonStyle(
-          padding: WidgetStateProperty.all<EdgeInsetsGeometry?>(
-              const EdgeInsets.symmetric(vertical: 15)),
+       minimumSize: WidgetStatePropertyAll(Size(double.infinity, 48)),
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(60.0),
@@ -142,48 +142,7 @@ class _ReligionState extends State<Religion> {
       data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
       child: Scaffold(
         
-         appBar: PreferredSize(
-  preferredSize: const Size.fromHeight(115), // Adjust AppBar height
-  child: AppBar(
-    leading: GestureDetector(
-      onTap: () {
-        Navigator.of(context).pop();
-      },
-      child: Icon(
-        Icons.arrow_back_ios_new,
-        color: mainColor,
-        size: 25,
-      ),
-    ),
-    flexibleSpace: Padding(
-      padding: const EdgeInsets.only(top: 0), // Adjust padding for alignment
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ImageIcon(
-              const AssetImage('images/icons/religion.png'),
-              size: 30,
-              color: mainColor,
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-             DefaultTextStyle(
-              style: TextStyle(
-                color: mainColor,
-                fontFamily: 'Sans-serif',
-                fontWeight: FontWeight.w700,
-                fontSize: 24,
-              ),
-              child: Text("Religion"),
-            ),
-          ],
-        ),
-      ),
-    ),
-  ),
-),
+         appBar: CustomAppBar(iconImage: "images/icons/religion.png", title: "Religion",),
 
           body: SingleChildScrollView(
             child: Column(

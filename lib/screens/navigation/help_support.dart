@@ -503,8 +503,12 @@ class _HelpSupportState extends State<HelpSupport> {
                                       thickness: 1,
                                     ),
                                     const SizedBox(height: 5),
-                                    const Text(
-                                      "Query form",
+                                    Text(
+                                      (data1.length >= 1)
+                                          ? data1[0]["isAdmin"] == true
+                                              ? "Query Resolved"
+                                              : "Query Raised"
+                                          : "Query form",
                                       style: TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.w600),

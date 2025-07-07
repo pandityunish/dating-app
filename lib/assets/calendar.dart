@@ -133,26 +133,32 @@ class _CalenderState extends State<Calender> {
               borderRadius: BorderRadius.circular(30),
             ),
             child: SizedBox(
-              height: 46,
+              height: 48,
               width: MediaQuery.of(context).size.width * 0.29,
               child: Center(
                 child: DropdownButton<int>(
                   underline: Container(),
                   value: _selectedDay,
+                   isExpanded: true,
+                   alignment: Alignment.center,
+
+                  padding: EdgeInsets.symmetric(horizontal: 12),
                   hint:  Text(
                     "Day",
                     style: TextStyle(color: newtextColor),
                   ),
-                  iconEnabledColor: newtextColor,
+                  iconEnabledColor: _selectedDay != null ? Colors.black : newtextColor,
                   items: List.generate(
                     _daysInMonth[_selectedMonth] ?? _daysInMonth['January']!,
                     (index) => index + 1,
                   ).map((value) {
                     return DropdownMenuItem<int>(
                       value: value,
+                      alignment: Alignment.center,
                       child: Text(
                         value < 10 ? '0$value' : '$value',
-                        style:  TextStyle(color: newtextColor),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: _selectedDay == value ? Colors.black : newtextColor),
                       ),
                     );
                   }).toList(),
@@ -174,24 +180,32 @@ class _CalenderState extends State<Calender> {
               borderRadius: BorderRadius.circular(30),
             ),
             child: SizedBox(
-              height: 46,
+              height: 48,
               width: MediaQuery.of(context).size.width * 0.29,
               child: Center(
                 child: DropdownButton<String>(
-                  alignment: AlignmentDirectional.center,
                   underline: Container(),
+                  isExpanded: true,
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
                   value: _selectedMonth,
-                  hint:  Text(
+                  hint: Text(
                     "Month",
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                     style: TextStyle(color: newtextColor),
                   ),
-                  iconEnabledColor: newtextColor,
+                  iconEnabledColor: _selectedMonth != null ? Colors.black : newtextColor,
                   items: _monthNames.map((value) {
                     return DropdownMenuItem<String>(
                       value: value,
+                      alignment: Alignment.center,
                       child: Text(
                         value,
-                        style:  TextStyle(color: newtextColor),
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(color: _selectedMonth == value ? Colors.black : newtextColor),
                       ),
                     );
                   }).toList(),
@@ -213,23 +227,28 @@ class _CalenderState extends State<Calender> {
               borderRadius: BorderRadius.circular(30),
             ),
             child: SizedBox(
-              height: 46,
+              height: 48,
               width: MediaQuery.of(context).size.width * 0.29,
               child: Center(
                 child: DropdownButton<int>(
                   underline: Container(),
                   value: _selectedYear,
+                   isExpanded: true,
+                   alignment: Alignment.center,
+                    padding: EdgeInsets.symmetric(horizontal: 12),
                   hint:  Text(
                     "Year",
                     style: TextStyle(color: newtextColor),
                   ),
-                  iconEnabledColor: newtextColor,
+                  iconEnabledColor: _selectedYear != null ? Colors.black : newtextColor,
                   items: _years.map((value) {
                     return DropdownMenuItem<int>(
                       value: value,
+                      alignment: Alignment.center,
                       child: Text(
                         '$value',
-                        style:  TextStyle(color: newtextColor),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: _selectedYear == value ? Colors.black : newtextColor),
                       ),
                     );
                   }).toList(),

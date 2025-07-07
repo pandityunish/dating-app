@@ -50,7 +50,7 @@ class _CustomRoundedInputFieldState extends State<CustomRoundedInputField> {
           borderRadius: BorderRadius.circular(30),
         ),
         child: SizedBox(
-          height: 50,
+          height: 48,
           child: CupertinoTextField(
             maxLength: widget.length,
             inputFormatters: widget.inputFormatters,
